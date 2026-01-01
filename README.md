@@ -61,15 +61,18 @@ The Router monitors the Main Agent's output stream in real-time. If the Main Age
 
 ## 🚀 Scalability (Consumer GPU)
 
-On a single RTX 3090/4090 (24GB VRAM):
+**Real-world Benchmark (RTX 3090 / 4090 Class)**
+Running `benchmark_capacity.py` with Qwen2.5-0.5B (Shared Weights Mode):
 
-| Component | VRAM Usage | Count |
+| Agent Count | Total VRAM | VRAM per Agent |
 | :--- | :--- | :--- |
-| **Main Agent (0.5B FP16)** | 1.2 GB | 1 |
-| **Side Agent (Shared)** | **0.0 GB** | **100+** |
-| **Side Agent (BitNet)** | 0.2 GB | ~100 |
+| **Baseline (1)** | 0.93 GB | - |
+| **10 Agents** | 1.05 GB | ~12 MB |
+| **50 Agents** | 1.44 GB | ~10 MB |
+| **100 Agents** | **2.22 GB** | **~13 MB** |
 
-**Result**: You can run a **Council of 100 Agents** in real-time on a single GPU.
+**Result**: You can run a **Council of 100 Agents** with only ~1.3 GB of *additional* VRAM.
+On a 24GB card, this architecture theoretically scales to **1,000+ concurrent agents**.
 
 ---
 
