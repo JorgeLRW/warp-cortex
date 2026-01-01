@@ -5,6 +5,7 @@ from threading import Thread
 from typing import Optional, Tuple
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.cache_utils import DynamicCache
+from cortex_router import CortexRouter
 
 class TopologicalSynapse:
     """
@@ -18,11 +19,11 @@ class TopologicalSynapse:
         self.thought_memory = [] # List of strings for simplicity in this demo
         self.lock = torch.cuda.Event() # Not strictly needed for list append but good practice
         
-    def update_landmarks(self, past_key_values, keep_ratio=0.1):
+    def update_landmarks(self, past_key_values, query_states=None, keep_ratio=0.1):
         """
         Main Agent calls this.
         Compresses the full KV cache into 'Landmarks'.
-        Strategy: Keep the first token (system), a strided middle, and the last window.
+        Strategy: Dynamic Attention-based Selection.
         """
         if past_key_values is None: return
 
@@ -30,29 +31,41 @@ class TopologicalSynapse:
         # key shape: [Batch, Heads, Seq, Dim]
         
         new_kv = []
-        for k, v in past_key_values:
+        for layer_idx, (k, v) in enumerate(past_key_values):
             seq_len = k.shape[2]
             if seq_len < 100:
-                # Keep everything if short
                 new_kv.append((k, v))
                 continue
                 
-            # Topological Selection (Simulated via Heuristic)
-            # 1. Always keep System Prompt (first 10 tokens)
-            # 2. Keep recent context (last 50 tokens)
-            # 3. Keep 'Landmarks' from the middle (every 10th token)
-            
-            indices = torch.cat([
-                torch.arange(0, 10, device=self.device),
-                torch.arange(10, seq_len - 50, 10, device=self.device),
-                torch.arange(seq_len - 50, seq_len, device=self.device)
-            ]).long()
+            # Dynamic Selection
+            if query_states is not None:
+                # query_states: [Batch, Heads, 1, Dim] (from Main Agent's last token)
+                # We compute attention scores: Q @ K.T
+                # k: [B, H, S, D] -> transpose -> [B, H, D, S]
+                attn_scores = torch.matmul(query_states, k.transpose(-1, -2)) # [B, H, 1, S]
+                attn_scores = attn_scores.squeeze(2) # [B, H, S]
+                
+                # Sum over heads to get global importance
+                global_scores = attn_scores.sum(dim=1) # [B, S]
+                
+                # Select Top-K (e.g., 64)
+                k_val = min(64, seq_len)
+                _, top_indices = torch.topk(global_scores, k_val, dim=-1)
+                indices, _ = torch.sort(top_indices, dim=-1) # Keep temporal order
+                indices = indices.squeeze(0) # [S]
+                
+            else:
+                # Fallback to Heuristic if no query provided
+                indices = torch.cat([
+                    torch.arange(0, 10, device=self.device),
+                    torch.arange(10, seq_len - 50, 10, device=self.device),
+                    torch.arange(seq_len - 50, seq_len, device=self.device)
+                ]).long()
             
             # Clamp indices just in case
             indices = indices[indices < seq_len]
             
             # Gather selected tokens
-            # k: [B, H, S, D] -> index along S (dim 2)
             k_selected = k.index_select(2, indices)
             v_selected = v.index_select(2, indices)
             
@@ -64,13 +77,13 @@ class TopologicalSynapse:
         """Side Agent calls this."""
         return self.landmarks
         
-    def push_thought(self, text):
-        self.thought_memory.append(text)
+    def push_thought(self, text, vector=None):
+        self.thought_memory.append((text, vector))
         
     def read_thought(self):
         if self.thought_memory:
             return self.thought_memory.pop(0)
-        return None
+        return None, None
 
 class BitNetSideAgent(nn.Module):
     """
@@ -266,6 +279,7 @@ class CortexEngine:
         )
         self.device = device
         self.synapse = TopologicalSynapse(device=device)
+        self.router = CortexRouter()
         
         if side_mode == "bitnet":
             self.side_agent_model = BitNetSideAgent(self.model.config, device)
@@ -279,7 +293,7 @@ class CortexEngine:
         self.main_stream = torch.cuda.Stream()
         self.side_stream = torch.cuda.Stream() # In reality, we'd use a pool of streams for multiple agents
         
-    def _side_agent_loop(self, input_ids, stop_event):
+    def _side_agent_loop(self, input_ids, stop_event, task_description=None):
         """
         The Side Agent:
         1. Wakes up.
@@ -318,7 +332,13 @@ class CortexEngine:
             
             # 2. Think (Generate a thought)
             # We append a "Thinking" prompt
-            think_prompt = self.tokenizer.encode(" [Analysis: ", return_tensors="pt").to(self.device)
+            if task_description:
+                print(f"[Side] Task: {task_description}")
+                prompt_text = f" [System: You are a sub-process. Task: {task_description}. Analysis: "
+            else:
+                prompt_text = " [Analysis: "
+                
+            think_prompt = self.tokenizer.encode(prompt_text, return_tensors="pt").to(self.device)
             
             # Manual Generation Loop to bypass Cache validation
             curr_input = think_prompt
@@ -340,7 +360,8 @@ class CortexEngine:
                 outputs = self.model(
                     input_ids=curr_input,
                     past_key_values=past_key_values,
-                    position_ids=position_ids
+                    position_ids=position_ids,
+                    output_hidden_states=True
                 )
                 
                 next_token_logits = outputs.logits[:, -1, :]
@@ -352,59 +373,131 @@ class CortexEngine:
 
             thought_text = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
             
+            # Capture the last hidden state as the "Thought Vector"
+            # outputs.hidden_states is a tuple of (layers), each [Batch, Seq, Dim]
+            # We take the last layer, last token
+            thought_vector = outputs.hidden_states[-1][:, -1, :].detach() # [1, Dim]
+
             # 3. Inject
-            self.synapse.push_thought("[Analysis: " + thought_text + "]")
+            self.synapse.push_thought("[Analysis: " + thought_text + "]", thought_vector)
             print(f"[Side] Injected thought: '[Analysis: {thought_text}]'")
 
     def generate_async(self, prompt, max_tokens=50):
         input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.device)
-        stop_side_agent = torch.cuda.Event() # Use CUDA event or threading Event
         import threading
         stop_event = threading.Event()
         
-        # Trigger Side Agent if needed
-        if "search" in prompt.lower() or "analyze" in prompt.lower():
-            print("[Main] Trigger detected! Preparing Side Agent...")
-            # We launch the thread, but it will wait for landmarks
-            side_thread = Thread(target=self._side_agent_loop, args=(input_ids, stop_event))
+        # Initial Trigger Check (Prompt-based)
+        task_description = self.router.check_for_triggers(prompt)
+        if task_description:
+            print(f"[Main] Trigger detected. Delegating Task: '{task_description}'")
+            side_thread = Thread(target=self._side_agent_loop, args=(input_ids, stop_event, task_description))
             side_thread.start()
         
         print("[Main] Generating...")
         curr_input = input_ids
         past_key_values = None
         full_response = []
+        generated_ids = [] # Track for repetition penalty
+        recent_text_buffer = ""
         
         with torch.cuda.stream(self.main_stream):
             for i in range(max_tokens):
-                # 1. Check for Thoughts
-                thought = self.synapse.read_thought()
-                if thought:
-                    print(f"\n[Main] !!! Absorbed Thought: {thought} !!!")
-                    # In a real app, we'd insert this into the context.
-                    # For now, we just print it.
+                # 1. Check for Thoughts (Validation Gate)
+                thought_text, thought_vector = self.synapse.read_thought()
+                if thought_text:
+                    # Validation Gate
+                    should_integrate = True
+                    if 'last_hidden_state' in locals() and thought_vector is not None:
+                        sim = torch.nn.functional.cosine_similarity(last_hidden_state, thought_vector)
+                        if sim.item() < 0.5:
+                            print(f"[Main] REJECTED thought (Similarity: {sim.item():.2f})")
+                            should_integrate = False
+                    
+                    if should_integrate:
+                        print(f"\n[Main] !!! Absorbed Thought: {thought_text} !!!")
+                        
+                        # --- REFERENTIAL INJECTION MECHANISM ---
+                        # Instead of forcing the text, we inject a "Reference Token" that points to the thought.
+                        # This allows the Main Agent to decide *how* to use it.
+                        # We format it as: " [Ref: <Thought>]"
+                        
+                        # 1. Inject the thought into the KV Cache (Hidden from user output)
+                        thought_ids = self.tokenizer(f" [Ref: {thought_text}]", return_tensors="pt").input_ids.to(self.device)
+                        thought_outputs = self.model(thought_ids, past_key_values=past_key_values)
+                        past_key_values = thought_outputs.past_key_values
+                        
+                        # 2. Do NOT update curr_input. 
+                        # The Main Agent continues generating from where it left off, 
+                        # but now its "Memory" (KV Cache) contains the thought.
+                        # It will naturally attend to it if relevant.
+                        
+                        # Optional: We can force a single space to "nudge" it to acknowledge the update
+                        # curr_input = self.tokenizer(" ", return_tensors="pt").input_ids.to(self.device)
                 
                 # 2. Generate
-                outputs = self.model(curr_input, past_key_values=past_key_values)
+                outputs = self.model(curr_input, past_key_values=past_key_values, output_hidden_states=True)
                 next_token_logits = outputs.logits[:, -1, :]
+                
+                # --- REPETITION PENALTY ---
+                if len(generated_ids) > 0:
+                    # Penalize tokens generated in the last 20 steps
+                    for prev_id in set(generated_ids[-20:]):
+                        next_token_logits[0, prev_id] /= 1.5 
+
                 next_token = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
+                generated_ids.append(next_token.item())
+                
+                # Capture current state for next validation
+                last_hidden_state = outputs.hidden_states[-1][:, -1, :].detach() # [1, Dim]
                 
                 past_key_values = outputs.past_key_values
                 curr_input = next_token
                 
                 token_str = self.tokenizer.decode(next_token[0])
                 full_response.append(token_str)
+                recent_text_buffer += token_str
                 print(token_str, end="", flush=True)
                 
-                # 3. Update Landmarks (Push Context to Side Agent)
+                # 3. Dynamic Trigger Check (Stream-based)
+                # Check the last 20 chars for triggers
+                if len(recent_text_buffer) > 50:
+                    recent_slice = recent_text_buffer[-50:]
+                    task_description = self.router.check_for_triggers(recent_slice)
+                    if task_description:
+                        print(f"\n[Main] Dynamic Trigger. Delegating Task: '{task_description}'")
+                        # Clear buffer to avoid double trigger
+                        recent_text_buffer = "" 
+                        # Spawn new thread
+                        t = Thread(target=self._side_agent_loop, args=(input_ids, stop_event, task_description))
+                        t.start()
+
+                # 4. Update Landmarks (Push Context to Side Agent)
                 # We do this early so the Side Agent has something to work with
-                if i == 10 and "side_thread" in locals():
+                if i == 10:
                     print(f"\n[Main] Pushing Landmarks to Synapse...")
-                    self.synapse.update_landmarks(past_key_values)
+                    # Pass the current hidden state as the Query for dynamic selection
+                    # query_states needs to be [Batch, Heads, 1, Dim]
+                    # We have [Batch, Dim]. We need to project it? 
+                    # Actually, 'last_hidden_state' is the output of the last layer.
+                    # The keys are inside the layers.
+                    # To do proper attention, we need the query *before* the output projection?
+                    # For simplicity, let's reshape last_hidden_state to [B, 1, 1, D] and broadcast heads
+                    # Or just pass it as is and let update_landmarks handle it.
+                    
+                    # Reshape for update_landmarks: [Batch, Heads, 1, Dim]
+                    # We'll just duplicate across heads for now
+                    num_heads = self.model.config.num_attention_heads
+                    head_dim = self.model.config.hidden_size // num_heads
+                    
+                    # [1, Dim] -> [1, Heads, 1, HeadDim]
+                    query = last_hidden_state.view(1, num_heads, 1, head_dim)
+                    
+                    self.synapse.update_landmarks(past_key_values, query_states=query)
                     
         print("\n[Engine] Done.")
         stop_event.set()
-        if "side_thread" in locals():
-            side_thread.join()
+        # We don't join threads here because they might be running dynamically
 
 if __name__ == "__main__":
     engine = CortexEngine()
