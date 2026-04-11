@@ -1,0 +1,53 @@
+# Warp Cortex central settings.
+#
+# Keep committed defaults here.
+# Put machine-specific overrides or real secrets in config/settings.local.yaml.
+
+runtime:
+  device: cuda
+  verbose: true
+
+paths:
+  # Leave empty to use HF_* env vars or repo-local local_artifacts/huggingface.
+  huggingface_cache: ""
+
+backends:
+  default: local
+  local:
+    model: Qwen/Qwen2.5-0.5B-Instruct
+  api:
+    base_url: https://api.openai.com/v1
+    model: gpt-4o-mini
+    key: ${OPENAI_API_KEY}
+  bitnet:
+    model: microsoft/bitnet-b1.58-2B-4T
+
+adaptive_engine:
+  mode: both
+  council_size: 3
+  max_tokens: 150
+  temperature: 0.0
+  max_delegations: 5
+  turbo_quant:
+    enabled: true
+    bits: 4
+    interval: 64
+  entropy:
+    spread_z_threshold: 2.0
+    logit_z_threshold: 2.5
+    warmup_steps: 8
+
+orchestrator:
+  max_rounds: 3
+  worker_count: 4
+  verify_claims: false
+  llm_workers: false
+  stream_inject: false
+  async_delegate: false
+
+benchmarks:
+  gsm8k:
+    n: 20
+    modes: single,orchestrated
+    workers: 4
+    rounds: 3

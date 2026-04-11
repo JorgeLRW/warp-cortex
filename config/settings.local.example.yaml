@@ -1,0 +1,25 @@
+# Copy this file to config/settings.local.yaml for local overrides.
+# settings.local.yaml is gitignored, so it is the right place for API keys.
+
+runtime:
+  device: cuda
+
+paths:
+  # Example: D:/hf_cache/huggingface-home
+  huggingface_cache: ""
+
+backends:
+  default: api
+  api:
+    base_url: https://api.openai.com/v1
+    model: gpt-4o-mini
+    key: your-api-key-here
+
+adaptive_engine:
+  mode: council
+  council_size: 5
+  turbo_quant:
+    bits: 3
+
+orchestrator:
+  max_rounds: 4

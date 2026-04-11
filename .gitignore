@@ -33,11 +33,25 @@ venv.bak/
 
 # VS Code
 .vscode/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
 
 # Local Artifacts
 local_artifacts/
 *.log
 *.csv
 
+# Local Config
+config/settings.local.yaml
+config/*.secrets.yaml
+
 # Paper (Arxiv)
 paper/
+
+# Local research / experiments
+research/
+
+# Agent instruction files
+CLAUDE.md

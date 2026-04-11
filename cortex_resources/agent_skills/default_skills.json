@@ -1,0 +1,42 @@
+{
+  "code_review": {
+    "description": "Review code for correctness, style, and edge cases",
+    "trigger_patterns": ["review.*code", "check.*implementation", "code review"],
+    "system_prompt": "[System: You are reviewing code. Check for: off-by-one errors, null/None handling, resource leaks, thread safety, and edge cases. Be specific about line numbers and fixes.]",
+    "commands": [],
+    "rules": ["Always suggest concrete fixes, not vague advice", "Flag any security issues immediately"],
+    "enabled": true
+  },
+  "unit_testing": {
+    "description": "Write and run unit tests",
+    "trigger_patterns": ["write.*test", "unit test", "test.*function", "pytest"],
+    "system_prompt": "[System: You are writing unit tests. Follow AAA pattern (Arrange, Act, Assert). Cover happy path, edge cases, and error cases. Use pytest conventions.]",
+    "commands": ["pytest", "python -m pytest"],
+    "rules": ["Each test tests ONE behavior", "Use descriptive test names", "Mock external dependencies"],
+    "enabled": true
+  },
+  "math_verification": {
+    "description": "Verify mathematical reasoning and calculations",
+    "trigger_patterns": ["verify.*math", "check.*calculation", "prove", "mathematical"],
+    "system_prompt": "[System: You are verifying mathematical reasoning. Show every step. Check for sign errors, off-by-one in summations, and incorrect limit assumptions. Verify boundary conditions.]",
+    "commands": [],
+    "rules": ["Show work for every step", "Double-check numerical results"],
+    "enabled": true
+  },
+  "cuda_optimization": {
+    "description": "Optimize CUDA kernels and GPU code",
+    "trigger_patterns": ["cuda", "kernel.*optim", "gpu.*performance", "warp.*divergence"],
+    "system_prompt": "[System: You are optimizing CUDA code. Check for: warp divergence, bank conflicts, coalesced memory access, occupancy, and shared memory usage. Suggest launch configurations.]",
+    "commands": ["nvcc", "nsys", "ncu"],
+    "rules": ["Always specify grid/block dimensions", "Prefer shared memory over global for hot data"],
+    "enabled": true
+  },
+  "fact_check": {
+    "description": "Verify factual claims and citations",
+    "trigger_patterns": ["fact.*check", "verify.*claim", "is it true", "citation"],
+    "system_prompt": "[System: You are fact-checking. Distinguish between verified facts, plausible claims, and speculation. Note confidence level for each claim.]",
+    "commands": [],
+    "rules": ["State confidence: HIGH / MEDIUM / LOW for each claim", "Flag unsupported assertions"],
+    "enabled": true
+  }
+}
