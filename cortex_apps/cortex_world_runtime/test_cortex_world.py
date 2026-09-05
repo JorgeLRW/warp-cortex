@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
@@ -15,7 +16,7 @@ if REPO_ROOT not in sys.path:
 import numpy as np
 
 from cortex_apps.cortex_world_runtime.cortex_world.store import (
-    PortableWorld, open_world, FORMAT_VERSION,
+    PortableWorld, open_world, inspect_world, FORMAT_VERSION,
 )
 from cortex_apps.cortex_world_runtime.cortex_world import graph as G
 from cortex_apps.cortex_world_runtime.cortex_world.recall import recall
@@ -45,6 +46,88 @@ def test_open_manifest_budgets(tmp_path):
         assert w.manifest["history"]["hot_events"] == 2000
     finally:
         w.close()
+
+
+def test_status_lifecycle_and_read_only_inspection(tmp_path):
+    project = str(tmp_path / "proj")
+    absent = inspect_world(project)
+    assert absent["lifecycle"] == "absent"
+    assert absent["presence"] == {
+        "manifest_present": False,
+        "sqlite_present": False,
+        "entities_present": False,
+        "skills_present": False,
+    }
+    assert not os.path.exists(project)
+
+    w = open_world(project)
+    w.close()
+    empty = inspect_world(project)
+    assert empty["lifecycle"] == "initialized_empty"
+    assert empty["canonical"]["chain_status"] == "verified"
+    assert all(empty["presence"].values())
+
+    w = open_world(project)
+    seq = w.commit("note", {"text": "status probe"})
+    w.upsert_node("note", {"title": "Status"}, event_seq=seq)
+    w.close()
+    ready = inspect_world(project)
+    assert ready["lifecycle"] == "ready"
+    assert ready["consistency"]["status"] == "consistent"
+    assert ready["canonical"]["verified_seq"] == seq
+    assert ready["projections"]["entities"]["status"] == "complete"
+
+    mirror_path = os.path.join(ready["root"], "entities", "note.md")
+    with open(mirror_path, "a", encoding="utf-8") as f:
+        f.write("tampered\n")
+    stale = inspect_world(project)
+    assert stale["lifecycle"] == "degraded"
+    assert stale["consistency"]["status"] == "partial_mirror"
+    assert stale["projections"]["entities"]["status"] == "stale"
+
+    os.remove(mirror_path)
+    partial = inspect_world(project)
+    assert partial["lifecycle"] == "degraded"
+    assert partial["consistency"]["status"] == "partial_mirror"
+    assert partial["canonical"]["chain_status"] == "verified"
+
+
+def test_status_detects_broken_event_chain_without_opening_world(tmp_path):
+    project = str(tmp_path / "proj")
+    w = open_world(project)
+    w.commit("note", {"text": "chain"})
+    w.db.execute("UPDATE events SET hash_prev='corrupted'")
+    w.db.commit()
+    w.close()
+
+    damaged = inspect_world(project)
+    assert damaged["lifecycle"] == "damaged"
+    assert damaged["consistency"]["status"] == "damaged"
+    assert damaged["canonical"]["chain_status"] == "broken"
+    assert any("hash chain" in error for error in damaged["consistency"]["errors"])
+
+
+def test_concurrent_world_writers_keep_manifest_valid(tmp_path):
+    project = str(tmp_path / "proj")
+    opened = open_world(project)
+    opened.close()
+
+    def write_event(index):
+        world = open_world(project)
+        try:
+            return world.commit("tick", {"index": index})
+        finally:
+            world.close()
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        sequences = list(pool.map(write_event, range(2)))
+
+    status = inspect_world(project)
+    assert sorted(sequences) == [1, 2]
+    assert status["lifecycle"] == "ready"
+    assert status["consistency"]["status"] == "consistent"
+    assert status["canonical"]["chain_status"] == "verified"
+    assert status["canonical"]["event_seq"] == 2
 
 
 def test_commit_upsert_bfs_recall(tmp_path, encoder):
@@ -173,6 +256,7 @@ def test_harvest_file_roundtrip(tmp_path, encoder):
 def test_cli_roundtrip(tmp_path):
     from cortex_apps.cortex_world_runtime.cortex_world.cli import main
     proj = str(tmp_path / "proj")
+    assert main(["status", proj]) == 0
     assert main(["open", proj]) == 0
     assert main(["bfs", proj, "ghost"]) == 0
     assert main(["select-skill", proj, "repair"]) == 0

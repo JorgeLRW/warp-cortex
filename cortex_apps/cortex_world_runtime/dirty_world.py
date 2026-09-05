@@ -120,7 +120,10 @@ class DirtyWorld:
                 GenericFrozenAspectEncoder,
             )
             encoder = GenericFrozenAspectEncoder(d_out=64, seed=42)
-            torch.manual_seed(seed)  # encoder reseeds internally; restore stream
+            # P1 lesson: the encoder reseeds torch internally (fixed projection
+            # seed by design). Re-seed here so background geometry actually
+            # varies per world seed; the encoder itself stays frozen.
+            torch.manual_seed(seed)
         self.encoder = encoder
         self.tasks = build_20_unseen_tasks()
 
@@ -438,7 +441,9 @@ class DirtyWorld:
         self._tick([(eid, {"state_v2": cur})])
         self.o_state[eid] = {k: v for k, v in self.o_state[eid].items() if k != "status"}
         self.o_state[eid]["state_v2"] = cur
-        self._log("schema_migrate", eid=eid)
+        # Journal completeness: the tick value MUST be logged (shadow
+        # reconstruction reads the journal, never the oracle).
+        self._log("schema_migrate", eid=eid, value=cur)
         return "schema_migrate"
 
     def _op_retract(self):

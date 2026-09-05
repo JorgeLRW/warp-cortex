@@ -47,7 +47,9 @@ def harvest_file(store, path: str, encoder=None, project: str = "default",
     for eid in eids:
         node = store.get_node(eid)
         if node is not None:
-            store._write_md_mirror(eid, node["state"], node["version"])
+            store._write_md_mirror(eid, node["state"], node["version"],
+                                    event_seq=node["updated_seq"])
+    store.refresh_manifest()
     return eids
 
 

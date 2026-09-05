@@ -31,6 +31,7 @@ def register_skill(store, skill_id: str, version: str, skill_md: str) -> str:
         f.flush()
         os.fsync(f.fileno())
     os.replace(tmp, dst)
+    store.refresh_manifest()
     return h
 
 
@@ -49,6 +50,7 @@ def record_invocation(store, skill_id: str, version: str, success: bool,
         (skill_id, version, project, int(success), latency_ms, error,
          json.dumps(constraints or {}), store.version, seq))
     store.db.commit()
+    store.refresh_manifest()
     return seq
 
 

@@ -16,7 +16,9 @@ Public surface (deliberately tiny):
 from cortex_apps.cortex_world_runtime.cortex_world.store import (
     PortableWorld,
     open_world,
+  inspect_world,
     FORMAT_VERSION,
+  STATUS_SCHEMA_VERSION,
     DEFAULT_MANIFEST,
 )
 from cortex_apps.cortex_world_runtime.cortex_world.recall import (
@@ -31,7 +33,9 @@ from cortex_apps.cortex_world_runtime.cortex_world.graph import (
 __all__ = [
     "PortableWorld",
     "open_world",
+    "inspect_world",
     "FORMAT_VERSION",
+    "STATUS_SCHEMA_VERSION",
     "DEFAULT_MANIFEST",
     "RecallHit",
     "RecallResult",

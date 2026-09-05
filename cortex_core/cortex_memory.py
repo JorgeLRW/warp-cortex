@@ -19,6 +19,8 @@ import threading
 from dataclasses import dataclass, field
 from typing import Optional, List, Dict, Callable, Any
 
+from .cache_control import CacheControlAdapter, PythonKVCacheAdapter
+
 
 # ======================================================================
 # 1. Auto-Compaction
@@ -50,6 +52,7 @@ class AutoCompactor:
         compact_threshold: float = 0.75,
         target_utilization: float = 0.30,
         landmark_k: int = 64,
+        cache_adapter: Optional[CacheControlAdapter] = None,
     ):
         """
         Args:
@@ -62,6 +65,7 @@ class AutoCompactor:
         self.compact_threshold = compact_threshold
         self.target_utilization = target_utilization
         self.landmark_k = landmark_k
+        self.cache_adapter = cache_adapter or PythonKVCacheAdapter()
 
         # Hook registries
         self.pre_compact_hooks: List[Callable[[float], None]] = []
@@ -80,16 +84,7 @@ class AutoCompactor:
         """Current KV-cache utilization as a fraction of max_seq_len."""
         if past_key_values is None:
             return 0.0
-        # past_key_values: tuple of (key, value) per layer
-        # key shape: [Batch, Heads, Seq, Dim]
-        try:
-            if hasattr(past_key_values, 'get_seq_length'):
-                seq_len = past_key_values.get_seq_length()
-            else:
-                seq_len = past_key_values[0][0].shape[2]
-            return seq_len / self.max_seq_len
-        except (IndexError, AttributeError):
-            return 0.0
+        return self.cache_adapter.sequence_length(past_key_values) / self.max_seq_len
 
     def should_compact(self, past_key_values) -> bool:
         """Check if compaction should be triggered."""
@@ -123,12 +118,10 @@ class AutoCompactor:
                   f"({seq_before}/{self.max_seq_len} tokens)")
 
             # 2. Run topological landmarking
-            synapse.update_kv_landmarks(
-                past_key_values,
-                query_states=query_states,
+            compacted = self.cache_adapter.compact(
+                past_key_values, synapse, query_states=query_states,
                 keep_ratio=self.landmark_k / max(seq_before, 1),
             )
-            compacted = synapse.get_landmarks()
 
             seq_after = self._get_seq_len(compacted) if compacted else 0
             util_after = seq_after / self.max_seq_len
@@ -175,12 +168,7 @@ class AutoCompactor:
     def _get_seq_len(self, kv) -> int:
         if kv is None:
             return 0
-        try:
-            if hasattr(kv, 'get_seq_length'):
-                return kv.get_seq_length()
-            return kv[0][0].shape[2]
-        except (IndexError, AttributeError):
-            return 0
+        return self.cache_adapter.sequence_length(kv)
 
 
 # ======================================================================

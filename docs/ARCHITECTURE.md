@@ -120,6 +120,20 @@ Traditional injection involves pasting text into the context, which disrupts the
 
 **Benefit**: Zero disruption to the output stream. The user sees clean, coherent text while the model benefits from asynchronous reasoning.
 
+## 5a. Cache Ownership Boundary
+
+The runtime's cache-aware path is explicitly a Python-level Hugging Face
+adapter (`cortex_core/cache_control.py`). It can inspect tuple or
+`DynamicCache` objects, return landmark-based replacements, and report
+content-free cache telemetry. Auto-compaction uses this adapter rather than
+assuming one concrete cache representation.
+
+This is not native paged-KV control. Cortex does not currently own vLLM or
+SGLang block tables, mutate backend pages in place, perform scheduler-level
+preemption, or merge arbitrary KV branches with copy-on-write semantics. A
+backend-specific implementation must advertise those capabilities explicitly
+before the architecture can claim them.
+
 ---
 
 ## 6. River & Stream (Async Execution)

@@ -1,6 +1,7 @@
-"""Stable CLI Unoctu will call: open/ingest/recall/bfs/select-skill/record-invocation.
+"""Stable CLI Unoctu will call: status/open/ingest/recall/bfs/select-skill/record-invocation.
 
 Usage:
+    python -m cortex_apps.cortex_world_runtime.cortex_world.cli status <project_dir>
   python -m cortex_apps.cortex_world_runtime.cortex_world.cli open <project_dir>
   ... ingest <project_dir> <file>
   ... recall <project_dir> <query text...>
@@ -26,7 +27,15 @@ def main(argv=None) -> int:
         print(__doc__)
         return 2
     cmd, rest = argv[0], argv[1:]
-    if cmd == "open":
+    if cmd == "status":
+        from cortex_apps.cortex_world_runtime.cortex_world.store import inspect_world
+        import argparse
+        p = argparse.ArgumentParser()
+        p.add_argument("project_dir")
+        p.add_argument("--no-verify", action="store_true")
+        a = p.parse_args(rest)
+        print(json.dumps(inspect_world(a.project_dir, verify=not a.no_verify), indent=1))
+    elif cmd == "open":
         w = _open(rest[0])
         print(json.dumps({"root": w.root, "version": w.version,
                           "manifest": w.manifest}, indent=1))

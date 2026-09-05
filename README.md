@@ -19,6 +19,7 @@ Authority is explicit: sqlite is canonical; Markdown is a mirror (`cortex_apps/c
 Stable public surface (deliberately tiny, `cortex_apps/cortex_world_runtime/cortex_world/`):
 
 ```bash
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli status <project_dir>
 python -m cortex_apps.cortex_world_runtime.cortex_world.cli open <project_dir>
 python -m cortex_apps.cortex_world_runtime.cortex_world.cli ingest <project_dir> <file>
 python -m cortex_apps.cortex_world_runtime.cortex_world.cli recall <project_dir> <query...>
@@ -26,6 +27,13 @@ python -m cortex_apps.cortex_world_runtime.cortex_world.cli bfs <project_dir> <e
 python -m cortex_apps.cortex_world_runtime.cortex_world.cli select-skill <project_dir> <query...>
 python -m cortex_apps.cortex_world_runtime.cortex_world.cli record-invocation <project_dir> <skill> <ver> <0|1>
 ```
+
+`status` is the read-only integration boundary. It returns the versioned
+`cortex-status-v1` contract with lifecycle (`absent`, `initialized_empty`,
+`ready`, `degraded`, or `damaged`), canonical event-chain verification,
+SQLite counts/hash, and entity/skill projection health. It never creates a
+world. See [docs/CORTEX_STATUS.md](docs/CORTEX_STATUS.md) for field meanings,
+migration behavior, and the inference cache ownership boundary.
 
 Internally: `S` = current state, `G` = typed structure (`depends_on, blocks, supports, refutes, mentions, derived_from` in `cortex_world/graph.py:8-12`), `Z` = semantic index, `H` = bounded provenance/history (hot cap + snapshots in `store.py:270-307`), `K` = versioned procedural skills. `recall()` returns `RecallResult{ hits=[RecallHit{entity, score, edge_path, event_seq, provenance}], snapshot_version, candidate_budget, candidates_examined }` (`recall.py:14-27`) so callers see degradation instead of thin context. `cascade_invalidate()` propagates through `depends_on/blocks/derived_from` only; `mentions` never invalidates (`graph.py:14-15`).
 
