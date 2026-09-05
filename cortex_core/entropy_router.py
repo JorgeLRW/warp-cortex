@@ -202,24 +202,26 @@ class EntropyRouter:
             logit_ent, logit_norm = self._logit_entropy(logits)
 
         # ── Update running stats ──
-        self._spread_stats.update(max_spread)
-        self._logit_stats.update(logit_ent)
+        if attentions is not None and len(layer_head_spread) > 0:
+            self._spread_stats.update(max_spread)
+        if logits is not None:
+            self._logit_stats.update(logit_ent)
 
         if self.ema_alpha > 0:
-            if self._ema_spread is None:
-                self._ema_spread = max_spread
-                self._ema_logit = logit_ent
-            else:
-                a = self.ema_alpha
-                self._ema_spread = a * max_spread + (1 - a) * self._ema_spread
+            if attentions is not None and len(layer_head_spread) > 0:
+                if self._ema_spread is None:
+                    self._ema_spread = max_spread
+                else:
+                    self._ema_spread = self.ema_alpha * max_spread + (1 - self.ema_alpha) * self._ema_spread
+            if logits is not None:
                 if self._ema_logit is None:
                     self._ema_logit = logit_ent
                 else:
-                    self._ema_logit = a * logit_ent + (1 - a) * self._ema_logit
+                    self._ema_logit = self.ema_alpha * logit_ent + (1 - self.ema_alpha) * self._ema_logit
 
         # ── Z-scores (deviation from baseline) ──
-        spread_z = self._spread_stats.z_score(max_spread)
-        logit_z = self._logit_stats.z_score(logit_ent)
+        spread_z = self._spread_stats.z_score(max_spread) if (attentions is not None and len(layer_head_spread) > 0) else 0.0
+        logit_z = self._logit_stats.z_score(logit_ent) if logits is not None else 0.0
 
         # ── Delegation decision ──
         in_warmup = self._step_count <= self.warmup_steps
@@ -228,14 +230,21 @@ class EntropyRouter:
 
         if in_warmup:
             should_delegate = False
+        elif attentions is None:
+            # Attention-free mode: preserve FlashAttention / SDPA, route purely on logit uncertainty
+            should_delegate = logit_fires
         elif self.compound_mode:
             should_delegate = spread_fires and logit_fires
         else:
             should_delegate = spread_fires or logit_fires
 
         # Confidence: how far above threshold (clamped 0-1)
-        max_z = max(spread_z, logit_z)
-        threshold = max(self.spread_z_threshold, self.logit_z_threshold)
+        if attentions is None:
+            max_z = logit_z
+            threshold = self.logit_z_threshold
+        else:
+            max_z = max(spread_z, logit_z)
+            threshold = max(self.spread_z_threshold, self.logit_z_threshold)
         confidence = min(max(max_z / (threshold * 2), 0.0), 1.0)
 
         signal = EntropySignal(

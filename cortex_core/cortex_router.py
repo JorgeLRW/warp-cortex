@@ -174,7 +174,7 @@ class CortexRouter:
         with torch.no_grad():
             acc = (head(X).argmax(-1) == y).float().mean().item()
         print(f"[Router] Bootstrapped semantic classifier "
-              f"({self._hidden_dim}→{self.num_intents}) acc={acc:.0%}")
+              f"({self._hidden_dim}->{self.num_intents}) acc={acc:.0%}")
 
         self._head = head
         self._bootstrapped = True

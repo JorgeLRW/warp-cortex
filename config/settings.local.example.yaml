@@ -20,6 +20,10 @@ adaptive_engine:
   council_size: 5
   turbo_quant:
     bits: 3
+  learned_gate:
+    enabled: false
+    threshold: 0.5
+    checkpoint: ""
 
 orchestrator:
   max_rounds: 4

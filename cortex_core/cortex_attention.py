@@ -15,7 +15,8 @@ class CortexAttention(nn.Module):
     buffer).  Cross-attends to ALL current injection landmarks.  The
     topology-induced gate scales the overall synapse contribution based
     on both query-landmark relevance AND the geometric structure of the
-    landmark manifold (density, spread, coverage).
+    landmark manifold (density, spread, coverage, components, bridges,
+    and isolation ratio).
 
     When injection_count == 0, this is pure self-attention (zero overhead).
     When injection_count >= 1, the last token cross-attends to all N
@@ -23,7 +24,7 @@ class CortexAttention(nn.Module):
     """
 
     # Number of topology features appended to the gate input
-    N_TOPO_FEATURES = 3
+    N_TOPO_FEATURES = 7
 
     def __init__(self, dim, num_heads):
         super().__init__()
@@ -42,7 +43,9 @@ class CortexAttention(nn.Module):
         self.synapse_v_proj = nn.Linear(dim, dim)
 
         # Topology-induced learnable gate
-        # Input: [q_feat, s_feat, topo_density, topo_spread, topo_coverage]
+        # Input: [q_feat, s_feat, topo_density, topo_spread, topo_coverage,
+        #         topo_component_ratio, topo_largest_region_ratio,
+        #         topo_bridge_ratio, topo_isolated_ratio]
         gate_in = 2 * self.head_dim + self.N_TOPO_FEATURES
         self.gate_proj = nn.Sequential(
             nn.Linear(gate_in, self.head_dim),
@@ -97,11 +100,15 @@ class CortexAttention(nn.Module):
                 synapse_out = torch.matmul(syn_attn, s_v)  # [B, H, 1, head_dim]
 
                 # Topology-induced gate
-                density, spread, coverage = synapse.topo_features()
+                if hasattr(synapse, "topology_feature_vector"):
+                    topo_features = synapse.topology_feature_vector()
+                else:
+                    density, spread, coverage = synapse.topo_features()
+                    topo_features = (density, spread, coverage, 0.0, 0.0, 0.0, 0.0)
                 topo = torch.tensor(
-                    [density, spread, coverage],
+                    list(topo_features),
                     device=x.device, dtype=x.dtype,
-                ).unsqueeze(0).expand(B, -1)  # [B, 3]
+                ).unsqueeze(0).expand(B, -1)  # [B, N_TOPO_FEATURES]
 
                 q_feat = q_last[:, 0, 0, :]          # [B, head_dim]
                 s_feat = synapse_out[:, 0, 0, :]      # [B, head_dim] (attention-weighted)

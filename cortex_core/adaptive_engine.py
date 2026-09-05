@@ -12,9 +12,11 @@ Two modes of delegation that share the same worker infrastructure:
   Mode B — SILENT:
       The model has no idea delegation exists. The EntropyRouter monitors
       every token's attention entropy inline. When the model's internal
-      uncertainty spikes beyond its running baseline, the engine pauses
-      generation, auto-classifies the needed expert from the hidden state,
-      and dispatches to the same worker pool. The result is injected back
+      uncertainty spikes beyond its running baseline, an optional learned
+      linear gate can veto or approve that candidate trigger from the
+      frozen last-layer hidden state. The engine then pauses generation,
+      auto-classifies the needed expert from the hidden state, and
+      dispatches to the same worker pool. The result is injected back
       into the generation context.
 
 Both modes use:
@@ -27,6 +29,7 @@ Both modes use:
 from __future__ import annotations
 
 import time
+from copy import deepcopy
 from enum import Enum
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple, Callable
@@ -35,6 +38,7 @@ import torch
 import torch.nn.functional as F
 
 from .entropy_router import EntropyRouter, EntropySignal
+from .delegation_gate import LinearDelegationGate, GateDecision
 from .async_delegate import (
     AsyncDelegationManager,
     DelegationRequest,
@@ -42,11 +46,10 @@ from .async_delegate import (
     detect_delegation_requests,
 )
 from .cortex_router import CortexRouter
-from .turbo_quant import TurboQuantCache
+from .turbo_quant import TurboQuantCache, summarize_kv_cache
 
 
 # ── Configuration ────────────────────────────────────────────────────
-
 class DelegationMode(Enum):
     AWARE = "aware"      # Model knows about delegation, emits [DELEGATE:...] tags
     SILENT = "silent"    # Model is unaware, entropy-based auto-dispatch
@@ -203,6 +206,14 @@ class AdaptiveGenerator:
         logit_z_threshold: float = 2.5,
         compound_mode: bool = False,
         warmup_steps: int = 8,
+        # Optional learned gate over frozen hidden states
+        use_learned_gate: bool = False,
+        learned_gate_threshold: float = 0.5,
+        learned_gate_lr: float = 1e-3,
+        learned_gate_warmup_steps: int = 64,
+        learned_gate_online_learning: bool = True,
+        learned_gate_checkpoint: Optional[str] = None,
+        delegation_gate: Optional[LinearDelegationGate] = None,
         # KV cache compression (TurboQuant)
         turbo_quant_bits: int = 4,           # 2, 3, or 4 — lower = more compression
         turbo_quant_enabled: bool = True,    # False = no KV compression
@@ -235,10 +246,21 @@ class AdaptiveGenerator:
 
         self.device = device or str(next(model.parameters()).device)
 
-        # TurboQuant KV cache compression
+        # KV cache compression (TurboQuant)
         self.turbo_quant_bits = turbo_quant_bits
         self.turbo_quant_enabled = turbo_quant_enabled
         self.turbo_quant_interval = turbo_quant_interval
+        self.enable_attention_weights = False
+        self.last_kv_memory_stats: Dict[str, Any] = {
+            "enabled": True,
+            "bits": int(self.turbo_quant_bits),
+            "layer_count": 0,
+            "layers": [],
+            "original_bytes": 0,
+            "compressed_bytes": 0,
+            "compression_ratio": 1.0,
+            "compressed_layer_bytes": [],
+        }
 
         # Entropy router — always active (diagnostics in aware, trigger in silent)
         self.entropy_router = EntropyRouter(
@@ -247,6 +269,25 @@ class AdaptiveGenerator:
             compound_mode=compound_mode,
             warmup_steps=warmup_steps,
         )
+
+        self.learned_gate_online_learning = learned_gate_online_learning
+        if delegation_gate is not None:
+            self.delegation_gate: Optional[LinearDelegationGate] = delegation_gate
+        elif use_learned_gate:
+            self.delegation_gate = LinearDelegationGate(
+                threshold=learned_gate_threshold,
+                lr=learned_gate_lr,
+                warmup_steps=learned_gate_warmup_steps,
+                device=self.device,
+            )
+        else:
+            self.delegation_gate = None
+
+        if self.delegation_gate is not None and learned_gate_checkpoint:
+            try:
+                self.delegation_gate.load(learned_gate_checkpoint, map_location=self.device)
+            except FileNotFoundError:
+                print(f"[Gate] checkpoint not found: {learned_gate_checkpoint} — starting fresh")
 
         # Delegation manager — shared worker pool for both modes
         if delegation_mgr is not None:
@@ -387,6 +428,8 @@ class AdaptiveGenerator:
                 messages, tokenize=False, add_generation_prompt=True,
             )
             input_ids = self.tokenizer(text, return_tensors="pt").input_ids.to(self.device)
+            sequence_ids = input_ids.clone()
+            logits_processors = self._build_logits_processors(input_ids, temp)
 
             past_kv = None
             current_ids = input_ids
@@ -394,22 +437,16 @@ class AdaptiveGenerator:
 
             for step in range(max_tokens):
                 with torch.no_grad():
-                    outputs = self.model(
-                        input_ids=current_ids,
-                        past_key_values=past_kv,
-                        use_cache=True,
-                    )
+                    outputs = self._model_forward(current_ids, past_kv)
                 past_kv = outputs.past_key_values
                 logits = outputs.logits[0, -1, :]
 
-                if temp > 0:
-                    probs = F.softmax(logits / temp, dim=-1)
-                    next_token = torch.multinomial(probs, 1)
-                else:
-                    next_token = logits.argmax().unsqueeze(0)
+                scores = self._apply_logits_processors(logits, sequence_ids, logits_processors)
+                next_token = self._select_next_token(scores, temp)
 
                 gen_ids.append(next_token.item())
-                current_ids = next_token.unsqueeze(0)
+                sequence_ids = torch.cat([sequence_ids, next_token.view(1, 1)], dim=1)
+                current_ids = next_token.view(1, 1)
 
                 if next_token.item() == self._eos_id:
                     break
@@ -496,28 +533,45 @@ class AdaptiveGenerator:
         if not kv_tuples:
             return past_kv, 1.0
 
-        orig_bytes = sum(
-            k.nelement() * k.element_size() + v.nelement() * v.element_size()
-            for k, v in kv_tuples
-        )
-
         tq = TurboQuantCache(
             bits=self.turbo_quant_bits,
             device=self.device,
         )
         tq.compress(kv_tuples)
-        ratio = tq.compression_ratio(orig_bytes)
+        summary = summarize_kv_cache(kv_tuples, tq)
+        ratio = float(summary.get("compression_ratio", 1.0))
+        self.last_kv_memory_stats = {
+            "enabled": True,
+            **summary,
+        }
 
-        # Decompress back into the format the model expects
-        decompressed = tq.decompress()
-        past_kv = self._rebuild_kv_cache(decompressed, past_kv)
+        # Decompress back into the format the model expects if requested
+        if getattr(self, "destructive_turbo_quant", False):
+            decompressed = tq.decompress()
+            past_kv = self._rebuild_kv_cache(decompressed, past_kv)
 
         self._log(
-            f"  [TurboQuant] KV compressed {ratio:.1f}× "
+            f"  [TurboQuant] KV compression metric: {ratio:.1f}× "
             f"({self.turbo_quant_bits}-bit + QJL) at step {step}",
             dim=True,
         )
         return past_kv, ratio
+
+    def get_last_kv_memory_stats(self) -> Dict[str, Any]:
+        return dict(self.last_kv_memory_stats)
+
+    def get_memory_accounting(self) -> Dict[str, Any]:
+        model_param_bytes = sum(p.nelement() * p.element_size() for p in self.model.parameters())
+        buffer_bytes = sum(buffer.nelement() * buffer.element_size() for buffer in self.model.buffers())
+        return {
+            "model_parameter_bytes": int(model_param_bytes),
+            "model_buffer_bytes": int(buffer_bytes),
+            "model_total_bytes": int(model_param_bytes + buffer_bytes),
+            "model_total_mb": float(model_param_bytes + buffer_bytes) / (1024.0 * 1024.0),
+            "turbo_quant_enabled": True,
+            "turbo_quant_bits": int(self.turbo_quant_bits),
+            "kv": self.get_last_kv_memory_stats(),
+        }
 
     @staticmethod
     def _extract_kv_tuples(past_kv):
@@ -550,6 +604,114 @@ class AdaptiveGenerator:
             return DynamicCache.from_legacy_cache(tuple(decompressed))
         return tuple(decompressed)
 
+    @staticmethod
+    def _cache_seq_len(past_kv) -> int:
+        if past_kv is None:
+            return 0
+
+        if hasattr(past_kv, "get_seq_length"):
+            try:
+                seq_len = past_kv.get_seq_length()
+                if seq_len is not None:
+                    return int(seq_len)
+            except TypeError:
+                pass
+
+        kv_tuples = AdaptiveGenerator._extract_kv_tuples(past_kv)
+        if kv_tuples:
+            return int(kv_tuples[0][0].shape[2])
+
+        return 0
+
+    def _model_forward(self, input_ids: torch.Tensor, past_kv=None, **kwargs):
+        call_kwargs = {
+            "input_ids": input_ids,
+            "use_cache": True,
+            **kwargs,
+        }
+        if past_kv is not None:
+            call_kwargs["past_key_values"] = past_kv
+            seq_len = self._cache_seq_len(past_kv)
+            call_kwargs["position_ids"] = torch.arange(
+                seq_len,
+                seq_len + input_ids.shape[1],
+                device=input_ids.device,
+            ).unsqueeze(0)
+        return self.model(**call_kwargs)
+
+    def _build_generation_config(self, temperature: float):
+        base_config = getattr(self.model, "generation_config", None)
+        if base_config is None:
+            return None
+
+        generation_config = deepcopy(base_config)
+        generation_config.do_sample = temperature > 0
+        generation_config.pad_token_id = self.tokenizer.pad_token_id
+        if self.tokenizer.eos_token_id is not None:
+            generation_config.eos_token_id = self.tokenizer.eos_token_id
+
+        if temperature > 0:
+            generation_config.temperature = max(float(temperature), 0.01)
+        else:
+            generation_config.temperature = None
+            for attr in (
+                "top_p",
+                "top_k",
+                "min_p",
+                "typical_p",
+                "epsilon_cutoff",
+                "eta_cutoff",
+            ):
+                if hasattr(generation_config, attr):
+                    setattr(generation_config, attr, None)
+
+        return generation_config
+
+    def _build_logits_processors(self, prompt_ids: torch.Tensor, temperature: float):
+        if not hasattr(self.model, "_get_logits_processor"):
+            return None
+
+        generation_config = self._build_generation_config(temperature)
+        if generation_config is None:
+            return None
+
+        return self.model._get_logits_processor(
+            generation_config=generation_config,
+            input_ids_seq_length=int(prompt_ids.shape[1]),
+            device=prompt_ids.device,
+            model_kwargs={},
+        )
+
+    @staticmethod
+    def _apply_logits_processors(logits: torch.Tensor, sequence_ids: torch.Tensor, logits_processors):
+        if logits_processors is None:
+            return logits
+        return logits_processors(sequence_ids, logits.unsqueeze(0))[0]
+
+    @staticmethod
+    def _select_next_token(scores: torch.Tensor, temperature: float) -> torch.Tensor:
+        if temperature > 0:
+            probs = F.softmax(scores / temperature, dim=-1)
+            return torch.multinomial(probs, 1)
+        return scores.argmax().unsqueeze(0)
+
+    def _gate_decision(
+        self,
+        hidden_state: torch.Tensor,
+        signal: EntropySignal,
+    ) -> tuple[Optional[GateDecision], Optional[float]]:
+        if self.delegation_gate is None:
+            return None, None
+
+        decision = self.delegation_gate.decide(hidden_state)
+        loss = None
+        if self.learned_gate_online_learning:
+            loss = self.delegation_gate.partial_fit(
+                hidden_state,
+                1.0 if signal.should_delegate else 0.0,
+            )
+        return decision, loss
+
     # ── Mode B: SILENT — entropy-triggered auto-dispatch ─────────
 
     def _generate_silent(self, question: str, system_prompt: str,
@@ -564,6 +726,8 @@ class AdaptiveGenerator:
             messages, tokenize=False, add_generation_prompt=True,
         )
         input_ids = self.tokenizer(text, return_tensors="pt").input_ids.to(self.device)
+        sequence_ids = input_ids.clone()
+        logits_processors = self._build_logits_processors(input_ids, self.temperature)
 
         all_tokens: List[str] = []
         all_events: List[Dict] = []
@@ -578,32 +742,38 @@ class AdaptiveGenerator:
 
         for step in range(max_tokens):
             with torch.no_grad():
-                outputs = self.model(
-                    input_ids=current_ids,
-                    past_key_values=past_kv,
-                    use_cache=True,
-                    output_attentions=True,
+                outputs = self._model_forward(
+                    current_ids,
+                    past_kv,
+                    output_attentions=self.enable_attention_weights,
                     output_hidden_states=True,
                 )
 
             past_kv = outputs.past_key_values
             logits = outputs.logits[0, -1, :]
-            signal = self.entropy_router.step(outputs.attentions, logits)
+            signal = self.entropy_router.step(
+                outputs.attentions if self.enable_attention_weights else None,
+                logits,
+            )
             all_signals.append(signal)
 
-            # Next token
-            if self.temperature > 0:
-                probs = F.softmax(logits / self.temperature, dim=-1)
-                next_token = torch.multinomial(probs, 1)
-            else:
-                next_token = logits.argmax().unsqueeze(0)
+            hidden_state = outputs.hidden_states[-1][0, -1, :]
+            gate_decision, gate_loss = self._gate_decision(hidden_state, signal)
+            gate_allows = True
+            if gate_decision is not None and gate_decision.ready:
+                gate_allows = gate_decision.should_delegate
+            should_delegate = signal.should_delegate and gate_allows
+
+            scores = self._apply_logits_processors(logits, sequence_ids, logits_processors)
+            next_token = self._select_next_token(scores, self.temperature)
 
             token_str = self.tokenizer.decode(next_token, skip_special_tokens=False)
             all_tokens.append(token_str)
             generated_token_ids.append(next_token.item())
+            sequence_ids = torch.cat([sequence_ids, next_token.view(1, 1)], dim=1)
 
             # Next step: only the new token (KV cache handles history)
-            current_ids = next_token.unsqueeze(0)
+            current_ids = next_token.view(1, 1)
 
             # ── TurboQuant periodic compression ──
             past_kv, ratio = self._maybe_compress_kv(past_kv, step)
@@ -611,13 +781,9 @@ class AdaptiveGenerator:
                 last_compression_ratio = ratio
 
             # ── Entropy-based delegation check ──
-            if (signal.should_delegate
-                    and delegation_count < self.max_delegations):
+            if should_delegate and delegation_count < self.max_delegations:
                 delegation_count += 1
                 partial_text = "".join(all_tokens)
-
-                # Classify intent from hidden state
-                hidden_state = outputs.hidden_states[-1][0, -1, :]
                 kind = _classify_delegation_kind(
                     hidden_state, partial_text, self.cortex_router,
                 )
@@ -638,13 +804,21 @@ class AdaptiveGenerator:
                     "mode": "silent",
                     "expert_kind": kind,
                     "confidence": signal.confidence,
+                    "gate_probability": (
+                        gate_decision.probability if gate_decision is not None else None
+                    ),
+                    "gate_ready": gate_decision.ready if gate_decision is not None else False,
+                    "gate_loss": gate_loss,
                 }
                 all_events.append(event)
 
+                gate_fragment = ""
+                if gate_decision is not None:
+                    gate_fragment = f", gate_p={gate_decision.probability:.2f}"
                 self._log(
                     f"  [SILENT] t={step} entropy spike "
                     f"(spread_z={signal.spread_z_score:+.2f}, "
-                    f"logit_z={signal.logit_z_score:+.2f}) "
+                    f"logit_z={signal.logit_z_score:+.2f}{gate_fragment}) "
                     f"→ auto-dispatch to '{kind}'"
                 )
 
@@ -665,23 +839,44 @@ class AdaptiveGenerator:
                     ).input_ids.to(self.device)
                     # Feed injection through model to update KV cache
                     with torch.no_grad():
-                        inject_out = self.model(
-                            input_ids=inject_ids,
-                            past_key_values=past_kv,
-                            use_cache=True,
+                        inject_out = self._model_forward(
+                            inject_ids,
+                            past_kv,
+                            output_attentions=self.enable_attention_weights,
+                            output_hidden_states=False,
                         )
                     past_kv = inject_out.past_key_values
                     for tid in inject_ids[0].tolist():
                         generated_token_ids.append(tid)
+                    sequence_ids = torch.cat([sequence_ids, inject_ids], dim=1)
                     self._log(f"  [SILENT] Injected: {injection[:80]}")
+
+                    # Sample next token from injection output (prevents stale token duplication)
+                    inject_logits = inject_out.logits[0, -1, :]
+                    inject_scores = self._apply_logits_processors(inject_logits, sequence_ids, logits_processors)
+                    next_token = self._select_next_token(inject_scores, self.temperature)
+                    token_str = self.tokenizer.decode(next_token, skip_special_tokens=False)
+                    all_tokens.append(token_str)
+                    generated_token_ids.append(next_token.item())
+                    sequence_ids = torch.cat([sequence_ids, next_token.view(1, 1)], dim=1)
+                    current_ids = next_token.view(1, 1)
 
             # Logging (sparse)
             if self.verbose and (step < 10 or signal.should_delegate or step % 30 == 0):
-                marker = " ◆DELEGATE" if signal.should_delegate else ""
+                if should_delegate:
+                    marker = " ◆DELEGATE"
+                elif signal.should_delegate and gate_decision is not None and gate_decision.ready:
+                    marker = " ◆GATE-BLOCK"
+                else:
+                    marker = ""
+                gate_fragment = ""
+                if gate_decision is not None:
+                    gate_fragment = f" gate_p={gate_decision.probability:.2f}"
                 self._log(
                     f"  t={step:>3} '{token_str}' "
                     f"spread_z={signal.spread_z_score:+.2f} "
                     f"logit_z={signal.logit_z_score:+.2f}"
+                    f"{gate_fragment}"
                     f"{marker}",
                     dim=not signal.should_delegate,
                 )
@@ -724,6 +919,8 @@ class AdaptiveGenerator:
             messages, tokenize=False, add_generation_prompt=True,
         )
         input_ids = self.tokenizer(text, return_tensors="pt").input_ids.to(self.device)
+        sequence_ids = input_ids.clone()
+        logits_processors = self._build_logits_processors(input_ids, self.temperature)
 
         tokens: List[str] = []
         events: List[Dict] = []
@@ -734,30 +931,30 @@ class AdaptiveGenerator:
 
         for step in range(max_tokens):
             with torch.no_grad():
-                outputs = self.model(
-                    input_ids=current_ids,
-                    past_key_values=past_kv,
-                    use_cache=True,
-                    output_attentions=True,
+                outputs = self._model_forward(
+                    current_ids,
+                    past_kv,
+                    output_attentions=self.enable_attention_weights,
                     output_hidden_states=True,
                 )
 
             past_kv = outputs.past_key_values
             logits = outputs.logits[0, -1, :]
-            signal = self.entropy_router.step(outputs.attentions, logits)
+            signal = self.entropy_router.step(
+                outputs.attentions if self.enable_attention_weights else None,
+                logits,
+            )
             signals.append(signal)
 
-            if self.temperature > 0:
-                probs = F.softmax(logits / self.temperature, dim=-1)
-                next_token = torch.multinomial(probs, 1)
-            else:
-                next_token = logits.argmax().unsqueeze(0)
+            scores = self._apply_logits_processors(logits, sequence_ids, logits_processors)
+            next_token = self._select_next_token(scores, self.temperature)
 
             token_str = self.tokenizer.decode(next_token, skip_special_tokens=False)
             tokens.append(token_str)
+            sequence_ids = torch.cat([sequence_ids, next_token.view(1, 1)], dim=1)
 
             # Next step will only feed the new token
-            current_ids = next_token.unsqueeze(0)
+            current_ids = next_token.view(1, 1)
 
             # TurboQuant periodic compression
             past_kv, _ = self._maybe_compress_kv(past_kv, step)

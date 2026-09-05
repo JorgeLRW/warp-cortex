@@ -1,0 +1,14 @@
+{
+  "synthesis_sound": true,
+  "solution_title": "Watermarked Sequence Barrier Ring Buffer (Chandy-Lamport + Lock-Free Storage)",
+  "retrieved_facts": [
+    "[target_runtime] ERR_CONCURRENT_OVERRUN: Under 512 concurrent writers, readers experience silent memory corruption and intermittent deadlock. | Suspect: Writer head advances past lagging reader tail; readers take read-locks on write paths causing lock inversion.",
+    "[storage_engine] LOCK_FREE_RING_BUFFER: Producers write to buffer[head % N] and atomic_fetch_add(head, 1); consumers read buffer[tail % N].",
+    "[distributed_theory] CHANDY_LAMPORT: A snapshot cut C is causally consistent iff for every message/event e in C, cause(e) in C."
+  ],
+  "solution_invariants": [
+    "Invariant 1 (Lock-Free Read): Readers never acquire mutexes on the write ring; they read against monotonic epoch watermark.",
+    "Invariant 2 (Overrun Prevention): Writers check min(reader_watermark); if (head - min_watermark >= Buffer_Size), writer yields or pauses without deadlocking.",
+    "Invariant 3 (Causal Cut Consistency): Channel marker events guarantee that no reader observes a torn snapshot across shards."
+  ]
+}

@@ -47,10 +47,12 @@ class SubAgentTask:
     """A unit of work to be dispatched to a sub-agent."""
     id: str = field(default_factory=lambda: uuid.uuid4().hex[:8])
     role: AgentRole = AgentRole.RESEARCHER
+    agent_id: Optional[str] = None
     description: str = ""
     priority: int = 1          # Higher = more urgent (0=background, 1=normal, 2=urgent)
     depends_on: List[str] = field(default_factory=list)  # Task IDs this depends on
     max_tokens: int = 30
+    persist_result: bool = True
     # Populated after execution
     result: Optional[str] = None
     result_vector: Optional[torch.Tensor] = None
@@ -109,14 +111,15 @@ class CortexOrchestrator:
         print(f"[Orchestrator] Dispatched {task.role.value} agent ({task.id}): {task.description[:60]}")
         return task.id
 
-    def dispatch_from_trigger(self, trigger_text: str, role: Optional[AgentRole] = None) -> str:
+    def dispatch_from_trigger(self, trigger_text: str, role: Optional[AgentRole] = None,
+                              agent_id: Optional[str] = None) -> str:
         """
         Convenience: create a SubAgentTask from a router trigger string.
         Auto-infers role if not provided.
         """
         if role is None:
             role = self._infer_role(trigger_text)
-        task = SubAgentTask(role=role, description=trigger_text)
+        task = SubAgentTask(role=role, description=trigger_text, agent_id=agent_id)
         return self.dispatch(task)
 
     # ------------------------------------------------------------------
@@ -152,14 +155,14 @@ class CortexOrchestrator:
         print(f"[Orchestrator] Team '{goal}' dispatched: {len(ready)} immediate, {len(blocked)} blocked")
         return plan
 
-    def create_review_chain(self, description: str) -> TeamPlan:
+    def create_review_chain(self, description: str, agent_id: Optional[str] = None) -> TeamPlan:
         """
         Common pattern: Researcher → Reviewer → Verifier chain.
         Each stage depends on the previous.
         """
-        t1 = SubAgentTask(role=AgentRole.RESEARCHER, description=f"Research: {description}", priority=2)
-        t2 = SubAgentTask(role=AgentRole.REVIEWER, description=f"Review the research findings", depends_on=[t1.id])
-        t3 = SubAgentTask(role=AgentRole.VERIFIER, description=f"Verify the reviewed answer", depends_on=[t2.id])
+        t1 = SubAgentTask(role=AgentRole.RESEARCHER, agent_id=agent_id, description=f"Research: {description}", priority=2)
+        t2 = SubAgentTask(role=AgentRole.REVIEWER, agent_id=agent_id, description=f"Review the research findings", depends_on=[t1.id])
+        t3 = SubAgentTask(role=AgentRole.VERIFIER, agent_id=agent_id, description=f"Verify the reviewed answer", depends_on=[t2.id])
         return self.dispatch_team(goal=description, tasks=[t1, t2, t3])
 
     # ------------------------------------------------------------------
@@ -212,7 +215,15 @@ class CortexOrchestrator:
             if dep_task and dep_task.result:
                 upstream_context += f" [Upstream ({dep_task.role.value}): {dep_task.result}]"
 
-        full_prompt = f"{role_prompt} Task: {task.description}.{upstream_context} Analysis: "
+        if task.agent_id and getattr(self.engine, "agent_cloud", None) is not None:
+            full_prompt = self.engine.agent_cloud.compose_prompt(
+                task.agent_id,
+                task=task.description,
+                role_prompt=role_prompt,
+                upstream_context=upstream_context,
+            )
+        else:
+            full_prompt = f"{role_prompt} Task: {task.description}.{upstream_context} Analysis: "
 
         try:
             thought_text, thought_vector = self._run_side_agent(full_prompt, task.max_tokens)
@@ -220,6 +231,26 @@ class CortexOrchestrator:
             task.result_vector = thought_vector
             task.status = "completed"
             print(f"[Orchestrator] {task.role.value} ({task.id}) completed: {thought_text[:80]}")
+
+            if getattr(self.engine, "agent_cloud", None) is not None:
+                if task.agent_id and task.persist_result:
+                    self.engine.agent_cloud.store_task_result(
+                        agent_id=task.agent_id,
+                        task_text=task.description,
+                        result_text=f"[{task.role.value.title()}] {thought_text}",
+                        result_vector=thought_vector.squeeze(0) if thought_vector is not None else None,
+                        role=task.role.value,
+                        metadata={"task_id": task.id, "priority": task.priority},
+                    )
+                else:
+                    self.engine.agent_cloud.remember_shared_text(
+                        text=f"[{task.role.value.title()}] {thought_text}",
+                        score=1.0,
+                        source="subagent",
+                        node_type="task_result",
+                        metadata={"task_id": task.id, "priority": task.priority, "role": task.role.value},
+                        embedding=thought_vector.squeeze(0) if thought_vector is not None else None,
+                    )
 
             # Inject into synapse
             self.engine.synapse.push_thought(
@@ -244,7 +275,10 @@ class CortexOrchestrator:
 
         think_prompt = tokenizer.encode(prompt_text, return_tensors="pt").to(device)
 
-        landmarks = self.engine.synapse.get_landmarks()
+        if hasattr(self.engine, "_resolve_worker_landmarks"):
+            landmarks = self.engine._resolve_worker_landmarks(query_text=prompt_text)
+        else:
+            landmarks = self.engine.synapse.get_landmarks()
 
         past_key_values = None
         if landmarks is not None:

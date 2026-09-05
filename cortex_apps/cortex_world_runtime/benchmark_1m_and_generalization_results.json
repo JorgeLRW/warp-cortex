@@ -1,0 +1,21 @@
+{
+  "benchmark_1m_capacity": {
+    "n_entities": 1000000,
+    "init_seconds": 97.01,
+    "total_mb": 1208.01,
+    "total_gb": 1.18,
+    "bytes_per_entity": 1266.7,
+    "tracemalloc_peak_mb": 1560.98,
+    "clock1_p50": 0.007,
+    "clock1_p95": 0.01,
+    "clock1_p99": 0.013,
+    "state_lookup_p99_us": 2.5,
+    "bfs_p50": 0.022,
+    "bfs_p95": 0.025
+  },
+  "benchmark_skill_generalization": {
+    "flat_table_novel_acc": 0.0,
+    "cortex_novel_acc": 80.0,
+    "explanation": "Flat table is limited to exact class keys; Cortex leverages Z semantic aspects and S state constraints."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "static": {
+    "mode": "STATIC",
+    "total_tasks": 20,
+    "first_attempt_success_rate": 20.0,
+    "first_attempt_count": 4,
+    "total_attempts": 36,
+    "repeated_mistakes": 12,
+    "total_tokens": 5400,
+    "cross_agent_transfer_rate": 20.0,
+    "cross_agent_transfer_wins": 3,
+    "repeat_opportunities": 15
+  },
+  "private": {
+    "mode": "PRIVATE_MEMORY",
+    "total_tasks": 20,
+    "first_attempt_success_rate": 60.0,
+    "first_attempt_count": 12,
+    "total_attempts": 28,
+    "repeated_mistakes": 4,
+    "total_tokens": 4200,
+    "cross_agent_transfer_rate": 73.33333333333333,
+    "cross_agent_transfer_wins": 11,
+    "repeat_opportunities": 15
+  },
+  "shared": {
+    "mode": "SHARED_CORTEX_LEDGER",
+    "total_tasks": 20,
+    "first_attempt_success_rate": 80.0,
+    "first_attempt_count": 16,
+    "total_attempts": 24,
+    "repeated_mistakes": 0,
+    "total_tokens": 3600,
+    "cross_agent_transfer_rate": 100.0,
+    "cross_agent_transfer_wins": 15,
+    "repeat_opportunities": 15
+  }
+}

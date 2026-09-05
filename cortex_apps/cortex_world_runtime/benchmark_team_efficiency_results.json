@@ -1,0 +1,512 @@
+{
+  "contenders": {
+    "CODING": [
+      {
+        "config_name": "1. Single Generalist (Sequential)",
+        "problem_class": "CODING",
+        "roles": {
+          "GENERALIST": 1
+        },
+        "total_agents": 1,
+        "success": true,
+        "wall_clock_ms": 5600.672700005816,
+        "total_tokens": 274,
+        "input_tokens": 179,
+        "output_tokens": 95,
+        "gpu_seconds": 5.591038800004753,
+        "total_tool_calls": 5,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 651.6422637038869,
+        "notes": ""
+      },
+      {
+        "config_name": "2. Four Homogeneous Agents",
+        "problem_class": "CODING",
+        "roles": {
+          "GENERALIST": 4
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 21927.454399992712,
+        "total_tokens": 1096,
+        "input_tokens": 716,
+        "output_tokens": 380,
+        "gpu_seconds": 21.9127399000281,
+        "total_tool_calls": 20,
+        "duplicated_entity_reads": 6,
+        "failed_actions": 0,
+        "work_efficiency": 41.61033663462508,
+        "notes": ""
+      },
+      {
+        "config_name": "3. Specialist Team (1P+1R+1I+1V)",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 1,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 5144.154299996444,
+        "total_tokens": 181,
+        "input_tokens": 86,
+        "output_tokens": 95,
+        "gpu_seconds": 5.13984510001319,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 1074.0078069697206,
+        "notes": ""
+      },
+      {
+        "config_name": "4. Eight Specialists (2P+2R+2I+2V)",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 2,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 2
+        },
+        "total_agents": 8,
+        "success": true,
+        "wall_clock_ms": 9814.33829999878,
+        "total_tokens": 362,
+        "input_tokens": 172,
+        "output_tokens": 190,
+        "gpu_seconds": 9.808522099992842,
+        "total_tool_calls": 8,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 281.46889324437313,
+        "notes": ""
+      },
+      {
+        "config_name": "5. Large Event-Driven Society (A=16)",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 4,
+          "RESEARCHER": 6,
+          "IMPLEMENTER": 4,
+          "VERIFIER": 2
+        },
+        "total_agents": 16,
+        "success": true,
+        "wall_clock_ms": 5476.778299998841,
+        "total_tokens": 181,
+        "input_tokens": 86,
+        "output_tokens": 95,
+        "gpu_seconds": 5.4738606000028085,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 1008.7795371330274,
+        "notes": ""
+      }
+    ],
+    "RESEARCH": [
+      {
+        "config_name": "1. Single Generalist (Sequential)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "GENERALIST": 1
+        },
+        "total_agents": 1,
+        "success": true,
+        "wall_clock_ms": 5451.543700008187,
+        "total_tokens": 321,
+        "input_tokens": 226,
+        "output_tokens": 95,
+        "gpu_seconds": 5.448315400004503,
+        "total_tool_calls": 5,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 571.4463588548524,
+        "notes": ""
+      },
+      {
+        "config_name": "2. Four Homogeneous Agents",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "GENERALIST": 4
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 20352.989400009392,
+        "total_tokens": 1284,
+        "input_tokens": 904,
+        "output_tokens": 380,
+        "gpu_seconds": 20.339671099980478,
+        "total_tool_calls": 20,
+        "duplicated_entity_reads": 6,
+        "failed_actions": 0,
+        "work_efficiency": 38.26544514274585,
+        "notes": ""
+      },
+      {
+        "config_name": "3. Specialist Team (1P+1R+1I+1V)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 1,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 3224.3782000005012,
+        "total_tokens": 184,
+        "input_tokens": 89,
+        "output_tokens": 95,
+        "gpu_seconds": 3.2223134000087157,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 1685.5288900957112,
+        "notes": ""
+      },
+      {
+        "config_name": "4. Eight Specialists (2P+2R+2I+2V)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 2,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 2
+        },
+        "total_agents": 8,
+        "success": true,
+        "wall_clock_ms": 7088.649699988309,
+        "total_tokens": 368,
+        "input_tokens": 178,
+        "output_tokens": 190,
+        "gpu_seconds": 7.084018299967283,
+        "total_tool_calls": 8,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 383.3439962976739,
+        "notes": ""
+      },
+      {
+        "config_name": "5. Large Event-Driven Society (A=16)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 4,
+          "RESEARCHER": 6,
+          "IMPLEMENTER": 4,
+          "VERIFIER": 2
+        },
+        "total_agents": 16,
+        "success": true,
+        "wall_clock_ms": 3445.839399995748,
+        "total_tokens": 184,
+        "input_tokens": 89,
+        "output_tokens": 95,
+        "gpu_seconds": 3.443561400010367,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 1577.2013660016653,
+        "notes": ""
+      }
+    ]
+  },
+  "composition_factorial": {
+    "CODING": [
+      {
+        "config_name": "(1, 0, 0, 0) Solo Planner/Generalist",
+        "problem_class": "CODING",
+        "roles": {
+          "GENERALIST": 1
+        },
+        "total_agents": 1,
+        "success": true,
+        "wall_clock_ms": 6047.5146999961,
+        "total_tokens": 274,
+        "input_tokens": 179,
+        "output_tokens": 95,
+        "gpu_seconds": 6.043778000006569,
+        "total_tool_calls": 5,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 603.4933716653395,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 1, 1, 1) Balanced 4",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 1,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 6139.240399992559,
+        "total_tokens": 181,
+        "input_tokens": 86,
+        "output_tokens": 95,
+        "gpu_seconds": 6.135997400007909,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 899.9259710467984,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 2, 2, 1) Execution Heavy 6",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 1
+        },
+        "total_agents": 6,
+        "success": true,
+        "wall_clock_ms": 9323.620799987111,
+        "total_tokens": 267,
+        "input_tokens": 122,
+        "output_tokens": 145,
+        "gpu_seconds": 9.31773450000037,
+        "total_tool_calls": 6,
+        "duplicated_entity_reads": 2,
+        "failed_actions": 0,
+        "work_efficiency": 401.7021318654554,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 4, 1, 1) Research Heavy 7",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 4,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 7,
+        "success": true,
+        "wall_clock_ms": 10264.722599997185,
+        "total_tokens": 313,
+        "input_tokens": 143,
+        "output_tokens": 170,
+        "gpu_seconds": 10.25851149999653,
+        "total_tool_calls": 7,
+        "duplicated_entity_reads": 4,
+        "failed_actions": 0,
+        "work_efficiency": 311.249344323695,
+        "notes": ""
+      },
+      {
+        "config_name": "(2, 2, 2, 2) Symmetric 8",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 2,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 2
+        },
+        "total_agents": 8,
+        "success": true,
+        "wall_clock_ms": 9838.263900004677,
+        "total_tokens": 362,
+        "input_tokens": 172,
+        "output_tokens": 190,
+        "gpu_seconds": 9.8323848,
+        "total_tool_calls": 8,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 280.78439115921725,
+        "notes": ""
+      },
+      {
+        "config_name": "(4, 0, 0, 0) All Planners (Imbalanced)",
+        "problem_class": "CODING",
+        "roles": {
+          "PLANNER": 4
+        },
+        "total_agents": 4,
+        "success": false,
+        "wall_clock_ms": 5480.418500010273,
+        "total_tokens": 240,
+        "input_tokens": 140,
+        "output_tokens": 100,
+        "gpu_seconds": 5.4771108999993885,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 0.0,
+        "notes": ""
+      },
+      {
+        "config_name": "(0, 0, 4, 0) All Implementers (Imbalanced)",
+        "problem_class": "CODING",
+        "roles": {
+          "IMPLEMENTER": 4
+        },
+        "total_agents": 4,
+        "success": false,
+        "wall_clock_ms": 6050.24909999338,
+        "total_tokens": 148,
+        "input_tokens": 48,
+        "output_tokens": 100,
+        "gpu_seconds": 6.047353200003272,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 0.0,
+        "notes": ""
+      }
+    ],
+    "RESEARCH": [
+      {
+        "config_name": "(1, 0, 0, 0) Solo Planner/Generalist",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "GENERALIST": 1
+        },
+        "total_agents": 1,
+        "success": true,
+        "wall_clock_ms": 3777.0067999954335,
+        "total_tokens": 321,
+        "input_tokens": 226,
+        "output_tokens": 95,
+        "gpu_seconds": 3.774444799986668,
+        "total_tool_calls": 5,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 824.7972435505159,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 1, 1, 1) Balanced 4",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 1,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 4,
+        "success": true,
+        "wall_clock_ms": 3472.726200008765,
+        "total_tokens": 184,
+        "input_tokens": 89,
+        "output_tokens": 95,
+        "gpu_seconds": 3.4705559000140056,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 1,
+        "failed_actions": 0,
+        "work_efficiency": 1564.9902398530398,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 2, 2, 1) Execution Heavy 6",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 1
+        },
+        "total_agents": 6,
+        "success": true,
+        "wall_clock_ms": 5577.984699993976,
+        "total_tokens": 270,
+        "input_tokens": 125,
+        "output_tokens": 145,
+        "gpu_seconds": 5.573981999972602,
+        "total_tool_calls": 6,
+        "duplicated_entity_reads": 2,
+        "failed_actions": 0,
+        "work_efficiency": 663.9859918776226,
+        "notes": ""
+      },
+      {
+        "config_name": "(1, 4, 1, 1) Research Heavy 7",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 1,
+          "RESEARCHER": 4,
+          "IMPLEMENTER": 1,
+          "VERIFIER": 1
+        },
+        "total_agents": 7,
+        "success": true,
+        "wall_clock_ms": 6333.491299999878,
+        "total_tokens": 316,
+        "input_tokens": 146,
+        "output_tokens": 170,
+        "gpu_seconds": 6.329626100035966,
+        "total_tool_calls": 7,
+        "duplicated_entity_reads": 4,
+        "failed_actions": 0,
+        "work_efficiency": 499.6544263075529,
+        "notes": ""
+      },
+      {
+        "config_name": "(2, 2, 2, 2) Symmetric 8",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 2,
+          "RESEARCHER": 2,
+          "IMPLEMENTER": 2,
+          "VERIFIER": 2
+        },
+        "total_agents": 8,
+        "success": true,
+        "wall_clock_ms": 7287.464999986696,
+        "total_tokens": 368,
+        "input_tokens": 178,
+        "output_tokens": 190,
+        "gpu_seconds": 7.280808799987426,
+        "total_tool_calls": 8,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 372.8856748338121,
+        "notes": ""
+      },
+      {
+        "config_name": "(4, 0, 0, 0) All Planners (Imbalanced)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "PLANNER": 4
+        },
+        "total_agents": 4,
+        "success": false,
+        "wall_clock_ms": 3856.4598000084516,
+        "total_tokens": 252,
+        "input_tokens": 152,
+        "output_tokens": 100,
+        "gpu_seconds": 3.853240599972196,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 3,
+        "failed_actions": 0,
+        "work_efficiency": 0.0,
+        "notes": ""
+      },
+      {
+        "config_name": "(0, 0, 4, 0) All Implementers (Imbalanced)",
+        "problem_class": "RESEARCH",
+        "roles": {
+          "IMPLEMENTER": 4
+        },
+        "total_agents": 4,
+        "success": false,
+        "wall_clock_ms": 3765.4091000003973,
+        "total_tokens": 148,
+        "input_tokens": 48,
+        "output_tokens": 100,
+        "gpu_seconds": 3.762882900002296,
+        "total_tool_calls": 4,
+        "duplicated_entity_reads": 0,
+        "failed_actions": 0,
+        "work_efficiency": 0.0,
+        "notes": ""
+      }
+    ]
+  }
+}

@@ -4,10 +4,11 @@ import copy
 import os
 import sys
 from contextlib import nullcontext
-from threading import Thread
+from threading import Event, Thread
 from typing import Any, Callable, Optional, Sequence, Tuple, cast
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.cache_utils import DynamicCache
+from cortex_core.agent_cloud import PersistentAgentCloud
 from cortex_core.synapse import TopologicalSynapse
 from cortex_core.cortex_router import CortexRouter
 from cortex_core.cortex_orchestrator import CortexOrchestrator, AgentRole, SubAgentTask
@@ -16,9 +17,14 @@ from cortex_core.cortex_hooks import (
     HookRegistry, HookPoint, HookContext,
     create_default_hooks, VerificationLoop,
 )
-from cortex_core.hf_utils import prepare_hf_cache
+from cortex_core.hf_utils import prepare_hf_cache, resolve_local_model_source
 from cortex_core.settings import get_setting, load_settings, resolve_project_path
-from cortex_core.turbo_quant import TurboQuantCache, compress_landmarks, decompress_landmarks
+from cortex_core.turbo_quant import (
+    TurboQuantCache,
+    compress_landmarks,
+    decompress_landmarks,
+    summarize_kv_cache,
+)
 
 # ---------------------------------------------------------------------------
 # warp-bitnet lite integration (optional — graceful fallback if not built)
@@ -431,7 +437,12 @@ class CortexEngine:
             os.path.dirname(os.path.abspath(__file__)),
             preferred_root=cache_root,
         )
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=cache_dir)
+        model_source, local_files_only = resolve_local_model_source(model_id, cache_dir)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_source,
+            cache_dir=cache_dir,
+            local_files_only=local_files_only,
+        )
 
         model_kwargs = {
             "cache_dir": cache_dir,
@@ -439,8 +450,10 @@ class CortexEngine:
         }
         if self.use_cuda_streams:
             model_kwargs["device_map"] = "auto"
+        if local_files_only:
+            model_kwargs["local_files_only"] = True
 
-        self.model = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
+        self.model = AutoModelForCausalLM.from_pretrained(model_source, **model_kwargs)
         cast(Any, self.model).config.output_hidden_states = True
         if not self.use_cuda_streams:
             cast(Any, self.model).to(self.device)
@@ -478,8 +491,46 @@ class CortexEngine:
         )
         self.skills = SkillRegistry(skills_dir)
 
-        # 4. Context manager (wraps synapse + compaction + skills)
-        self.context_mgr = ContextManager(self.synapse, self.compactor, self.skills)
+        # 4. Persistent agent cloud: isolated per-agent memory on one backbone
+        shared_store_path = (
+            os.environ.get("WARP_CORTEX_SHARED_MANIFOLD_DB")
+            or get_setting(settings, "shared_manifold.store_path", "")
+            or None
+        )
+        shared_store_cache_key = get_setting(settings, "shared_manifold.cache_key", "default")
+        shared_hot_capacity = int(get_setting(settings, "shared_manifold.hot_capacity", 8))
+        self.shared_hot_refresh_seconds = float(
+            get_setting(settings, "shared_manifold.background_refresh_seconds", 2.0)
+        )
+        self.prefer_hot_cache_for_workers = bool(
+            get_setting(settings, "shared_manifold.prefer_hot_cache_for_workers", True)
+        )
+        self.agent_cloud = PersistentAgentCloud(
+            hidden_dim=hidden,
+            tokenizer=self.tokenizer,
+            embed_layer=self.model.get_input_embeddings(),
+            device=self.device,
+            shared_hot_capacity=shared_hot_capacity,
+            shared_store_path=shared_store_path,
+            shared_store_cache_key=shared_store_cache_key,
+        )
+
+        self.shared_manifold_enabled = True
+        self.shared_manifold_trace: list[dict[str, Any]] = []
+        self.shared_manifold_prompt_hits = 0
+        self.shared_manifold_prompt_misses = 0
+        self.shared_manifold_runtime_refreshes = 0
+        self.shared_manifold_nodes_consumed = 0
+        self.shared_manifold_energy_feedback_enabled = True
+        self.agent_cloud.shared_energy_feedback_enabled = True
+
+        # 4b. Context manager (wraps synapse + compaction + skills + shared manifold)
+        self.context_mgr = ContextManager(
+            self.synapse,
+            self.compactor,
+            self.skills,
+            shared_context_getter=self._build_shared_manifold_context,
+        )
 
         if side_mode == "bitnet":
             hidden = getattr(self.model.config, 'hidden_size', 896)
@@ -516,9 +567,363 @@ class CortexEngine:
             target_accept_rate=0.6,
         )
 
+        # 9. Shared manifold refresh (bounded external working memory)
+        self.shared_manifold_refresh_interval = 8
+        self.shared_manifold_refresh_top_k = 2
+        self.shared_manifold_projection_top_k = 4
+
         # 8. TurboQuant KV cache compressor (3-4 bit, Mac-friendly Hadamard)
         self.turbo_quant_bits = int(get_setting(settings, "adaptive_engine.turbo_quant.bits", 4))
-        self.turbo_quant_enabled = bool(get_setting(settings, "adaptive_engine.turbo_quant.enabled", True))
+        self.turbo_quant_enabled = True
+        self._turbo_cache: Optional[TurboQuantCache] = None
+        self._shared_hot_refresh_stop = Event()
+        self._shared_hot_refresh_thread: Optional[Thread] = None
+        if shared_store_path and self.shared_hot_refresh_seconds > 0:
+            self._start_shared_hot_refresh_worker()
+
+    def _start_shared_hot_refresh_worker(self):
+        if self._shared_hot_refresh_thread is not None:
+            return
+
+        thread = Thread(target=self._shared_hot_refresh_loop, name="warp-cortex-hot-refresh", daemon=True)
+        thread.start()
+        self._shared_hot_refresh_thread = thread
+
+    def _shared_hot_refresh_loop(self):
+        while not self._shared_hot_refresh_stop.wait(self.shared_hot_refresh_seconds):
+            self._refresh_shared_hot_cache_once()
+
+    def _refresh_shared_hot_cache_once(self) -> Optional[dict[str, Any]]:
+        landmarks_raw = self.synapse.get_landmarks() if getattr(self, "synapse", None) is not None else None
+        if landmarks_raw is not None:
+            return self._materialize_shared_hot_cache(landmarks_raw)
+        self.agent_cloud.materialize_shared_hot_cache(kv_landmarks=None)
+        return None
+
+    def stop_shared_hot_refresh_worker(self):
+        self._shared_hot_refresh_stop.set()
+        thread = self._shared_hot_refresh_thread
+        if thread is not None and thread.is_alive():
+            thread.join(timeout=1.0)
+        self._shared_hot_refresh_thread = None
+
+    def _materialize_shared_hot_cache(
+        self,
+        landmarks_raw,
+        *,
+        query_text: Optional[str] = None,
+        agent_id: Optional[str] = None,
+        projection_kind: str = "runtime_decode",
+    ) -> Optional[dict[str, Any]]:
+        if landmarks_raw is None:
+            return None
+
+        tq = compress_landmarks(
+            landmarks_raw,
+            bits=self.turbo_quant_bits,
+            device=str(self.device),
+        )
+        kv_stats = summarize_kv_cache(landmarks_raw, tq)
+        ratio = float(kv_stats.get("compression_ratio", 1.0))
+        print(f"[TurboQuant] Landmarks compressed {ratio:.1f}× ({tq.bits}-bit + QJL residual)")
+        self._turbo_cache = tq
+        self.agent_cloud.materialize_shared_hot_cache(
+            kv_landmarks=landmarks_raw,
+            turbo_bits=self.turbo_quant_bits,
+            turbo_device=str(self.device),
+        )
+        compact_query = (query_text or "").strip()
+        if compact_query and self.shared_manifold_enabled:
+            self.agent_cloud.resolve_shared_projection(
+                query_text=compact_query,
+                top_k=self.shared_manifold_projection_top_k,
+                agent_id=agent_id,
+                require_residue=False,
+                materialize_missing=True,
+                projection_kind=projection_kind,
+                kv_landmarks=landmarks_raw,
+                turbo_bits=self.turbo_quant_bits,
+                turbo_device=str(self.device),
+            )
+        return kv_stats
+
+    def _dynamic_cache_from_landmarks(self, landmarks):
+        past_key_values = DynamicCache()
+        setattr(past_key_values, "key_cache", [k for k, _ in landmarks])
+        setattr(past_key_values, "value_cache", [v for _, v in landmarks])
+        return past_key_values
+
+    def _resolve_projection_landmarks(
+        self,
+        *,
+        query_text: str,
+        agent_id: Optional[str] = None,
+        projection_kind: str = "runtime_decode",
+        materialize_missing: bool = False,
+    ):
+        compact_query = str(query_text or "").strip()
+        if not compact_query or not self.shared_manifold_enabled:
+            return None, None
+
+        hot_landmarks = None
+        if materialize_missing:
+            hot_cache = self.agent_cloud.get_shared_hot_turbo_cache(device=str(self.device))
+            if hot_cache is not None:
+                hot_landmarks = decompress_landmarks(hot_cache)
+
+        projection = self.agent_cloud.resolve_shared_projection(
+            query_text=compact_query,
+            top_k=self.shared_manifold_projection_top_k,
+            agent_id=agent_id,
+            require_residue=True,
+            materialize_missing=bool(materialize_missing and hot_landmarks is not None),
+            projection_kind=projection_kind,
+            kv_landmarks=hot_landmarks,
+            turbo_bits=self.turbo_quant_bits,
+            turbo_device=str(self.device),
+        )
+        if projection is None or not projection.get("projection_id"):
+            return None, None
+
+        projection_cache = self.agent_cloud.get_projection_residue(
+            projection["projection_id"],
+            device=str(self.device),
+        )
+        if projection_cache is None:
+            return None, projection
+        return decompress_landmarks(projection_cache), projection
+
+    def _seed_shared_projection_cache(
+        self,
+        *,
+        query_text: str,
+        used_texts: Optional[set[str]] = None,
+        past_key_values=None,
+        agent_id: Optional[str] = None,
+    ):
+        if past_key_values is not None:
+            return past_key_values, 0
+
+        landmarks, projection = self._resolve_projection_landmarks(
+            query_text=query_text,
+            agent_id=agent_id,
+            projection_kind="runtime_decode",
+            materialize_missing=True,
+        )
+        if landmarks is None or projection is None:
+            return past_key_values, 0
+
+        seeded_cache = self._dynamic_cache_from_landmarks(landmarks)
+        if used_texts is not None:
+            used_texts.add(projection.get("summary_text", ""))
+            for node in projection.get("member_nodes") or []:
+                used_texts.add(node.text)
+
+        projection_nodes = [projection["node"]]
+        projection_nodes.extend(projection.get("member_nodes") or [])
+        self.shared_manifold_nodes_consumed += max(1, len(projection.get("projection_node_ids") or projection_nodes))
+        self._record_shared_manifold_event(
+            "projection_seed",
+            query_text,
+            projection_nodes,
+            agent_id=agent_id,
+        )
+        self._apply_shared_manifold_energy_feedback(
+            "projection_seed",
+            query_text,
+            projection_nodes,
+            agent_id=agent_id,
+        )
+        return seeded_cache, len(projection_nodes)
+
+    def _resolve_worker_landmarks(self, query_text: Optional[str] = None, agent_id: Optional[str] = None):
+        landmarks = self.synapse.get_landmarks() if getattr(self, "synapse", None) is not None else None
+        if landmarks is not None:
+            return landmarks
+        projection_landmarks, _ = self._resolve_projection_landmarks(
+            query_text=str(query_text or ""),
+            agent_id=agent_id,
+            projection_kind="worker_context",
+            materialize_missing=self.prefer_hot_cache_for_workers,
+        )
+        if projection_landmarks is not None:
+            return projection_landmarks
+        if self.prefer_hot_cache_for_workers:
+            hot_cache = self.agent_cloud.get_shared_hot_turbo_cache(device=str(self.device))
+            if hot_cache is not None:
+                return decompress_landmarks(hot_cache)
+        if self._turbo_cache is not None:
+            return decompress_landmarks(self._turbo_cache)
+        return None
+
+    def _record_shared_manifold_event(self, stage: str, query_text: str,
+                                      nodes: list[Any], agent_id: Optional[str] = None):
+        event = {
+            "stage": stage,
+            "agent_id": agent_id,
+            "query_text": query_text,
+            "node_count": len(nodes),
+            "node_ids": [
+                str(getattr(node, "node_id", "")).strip()
+                for node in nodes
+                if str(getattr(node, "node_id", "")).strip()
+            ],
+            "nodes": [getattr(node, "text", str(node)) for node in nodes],
+        }
+        self.shared_manifold_trace.append(event)
+        if len(self.shared_manifold_trace) > 256:
+            self.shared_manifold_trace = self.shared_manifold_trace[-256:]
+
+    def _apply_shared_manifold_energy_feedback(
+        self,
+        stage: str,
+        query_text: str,
+        nodes: list[Any],
+        agent_id: Optional[str] = None,
+    ):
+        if not getattr(self, "shared_manifold_energy_feedback_enabled", False):
+            return None
+        if getattr(self, "agent_cloud", None) is None:
+            return None
+
+        feedback_nodes = [node for node in nodes if getattr(node, "node_id", None)]
+        if not feedback_nodes:
+            return None
+
+        if stage == "projection_seed":
+            delta = float(getattr(self.agent_cloud, "shared_energy_projection_delta", 0.0))
+        elif stage == "runtime_refresh":
+            delta = float(getattr(self.agent_cloud, "shared_energy_refresh_delta", 0.0))
+        else:
+            delta = float(getattr(self.agent_cloud, "shared_energy_prompt_delta", 0.0))
+        if abs(delta) < 1e-9:
+            return None
+
+        return self.agent_cloud.deform_manifold_for_nodes(
+            feedback_nodes,
+            delta,
+            max_depth=1,
+            edge_decay=0.85,
+        )
+
+    def _build_shared_manifold_context(self, prompt: str, top_k: int = 4) -> str:
+        if not self.shared_manifold_enabled:
+            return ""
+
+        context_text = self.agent_cloud.build_shared_context(prompt, top_k=top_k)
+        if not context_text:
+            self.shared_manifold_prompt_misses += 1
+            return ""
+
+        projection = self.agent_cloud.resolve_shared_projection(
+            query_text=prompt,
+            top_k=top_k,
+        )
+        if projection is not None:
+            nodes = [projection["node"]]
+            nodes.extend(projection.get("member_nodes") or [])
+        else:
+            nodes = self.agent_cloud.query_shared_manifold(
+                query_text=prompt,
+                top_k=top_k,
+            )
+
+        self.shared_manifold_prompt_hits += 1
+        self.shared_manifold_nodes_consumed += len(nodes)
+        self._record_shared_manifold_event("prompt_context", prompt, nodes)
+        self._apply_shared_manifold_energy_feedback("prompt_context", prompt, nodes)
+        return context_text
+
+    def _inject_reference_memory(self, label: str, memory_text: str, past_key_values):
+        """Inject a compact memory reference into the live KV cache without emitting it to the user."""
+        memory_ids = self.tokenizer(
+            f" [{label}: {memory_text}]",
+            return_tensors="pt",
+        ).input_ids.to(self.device)
+        memory_outputs = self.model(memory_ids, past_key_values=past_key_values)
+        return memory_outputs.past_key_values
+
+    def _maybe_refresh_shared_manifold(
+        self,
+        *,
+        base_prompt: str,
+        recent_text: str,
+        used_texts: set[str],
+        past_key_values,
+        agent_id: Optional[str] = None,
+    ):
+        """Pull fresh shared-manifold nodes into the live decode state at bounded intervals."""
+        if not self.shared_manifold_enabled:
+            return past_key_values, 0
+
+        query_text = base_prompt.strip()
+        if recent_text.strip():
+            query_text = f"{query_text}\n{recent_text[-200:]}"
+
+        refresh_text, nodes = self.agent_cloud.plan_shared_injection(
+            query_text=query_text,
+            used_texts=used_texts,
+            top_k=self.shared_manifold_refresh_top_k,
+            agent_id=agent_id,
+        )
+        if not nodes:
+            return past_key_values, 0
+
+        print(f"\n[Main] Shared manifold refresh: {len(nodes)} node(s)")
+        past_key_values = self._inject_reference_memory("Shared", refresh_text, past_key_values)
+        self.shared_manifold_runtime_refreshes += 1
+        self.shared_manifold_nodes_consumed += len(nodes)
+        self._record_shared_manifold_event("runtime_refresh", query_text, nodes, agent_id=agent_id)
+        self._apply_shared_manifold_energy_feedback(
+            "runtime_refresh",
+            query_text,
+            nodes,
+            agent_id=agent_id,
+        )
+        for node in nodes:
+            used_texts.add(node.text)
+        return past_key_values, len(nodes)
+
+    def _build_landmark_query(self, last_hidden_state, past_key_values):
+        """Project the last hidden state into the KV-head layout expected by the synapse."""
+        if last_hidden_state is None or past_key_values is None:
+            return None
+
+        try:
+            first_layer = next(iter(past_key_values))
+        except Exception:
+            return None
+
+        if not isinstance(first_layer, (tuple, list)) or len(first_layer) < 1:
+            return None
+
+        key_states = first_layer[0]
+        if key_states is None or key_states.dim() != 4:
+            return None
+
+        target_heads = key_states.shape[1]
+        head_dim = key_states.shape[-1]
+        batch_size = last_hidden_state.shape[0]
+        hidden_size = last_hidden_state.shape[-1]
+
+        num_attention_heads = int(getattr(self.model.config, 'num_attention_heads', target_heads))
+        if hidden_size != num_attention_heads * head_dim:
+            return None
+
+        query = last_hidden_state.view(batch_size, num_attention_heads, 1, head_dim)
+        if num_attention_heads == target_heads:
+            return query
+
+        if num_attention_heads % target_heads == 0:
+            group_size = num_attention_heads // target_heads
+            query = query.view(batch_size, target_heads, group_size, 1, head_dim).mean(dim=2)
+            return query
+
+        if target_heads % num_attention_heads == 0:
+            repeat_factor = target_heads // num_attention_heads
+            return query.repeat_interleave(repeat_factor, dim=1)
+
+        return query[:, :target_heads, :, :]
         
     def _side_agent_loop(self, input_ids, stop_event, task_description=None):
         """
@@ -536,12 +941,12 @@ class CortexEngine:
             
             # Wait for landmarks
             import time
-            while self.synapse.get_landmarks() is None:
+            while self._resolve_worker_landmarks(query_text=task_description) is None:
                 if stop_event.is_set(): return
                 time.sleep(0.1)
             
             # 1. Retrieve Landmarks
-            landmarks = self.synapse.get_landmarks()
+            landmarks = self._resolve_worker_landmarks(query_text=task_description)
             
             if isinstance(self.side_agent_model, (BitNetSideAgent, EarlyExitSideAgent)):
                 # Specialized Path
@@ -575,9 +980,7 @@ class CortexEngine:
             curr_input = think_prompt
             
             # Wrap tuple in DynamicCache for Qwen2
-            past_key_values = DynamicCache()
-            setattr(past_key_values, "key_cache", [k for k, v in landmarks])
-            setattr(past_key_values, "value_cache", [v for k, v in landmarks])
+            past_key_values = self._dynamic_cache_from_landmarks(landmarks)
             
             generated_tokens = []
             outputs = None
@@ -623,6 +1026,17 @@ class CortexEngine:
         input_ids = self.tokenizer(enriched_prompt, return_tensors="pt").input_ids.to(self.device)
         import threading
         stop_event = threading.Event()
+        used_shared_manifold_texts = {
+            node.text for node in self.agent_cloud.query_shared_manifold(
+                query_text=prompt,
+                top_k=4,
+            )
+        }
+        past_key_values, _ = self._seed_shared_projection_cache(
+            query_text=prompt,
+            used_texts=used_shared_manifold_texts,
+            past_key_values=None,
+        )
         
         # Initial Trigger Check (Prompt-based) — now via Orchestrator
         task_description = self.router.check_for_triggers(prompt)
@@ -638,7 +1052,6 @@ class CortexEngine:
         
         print("[Main] Generating...")
         curr_input = input_ids
-        past_key_values = None
         full_response = []
         generated_ids = [] # Track for repetition penalty
         recent_text_buffer = ""
@@ -704,6 +1117,18 @@ class CortexEngine:
                         
                         # Optional: We can force a single space to "nudge" it to acknowledge the update
                         # curr_input = self.tokenizer(" ", return_tensors="pt").input_ids.to(self.device)
+
+                if (
+                    self.shared_manifold_refresh_interval > 0
+                    and i > 0
+                    and i % self.shared_manifold_refresh_interval == 0
+                ):
+                    past_key_values, _ = self._maybe_refresh_shared_manifold(
+                        base_prompt=prompt,
+                        recent_text=recent_text_buffer,
+                        used_texts=used_shared_manifold_texts,
+                        past_key_values=past_key_values,
+                    )
                 
                 # 2. Generate
                 outputs = self.model(curr_input, past_key_values=past_key_values, output_hidden_states=True)
@@ -769,45 +1194,113 @@ class CortexEngine:
                     # For simplicity, let's reshape last_hidden_state to [B, 1, 1, D] and broadcast heads
                     # Or just pass it as is and let update_landmarks handle it.
                     
-                    # Reshape for update_landmarks: [Batch, Heads, 1, Dim]
-                    # We'll just duplicate across heads for now
-                    num_heads = self.model.config.num_attention_heads
-                    head_dim = self.model.config.hidden_size // num_heads
-                    
-                    # [1, Dim] -> [1, Heads, 1, HeadDim]
-                    query = None
-                    if last_hidden_state is not None:
-                        query = last_hidden_state.view(1, num_heads, 1, head_dim)
+                    query = self._build_landmark_query(last_hidden_state, past_key_values)
                     
                     self.synapse.update_kv_landmarks(past_key_values, query_states=query)
 
                     # TurboQuant: compress the freshly-pushed landmarks
                     landmarks_raw = self.synapse.get_landmarks()
-                    if self.turbo_quant_enabled and landmarks_raw is not None:
-                        tq = compress_landmarks(
-                            landmarks_raw,
-                            bits=self.turbo_quant_bits,
-                            device=str(self.device),
-                        )
-                        orig_bytes = sum(
-                            k.nelement() * k.element_size() + v.nelement() * v.element_size()
-                            for k, v in landmarks_raw
-                        )
-                        ratio = tq.compression_ratio(orig_bytes)
-                        print(f"[TurboQuant] Landmarks compressed {ratio:.1f}× "
-                              f"({tq.bits}-bit + QJL residual)")
-                        # Store compressed cache for side agents that support it
-                        self._turbo_cache = tq
+                    if landmarks_raw is not None:
+                        self._materialize_shared_hot_cache(landmarks_raw, query_text=prompt)
                     
         print("\n[Engine] Done.")
         stop_event.set()
+        return "".join(full_response)
+
+    @torch.no_grad()
+    def generate_text(
+        self,
+        prompt: str,
+        max_tokens: int = 120,
+        stream: bool = False,
+        enrich_prompt: bool = True,
+        query_text: Optional[str] = None,
+        initial_used_texts: Optional[set[str]] = None,
+        seed_used_shared_texts: bool = True,
+        shared_query_top_k: int = 4,
+    ) -> str:
+        """Direct local generation with prompt enrichment and shared-manifold refresh, but no async trigger loop."""
+        enriched_prompt = self.context_mgr.enrich_prompt(prompt) if enrich_prompt else prompt
+        shared_query_text = query_text or prompt
+        input_ids = self.tokenizer(enriched_prompt, return_tensors="pt").input_ids.to(self.device)
+        curr_input = input_ids
+        past_key_values = None
+        generated_ids: list[int] = []
+        response_parts: list[str] = []
+        recent_text_buffer = ""
+        eos_token_id = self.tokenizer.eos_token_id
+        used_shared_manifold_texts = set(initial_used_texts or set())
+        if seed_used_shared_texts:
+            used_shared_manifold_texts.update(
+                node.text for node in self.agent_cloud.query_shared_manifold(
+                    query_text=shared_query_text,
+                    top_k=shared_query_top_k,
+                )
+            )
+        past_key_values, _ = self._seed_shared_projection_cache(
+            query_text=shared_query_text,
+            used_texts=used_shared_manifold_texts,
+            past_key_values=past_key_values,
+        )
+
+        stream_ctx = (
+            torch.cuda.stream(cast(Any, self.main_stream))
+            if self.main_stream is not None else nullcontext()
+        )
+        with stream_ctx:
+            for i in range(max_tokens):
+                if (
+                    self.shared_manifold_refresh_interval > 0
+                    and i > 0
+                    and i % self.shared_manifold_refresh_interval == 0
+                ):
+                    past_key_values, _ = self._maybe_refresh_shared_manifold(
+                        base_prompt=shared_query_text,
+                        recent_text=recent_text_buffer,
+                        used_texts=used_shared_manifold_texts,
+                        past_key_values=past_key_values,
+                    )
+
+                outputs = self.model(curr_input, past_key_values=past_key_values, output_hidden_states=False)
+                next_token_logits = outputs.logits[:, -1, :]
+
+                if generated_ids:
+                    for prev_id in set(generated_ids[-20:]):
+                        next_token_logits[0, prev_id] /= 1.5
+
+                next_token = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
+                token_id = int(next_token.item())
+                if eos_token_id is not None and token_id == eos_token_id:
+                    break
+
+                generated_ids.append(token_id)
+                past_key_values = outputs.past_key_values
+                curr_input = next_token
+
+                token_text = self.tokenizer.decode(next_token[0], skip_special_tokens=True)
+                if token_text:
+                    response_parts.append(token_text)
+                    recent_text_buffer += token_text
+                    if stream:
+                        print(token_text, end="", flush=True)
+
+        if past_key_values is not None:
+            self.synapse.update_kv_landmarks(past_key_values)
+            landmarks_raw = self.synapse.get_landmarks()
+            if landmarks_raw is not None:
+                self._materialize_shared_hot_cache(landmarks_raw, query_text=shared_query_text)
+
+        if stream:
+            print()
+        return "".join(response_parts).strip()
         # We don't join threads here because they might be running dynamically
 
     # ------------------------------------------------------------------
     # Team Dispatch (multi-agent coordination)
     # ------------------------------------------------------------------
 
-    def dispatch_team(self, goal: str, roles: Optional[Sequence[AgentRole]] = None):
+    def dispatch_team(self, goal: str, roles: Optional[Sequence[AgentRole]] = None,
+                      agent_id: Optional[str] = None):
         """
         Convenience: dispatch a Researcher → Reviewer → Verifier chain.
         Or pass custom roles list like [AgentRole.CODER, AgentRole.VERIFIER].
@@ -816,12 +1309,132 @@ class CortexEngine:
             tasks = []
             prev_id = None
             for role in roles:
-                t = SubAgentTask(role=role, description=goal, depends_on=[prev_id] if prev_id else [])
+                t = SubAgentTask(
+                    role=role,
+                    agent_id=agent_id,
+                    description=goal,
+                    depends_on=[prev_id] if prev_id else [],
+                )
                 tasks.append(t)
                 prev_id = t.id
             return self.orchestrator.dispatch_team(goal=goal, tasks=tasks)
         else:
-            return self.orchestrator.create_review_chain(goal)
+            return self.orchestrator.create_review_chain(goal, agent_id=agent_id)
+
+    def register_persistent_agent(self, agent_id: str, profile: str = "", role: str = "agent"):
+        """Create or fetch a persistent agent identity on the shared backbone."""
+        return self.agent_cloud.ensure_agent(agent_id, role=role, profile=profile)
+
+    def remember_agent_event(self, agent_id: str, text: str, score: float = 1.0,
+                             source: str = "observation", role: str = "agent"):
+        """Store a persistent agent memory without updating backbone weights."""
+        return self.agent_cloud.remember_text(
+            agent_id=agent_id,
+            text=text,
+            score=score,
+            source=source,
+            role=role,
+        )
+
+    def remember_shared_event(self, text: str, score: float = 1.0,
+                              source: str = "observation", node_type: str = "memory",
+                              metadata: Optional[dict[str, Any]] = None):
+        """Store shared runtime memory that any prompt or agent can recall later."""
+        return self.agent_cloud.remember_shared_text(
+            text=text,
+            score=score,
+            source=source,
+            node_type=node_type,
+            metadata=metadata,
+        )
+
+    def dispatch_agent_task(self, agent_id: str, description: str,
+                            role: AgentRole = AgentRole.RESEARCHER,
+                            priority: int = 1, max_tokens: int = 30):
+        """Dispatch a task against a persistent agent identity."""
+        self.agent_cloud.ensure_agent(agent_id, role=role.value)
+        task = SubAgentTask(
+            agent_id=agent_id,
+            role=role,
+            description=description,
+            priority=priority,
+            max_tokens=max_tokens,
+        )
+        return self.orchestrator.dispatch(task)
+
+    def get_agent_population_stats(self):
+        return self.agent_cloud.population_stats()
+
+    def get_shared_manifold_stats(self):
+        return self.agent_cloud.shared_manifold_stats()
+
+    def get_shared_hot_state(self):
+        return self.agent_cloud.get_shared_hot_state()
+
+    def get_memory_accounting(self):
+        model_param_bytes = (
+            sum(p.nelement() * p.element_size() for p in self.model.parameters())
+            if hasattr(self.model, "parameters")
+            else 0
+        )
+        buffer_bytes = (
+            sum(buffer.nelement() * buffer.element_size() for buffer in self.model.buffers())
+            if hasattr(self.model, "buffers")
+            else 0
+        )
+        hot_state = self.agent_cloud.get_shared_hot_state()
+        kv_stats = hot_state.get("kv_stats", {})
+        return {
+            "model_parameter_bytes": int(model_param_bytes),
+            "model_buffer_bytes": int(buffer_bytes),
+            "model_total_bytes": int(model_param_bytes + buffer_bytes),
+            "model_total_mb": float(model_param_bytes + buffer_bytes) / (1024.0 * 1024.0),
+            "turbo_quant_enabled": True,
+            "turbo_quant_bits": int(self.turbo_quant_bits),
+            "shared_hot_summary": hot_state.get("summary_text", ""),
+            "shared_hot_kv": kv_stats,
+            "live_turbo_cache_bytes": int(self._turbo_cache.memory_bytes()) if self._turbo_cache is not None else 0,
+        }
+
+    def get_shared_manifold_metrics(self):
+        return {
+            "enabled": self.shared_manifold_enabled,
+            "prompt_hits": self.shared_manifold_prompt_hits,
+            "prompt_misses": self.shared_manifold_prompt_misses,
+            "runtime_refreshes": self.shared_manifold_runtime_refreshes,
+            "nodes_consumed": self.shared_manifold_nodes_consumed,
+            "trace_length": len(self.shared_manifold_trace),
+        }
+
+    def get_shared_manifold_trace(self):
+        return list(self.shared_manifold_trace)
+
+    def reset_shared_manifold_trace(self):
+        self.shared_manifold_trace = []
+        self.shared_manifold_prompt_hits = 0
+        self.shared_manifold_prompt_misses = 0
+        self.shared_manifold_runtime_refreshes = 0
+        self.shared_manifold_nodes_consumed = 0
+
+    def set_shared_manifold_enabled(self, enabled: bool):
+        self.shared_manifold_enabled = bool(enabled)
+
+    def save_agent_population(self, file_path: str) -> str:
+        """Persist the shared-weight agent population to disk for a later session."""
+        return self.agent_cloud.save(file_path)
+
+    def load_agent_population(self, file_path: str, merge: bool = False):
+        """Restore a previously saved agent population snapshot."""
+        return self.agent_cloud.load(file_path, merge=merge)
+
+    def close(self):
+        self.stop_shared_hot_refresh_worker()
+
+    def __del__(self):
+        try:
+            self.stop_shared_hot_refresh_worker()
+        except Exception:
+            pass
 
     # ------------------------------------------------------------------
     # Verification Loop (check-then-fix)

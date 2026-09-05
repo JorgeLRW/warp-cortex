@@ -39,7 +39,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import time
-from typing import Tuple, Optional, List
+from typing import Dict, List, Optional, Set, Tuple
 
 
 class TopologicalSynapse:
@@ -351,6 +351,178 @@ class TopologicalSynapse:
     # Topology features — computed over the full landmark manifold
     # ==================================================================
 
+    def _build_topology_adjacency(
+        self,
+        normed_keys: torch.Tensor,
+        *,
+        max_neighbors: int = 6,
+        similarity_threshold: float = 0.55,
+    ) -> Dict[int, Set[int]]:
+        node_count = int(normed_keys.shape[0])
+        adjacency: Dict[int, Set[int]] = {index: set() for index in range(node_count)}
+        if node_count < 2:
+            return adjacency
+
+        sim_matrix = normed_keys @ normed_keys.T
+        candidate_edges: Dict[int, List[tuple[float, int]]] = {index: [] for index in range(node_count)}
+        for left in range(node_count):
+            for right in range(left + 1, node_count):
+                similarity = float(sim_matrix[left, right].item())
+                if similarity < similarity_threshold:
+                    continue
+                candidate_edges[left].append((similarity, right))
+                candidate_edges[right].append((similarity, left))
+
+        for node, edges in candidate_edges.items():
+            edges.sort(key=lambda item: (item[0], -item[1]), reverse=True)
+            for _, neighbor in edges[:max_neighbors]:
+                adjacency[node].add(neighbor)
+                adjacency[neighbor].add(node)
+        return adjacency
+
+    def _connected_components(
+        self,
+        adjacency: Dict[int, Set[int]],
+        node_count: int,
+    ) -> List[List[int]]:
+        seen: Set[int] = set()
+        components: List[List[int]] = []
+        for start in range(node_count):
+            if start in seen:
+                continue
+            stack = [start]
+            component: List[int] = []
+            seen.add(start)
+            while stack:
+                node = stack.pop()
+                component.append(node)
+                for neighbor in adjacency.get(node, set()):
+                    if neighbor not in seen:
+                        seen.add(neighbor)
+                        stack.append(neighbor)
+            component.sort()
+            components.append(component)
+        components.sort(key=lambda item: (-len(item), item[0] if item else -1))
+        return components
+
+    def _articulation_points(
+        self,
+        adjacency: Dict[int, Set[int]],
+        node_count: int,
+    ) -> Set[int]:
+        discovery = [-1] * node_count
+        low = [-1] * node_count
+        parent = [-1] * node_count
+        articulation: Set[int] = set()
+        timer = 0
+
+        def dfs(node: int):
+            nonlocal timer
+            discovery[node] = timer
+            low[node] = timer
+            timer += 1
+            child_count = 0
+
+            for neighbor in adjacency.get(node, set()):
+                if discovery[neighbor] == -1:
+                    parent[neighbor] = node
+                    child_count += 1
+                    dfs(neighbor)
+                    low[node] = min(low[node], low[neighbor])
+
+                    if parent[node] == -1 and child_count > 1:
+                        articulation.add(node)
+                    if parent[node] != -1 and low[neighbor] >= discovery[node]:
+                        articulation.add(node)
+                elif neighbor != parent[node]:
+                    low[node] = min(low[node], discovery[neighbor])
+
+        for node in range(node_count):
+            if discovery[node] == -1:
+                dfs(node)
+        return articulation
+
+    def topology_stats(self) -> Dict[str, float]:
+        """
+        Compute geometric and structural descriptors from ALL landmarks.
+
+        Returns both raw counts and normalized ratios so tests can assert
+        structure while learnable gates consume stable continuous features.
+        """
+        self.evict_stale()
+        self._evict_stale_injections()
+
+        total = self.count + self.injection_count
+        total_capacity = self.max_landmarks + self.max_injections
+        coverage = total / max(total_capacity, 1)
+
+        if total == 0:
+            return {
+                "density": 0.0,
+                "spread": 0.0,
+                "coverage": 0.0,
+                "node_count": 0.0,
+                "component_count": 0.0,
+                "largest_component_size": 0.0,
+                "bridge_count": 0.0,
+                "isolated_count": 0.0,
+                "component_ratio": 0.0,
+                "largest_component_ratio": 0.0,
+                "bridge_ratio": 0.0,
+                "isolated_ratio": 0.0,
+            }
+
+        parts = []
+        if self.count > 0:
+            parts.append(self.landmark_keys[:self.count])
+        if self.injection_count > 0:
+            parts.append(self.injection_keys[:self.injection_count])
+        keys = torch.cat(parts, dim=0)
+
+        if total < 2:
+            return {
+                "density": 0.0,
+                "spread": 0.0,
+                "coverage": coverage,
+                "node_count": float(total),
+                "component_count": 1.0,
+                "largest_component_size": float(total),
+                "bridge_count": 0.0,
+                "isolated_count": float(total),
+                "component_ratio": 1.0,
+                "largest_component_ratio": 1.0,
+                "bridge_ratio": 0.0,
+                "isolated_ratio": 1.0,
+            }
+
+        normed = F.normalize(keys.float(), dim=-1)
+        sim_matrix = normed @ normed.T
+        node_count = int(keys.shape[0])
+        density = float(((sim_matrix.sum() - node_count) / max(node_count * (node_count - 1), 1)).item())
+        spread = float(keys.norm(dim=-1).std(unbiased=False).item())
+
+        adjacency = self._build_topology_adjacency(normed)
+        components = self._connected_components(adjacency, node_count)
+        bridge_nodes = self._articulation_points(adjacency, node_count)
+        component_count = len(components)
+        largest_component = max((len(component) for component in components), default=0)
+        isolated_count = sum(1 for component in components if len(component) == 1)
+
+        return {
+            "density": density,
+            "spread": spread,
+            "coverage": coverage,
+            "node_count": float(node_count),
+            "component_count": float(component_count),
+            "largest_component_size": float(largest_component),
+            "bridge_count": float(len(bridge_nodes)),
+            "isolated_count": float(isolated_count),
+            "component_ratio": float(component_count / max(node_count, 1)),
+            "largest_component_ratio": float(largest_component / max(node_count, 1)),
+            "bridge_ratio": float(len(bridge_nodes) / max(node_count, 1)),
+            "isolated_ratio": float(isolated_count / max(node_count, 1)),
+        }
+
     def topo_features(self):
         """
         Compute topology descriptors from ALL landmarks (attention + injection).
@@ -362,31 +534,21 @@ class TopologicalSynapse:
 
         Cost: O(k²·d) where k = total landmark count.  Negligible for k ≤ 256.
         """
-        total = self.count + self.injection_count
-        total_capacity = self.max_landmarks + self.max_injections
-        coverage = total / max(total_capacity, 1)
+        stats = self.topology_stats()
+        return stats["density"], stats["spread"], stats["coverage"]
 
-        if total < 2:
-            return 0.0, 0.0, coverage
-
-        parts = []
-        if self.count > 0:
-            parts.append(self.landmark_keys[:self.count])
-        if self.injection_count > 0:
-            parts.append(self.injection_keys[:self.injection_count])
-        keys = torch.cat(parts, dim=0)
-
-        # Density: mean pairwise cosine similarity
-        normed = F.normalize(keys, dim=-1)
-        sim_matrix = normed @ normed.T
-        k = keys.shape[0]
-        density = (sim_matrix.sum() - k) / max(k * (k - 1), 1)
-        density = density.item()
-
-        # Spread: std of L2 norms
-        spread = keys.norm(dim=-1).std().item()
-
-        return density, spread, coverage
+    def topology_feature_vector(self) -> Tuple[float, float, float, float, float, float, float]:
+        """Return a normalized feature vector for learnable gates and routing logic."""
+        stats = self.topology_stats()
+        return (
+            stats["density"],
+            stats["spread"],
+            stats["coverage"],
+            stats["component_ratio"],
+            stats["largest_component_ratio"],
+            stats["bridge_ratio"],
+            stats["isolated_ratio"],
+        )
 
 
 class TopologicalSideAgent(nn.Module):

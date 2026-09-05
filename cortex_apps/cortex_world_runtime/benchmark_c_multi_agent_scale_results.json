@@ -1,0 +1,62 @@
+[
+  {
+    "agent_count": 1,
+    "total_mb": 11.961662292480469,
+    "m_agents_kb": 0.1015625,
+    "per_agent_kb": 0.1015625,
+    "read_qps": 12111.229521644244,
+    "total_read_queries": 25,
+    "commit_rate_sec": 5000.0,
+    "commits_attempted": 5,
+    "commits_succeeded": 5,
+    "conflict_rate_pct": 0.0
+  },
+  {
+    "agent_count": 8,
+    "total_mb": 11.962417602539062,
+    "m_agents_kb": 0.8125,
+    "per_agent_kb": 0.1015625,
+    "read_qps": 23683.774215443416,
+    "total_read_queries": 200,
+    "commit_rate_sec": 30000.0,
+    "commits_attempted": 40,
+    "commits_succeeded": 30,
+    "conflict_rate_pct": 25.0
+  },
+  {
+    "agent_count": 32,
+    "total_mb": 11.965042114257812,
+    "m_agents_kb": 3.25,
+    "per_agent_kb": 0.1015625,
+    "read_qps": 27867.379134905506,
+    "total_read_queries": 800,
+    "commit_rate_sec": 22000.0,
+    "commits_attempted": 100,
+    "commits_succeeded": 22,
+    "conflict_rate_pct": 78.0
+  },
+  {
+    "agent_count": 128,
+    "total_mb": 11.974746704101562,
+    "m_agents_kb": 13.0,
+    "per_agent_kb": 0.1015625,
+    "read_qps": 21039.357404804407,
+    "total_read_queries": 3200,
+    "commit_rate_sec": 6000.0,
+    "commits_attempted": 100,
+    "commits_succeeded": 6,
+    "conflict_rate_pct": 94.0
+  },
+  {
+    "agent_count": 512,
+    "total_mb": 12.012832641601562,
+    "m_agents_kb": 52.0,
+    "per_agent_kb": 0.1015625,
+    "read_qps": 22908.556202442778,
+    "total_read_queries": 12800,
+    "commit_rate_sec": 6000.0,
+    "commits_attempted": 100,
+    "commits_succeeded": 6,
+    "conflict_rate_pct": 94.0
+  }
+]

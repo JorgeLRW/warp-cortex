@@ -27,7 +27,7 @@ from typing import List, Dict, Optional, cast
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
-from cortex_core.hf_utils import prepare_hf_cache
+from cortex_core.hf_utils import prepare_hf_cache, resolve_local_model_source
 from cortex_core.settings import get_setting, load_settings, resolve_project_path
 from cortex_core.async_delegate import AsyncDelegationManager
 from cortex_scripts.council_live import DIRECT_SYSTEM, OrchestratedReasoningEngine
@@ -250,7 +250,12 @@ def run_benchmark(args, settings):
     print("=" * 70)
 
     # Load model
-    tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=cache_dir)
+    model_source, local_files_only = resolve_local_model_source(model_id, cache_dir)
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_source,
+        cache_dir=cache_dir,
+        local_files_only=local_files_only,
+    )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = 'left'
@@ -262,7 +267,9 @@ def run_benchmark(args, settings):
     }
     if device == "cuda":
         model_kwargs["device_map"] = "auto"
-    model = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
+    if local_files_only:
+        model_kwargs["local_files_only"] = True
+    model = AutoModelForCausalLM.from_pretrained(model_source, **model_kwargs)
     if device != "cuda":
         model.to(device)
     model.eval()

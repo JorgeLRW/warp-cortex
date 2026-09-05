@@ -1,0 +1,2265 @@
+{
+  "Baseline A (Local 8k)": {
+    "passed_count": 7,
+    "total_tasks": 20,
+    "success_rate": 0.35,
+    "ci_95": 0.2090411442754751,
+    "avg_tokens_per_task": 119,
+    "avg_generation_latency_ms": 959.1414749993419,
+    "avg_retrieval_latency_ms": 1.6997699989588,
+    "full_provenance_hits": 1,
+    "provenance_recall": 0.05,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 101,
+        "gen_ms": 838.996300008148,
+        "retrieval_ms": 1.9869999960064888,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.7426999984309077,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.5843000001041219,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": false,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_Delta_W = 2 * L",
+        "tokens": 98,
+        "gen_ms": 524.0848999965237,
+        "retrieval_ms": 1.5812000056030229,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 90%",
+        "tokens": 99,
+        "gen_ms": 300.72450000443496,
+        "retrieval_ms": 1.677599997492507,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix does not satisfy contractive decay conditions given the specified paramete",
+        "tokens": 115,
+        "gen_ms": 782.8069999959553,
+        "retrieval_ms": 1.4995999954408035,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 2.0923000120092183,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4",
+        "tokens": 103,
+        "gen_ms": 249.87749999854714,
+        "retrieval_ms": 1.7164000018965453,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 32",
+        "tokens": 107,
+        "gen_ms": 264.0271999989636,
+        "retrieval_ms": 1.92090000200551,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "tokens": 206,
+        "gen_ms": 4197.257500010892,
+        "retrieval_ms": 1.567799990880303,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 89,
+        "gen_ms": 328.91310000559315,
+        "retrieval_ms": 1.585599995451048,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1.20",
+        "tokens": 97,
+        "gen_ms": 344.25360000750516,
+        "retrieval_ms": 1.6361999878427014,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4096",
+        "tokens": 101,
+        "gen_ms": 372.9768999910448,
+        "retrieval_ms": 1.509599998826161,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.5916999982437119,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.00",
+        "tokens": 110,
+        "gen_ms": 807.8839999943739,
+        "retrieval_ms": 2.249400000437163,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 10%",
+        "tokens": 86,
+        "gen_ms": 326.78189998841844,
+        "retrieval_ms": 1.6094000020530075,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 24000000000 nanoseconds",
+        "tokens": 104,
+        "gen_ms": 671.7930000013439,
+        "retrieval_ms": 1.4693999983137473,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "The nullity of a projection operator is equal to its rank. Given that the rank \\( r \\) is 8 and the dimension \\( D \\) is",
+        "tokens": 166,
+        "gen_ms": 2961.997299993527,
+        "retrieval_ms": 1.6487999964738265,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.5910999936750159,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - zeta^2) * (omega_d / omega_0), where omega_d is the dominant pole's angular frequency a",
+        "tokens": 135,
+        "gen_ms": 1832.041300003766,
+        "retrieval_ms": 1.734400007990189,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": false
+      }
+    ]
+  },
+  "Baseline B (Stuffing 32k Native)": {
+    "passed_count": 7,
+    "total_tasks": 20,
+    "success_rate": 0.35,
+    "ci_95": 0.2090411442754751,
+    "avg_tokens_per_task": 130,
+    "avg_generation_latency_ms": 850.7499500010454,
+    "avg_retrieval_latency_ms": 1.4525650018185843,
+    "full_provenance_hits": 4,
+    "provenance_recall": 0.2,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.6574000037508085,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 2.071900002192706,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.6185999993467703,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": false,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_Delta_W = 2 * L",
+        "tokens": 98,
+        "gen_ms": 524.0848999965237,
+        "retrieval_ms": 1.283499994315207,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 90%",
+        "tokens": 99,
+        "gen_ms": 300.72450000443496,
+        "retrieval_ms": 1.204700005473569,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix does not satisfy contractive decay conditions given the specified paramete",
+        "tokens": 115,
+        "gen_ms": 782.8069999959553,
+        "retrieval_ms": 1.3134000037098303,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.2507000064942986,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4",
+        "tokens": 103,
+        "gen_ms": 249.87749999854714,
+        "retrieval_ms": 1.388099990435876,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 32",
+        "tokens": 107,
+        "gen_ms": 264.0271999989636,
+        "retrieval_ms": 1.3008999958401546,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "tokens": 206,
+        "gen_ms": 4197.257500010892,
+        "retrieval_ms": 1.1707000085152686,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 89,
+        "gen_ms": 328.91310000559315,
+        "retrieval_ms": 1.7736000008881092,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1.20",
+        "tokens": 97,
+        "gen_ms": 344.25360000750516,
+        "retrieval_ms": 1.3554000033764169,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4096",
+        "tokens": 101,
+        "gen_ms": 372.9768999910448,
+        "retrieval_ms": 1.1937000090256333,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.2273000029381365,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.00",
+        "tokens": 110,
+        "gen_ms": 807.8839999943739,
+        "retrieval_ms": 1.3037000026088208,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.332100000581704,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 24000000000 nanoseconds",
+        "tokens": 104,
+        "gen_ms": 671.7930000013439,
+        "retrieval_ms": 1.5819999971427023,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 1.5521000022999942,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.8582000047899783,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - zeta^2) * (omega_d / omega_0), where omega_d is the dominant pole's angular frequency a",
+        "tokens": 135,
+        "gen_ms": 1832.041300003766,
+        "retrieval_ms": 1.6133000026457012,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": false
+      }
+    ]
+  },
+  "Baseline C (Iterative Agentic RAG)": {
+    "passed_count": 7,
+    "total_tasks": 20,
+    "success_rate": 0.35,
+    "ci_95": 0.2090411442754751,
+    "avg_tokens_per_task": 130,
+    "avg_generation_latency_ms": 850.7499500010454,
+    "avg_retrieval_latency_ms": 1.3926950014138129,
+    "full_provenance_hits": 4,
+    "provenance_recall": 0.2,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.4472000038949773,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.294599991524592,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.2126000074204057,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": false,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_Delta_W = 2 * L",
+        "tokens": 98,
+        "gen_ms": 524.0848999965237,
+        "retrieval_ms": 1.5298000071197748,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 90%",
+        "tokens": 99,
+        "gen_ms": 300.72450000443496,
+        "retrieval_ms": 1.5625999949406832,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix does not satisfy contractive decay conditions given the specified paramete",
+        "tokens": 115,
+        "gen_ms": 782.8069999959553,
+        "retrieval_ms": 1.312399996095337,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.2469000066630542,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4",
+        "tokens": 103,
+        "gen_ms": 249.87749999854714,
+        "retrieval_ms": 1.9650999893201515,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 32",
+        "tokens": 107,
+        "gen_ms": 264.0271999989636,
+        "retrieval_ms": 1.5254000027198344,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "tokens": 206,
+        "gen_ms": 4197.257500010892,
+        "retrieval_ms": 1.3013000134378672,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 89,
+        "gen_ms": 328.91310000559315,
+        "retrieval_ms": 1.2094999983673915,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1.20",
+        "tokens": 97,
+        "gen_ms": 344.25360000750516,
+        "retrieval_ms": 1.5764999989187345,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4096",
+        "tokens": 101,
+        "gen_ms": 372.9768999910448,
+        "retrieval_ms": 1.5515999984927475,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.4170000067679211,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.00",
+        "tokens": 110,
+        "gen_ms": 807.8839999943739,
+        "retrieval_ms": 1.269300002604723,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.451799995265901,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 24000000000 nanoseconds",
+        "tokens": 104,
+        "gen_ms": 671.7930000013439,
+        "retrieval_ms": 1.2922000023536384,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 1.1978999973507598,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.2986000074306503,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - zeta^2) * (omega_d / omega_0), where omega_d is the dominant pole's angular frequency a",
+        "tokens": 135,
+        "gen_ms": 1832.041300003766,
+        "retrieval_ms": 1.1916000075871125,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": false
+      }
+    ]
+  },
+  "Baseline D (Graph + Agentic RAG)": {
+    "passed_count": 7,
+    "total_tasks": 20,
+    "success_rate": 0.35,
+    "ci_95": 0.2090411442754751,
+    "avg_tokens_per_task": 130,
+    "avg_generation_latency_ms": 850.7499500010454,
+    "avg_retrieval_latency_ms": 1.323505000618752,
+    "full_provenance_hits": 4,
+    "provenance_recall": 0.2,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.414199999999255,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.3100999931339175,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.3633999915327877,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": false,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_Delta_W = 2 * L",
+        "tokens": 98,
+        "gen_ms": 524.0848999965237,
+        "retrieval_ms": 1.2294999905861914,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 90%",
+        "tokens": 99,
+        "gen_ms": 300.72450000443496,
+        "retrieval_ms": 1.396900013787672,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix does not satisfy contractive decay conditions given the specified paramete",
+        "tokens": 115,
+        "gen_ms": 782.8069999959553,
+        "retrieval_ms": 1.3816999999107793,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.2617000029422343,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4",
+        "tokens": 103,
+        "gen_ms": 249.87749999854714,
+        "retrieval_ms": 1.3034000003244728,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 32",
+        "tokens": 107,
+        "gen_ms": 264.0271999989636,
+        "retrieval_ms": 1.2843000004068017,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "tokens": 206,
+        "gen_ms": 4197.257500010892,
+        "retrieval_ms": 1.5057999989949167,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 89,
+        "gen_ms": 328.91310000559315,
+        "retrieval_ms": 1.4690000098198652,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1.20",
+        "tokens": 97,
+        "gen_ms": 344.25360000750516,
+        "retrieval_ms": 1.2604999938048422,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4096",
+        "tokens": 101,
+        "gen_ms": 372.9768999910448,
+        "retrieval_ms": 1.2169999972684309,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.3483000075211748,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.00",
+        "tokens": 110,
+        "gen_ms": 807.8839999943739,
+        "retrieval_ms": 1.3015000004088506,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.1994000087724999,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 24000000000 nanoseconds",
+        "tokens": 104,
+        "gen_ms": 671.7930000013439,
+        "retrieval_ms": 1.1951000051340088,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 1.1999999987892807,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.5829000039957464,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - zeta^2) * (omega_d / omega_0), where omega_d is the dominant pole's angular frequency a",
+        "tokens": 135,
+        "gen_ms": 1832.041300003766,
+        "retrieval_ms": 1.2453999952413142,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": false
+      }
+    ]
+  },
+  "Baseline E (In-Process Modular C)": {
+    "passed_count": 10,
+    "total_tasks": 20,
+    "success_rate": 0.5,
+    "ci_95": 0.21913466179497937,
+    "avg_tokens_per_task": 183,
+    "avg_generation_latency_ms": 1140.669545000128,
+    "avg_retrieval_latency_ms": 1.6197049990296364,
+    "full_provenance_hits": 14,
+    "provenance_recall": 0.7,
+    "inter_store_marshaling_calls": 7,
+    "memory_duplication_overhead_pct": 9.5,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.02,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.2206000101286918,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.260699995327741,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.1834000033559278,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": true,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_delta_w = 1 / (2 * L)",
+        "tokens": 187,
+        "gen_ms": 664.4417999923462,
+        "retrieval_ms": 1.4452000032179058,
+        "retrieved_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 100%",
+        "tokens": 207,
+        "gen_ms": 355.1719000097364,
+        "retrieval_ms": 1.7888999864226207,
+        "retrieved_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix satisfies contractive decay.",
+        "tokens": 205,
+        "gen_ms": 584.5024000009289,
+        "retrieval_ms": 1.6717000107746571,
+        "retrieved_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.5478999994229525,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: d_min = 4",
+        "tokens": 143,
+        "gen_ms": 373.60989999433514,
+        "retrieval_ms": 1.644399992073886,
+        "retrieved_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": true,
+        "response_snippet": "To calculate the minimum bit-width \\( b_{\\text{min}} \\) required for a given SQNR of 25.84 dB under uniform quantization",
+        "tokens": 313,
+        "gen_ms": 4861.8306999997,
+        "retrieval_ms": 1.988899995922111,
+        "retrieved_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.19e-7",
+        "tokens": 186,
+        "gen_ms": 545.1580000080867,
+        "retrieval_ms": 1.571400003740564,
+        "retrieved_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 163,
+        "gen_ms": 405.56920001108665,
+        "retrieval_ms": 1.629899998079054,
+        "retrieved_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.35",
+        "tokens": 135,
+        "gen_ms": 432.5209999951767,
+        "retrieval_ms": 2.104599989252165,
+        "retrieved_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 512 * (1 - 0.125) = 460.8",
+        "tokens": 202,
+        "gen_ms": 1153.5773999930825,
+        "retrieval_ms": 1.5456999972229823,
+        "retrieved_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.720000000204891,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.0",
+        "tokens": 187,
+        "gen_ms": 844.7161999938544,
+        "retrieval_ms": 1.3990000006742775,
+        "retrieved_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.7009000002872199,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "To calculate the stage time in nanoseconds for a k = 3 cycle pipeline stage operating at clock frequency f = 1.50 GHz:  ",
+        "tokens": 305,
+        "gen_ms": 4885.310899990145,
+        "retrieval_ms": 1.498899990110658,
+        "retrieved_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 2.6541999977780506,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.6100000066217035,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - (zeta^2) / (1 + zeta^2)) * omega_n_damped",
+        "tokens": 201,
+        "gen_ms": 1368.623000002117,
+        "retrieval_ms": 1.207799999974668,
+        "retrieved_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": true
+      }
+    ]
+  },
+  "Contender F (Cortex Single Agent)": {
+    "passed_count": 10,
+    "total_tasks": 20,
+    "success_rate": 0.5,
+    "ci_95": 0.21913466179497937,
+    "avg_tokens_per_task": 183,
+    "avg_generation_latency_ms": 1140.669545000128,
+    "avg_retrieval_latency_ms": 1.7961049990844913,
+    "full_provenance_hits": 14,
+    "provenance_recall": 0.7,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.7331999988527969,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.5647000109311193,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.5875999961281195,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": true,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_delta_w = 1 / (2 * L)",
+        "tokens": 187,
+        "gen_ms": 664.4417999923462,
+        "retrieval_ms": 1.4684000052511692,
+        "retrieved_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 100%",
+        "tokens": 207,
+        "gen_ms": 355.1719000097364,
+        "retrieval_ms": 2.637400000821799,
+        "retrieved_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix satisfies contractive decay.",
+        "tokens": 205,
+        "gen_ms": 584.5024000009289,
+        "retrieval_ms": 2.6799000042956322,
+        "retrieved_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.687799987848848,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: d_min = 4",
+        "tokens": 143,
+        "gen_ms": 373.60989999433514,
+        "retrieval_ms": 1.8595000001369044,
+        "retrieved_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": true,
+        "response_snippet": "To calculate the minimum bit-width \\( b_{\\text{min}} \\) required for a given SQNR of 25.84 dB under uniform quantization",
+        "tokens": 313,
+        "gen_ms": 4861.8306999997,
+        "retrieval_ms": 1.858799994806759,
+        "retrieved_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.19e-7",
+        "tokens": 186,
+        "gen_ms": 545.1580000080867,
+        "retrieval_ms": 1.5393999929074198,
+        "retrieved_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 163,
+        "gen_ms": 405.56920001108665,
+        "retrieval_ms": 1.5813000063644722,
+        "retrieved_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.35",
+        "tokens": 135,
+        "gen_ms": 432.5209999951767,
+        "retrieval_ms": 1.905500001157634,
+        "retrieved_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 512 * (1 - 0.125) = 460.8",
+        "tokens": 202,
+        "gen_ms": 1153.5773999930825,
+        "retrieval_ms": 1.5708999999333173,
+        "retrieved_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.530199995613657,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.0",
+        "tokens": 187,
+        "gen_ms": 844.7161999938544,
+        "retrieval_ms": 1.7613999953027815,
+        "retrieved_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.727700000628829,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "To calculate the stage time in nanoseconds for a k = 3 cycle pipeline stage operating at clock frequency f = 1.50 GHz:  ",
+        "tokens": 305,
+        "gen_ms": 4885.310899990145,
+        "retrieval_ms": 1.5341999969678,
+        "retrieved_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 1.3792999961879104,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 2.795499996864237,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - (zeta^2) / (1 + zeta^2)) * omega_n_damped",
+        "tokens": 201,
+        "gen_ms": 1368.623000002117,
+        "retrieval_ms": 1.51940000068862,
+        "retrieved_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": true
+      }
+    ]
+  },
+  "Contender G (Cortex Specialist Team)": {
+    "passed_count": 10,
+    "total_tasks": 20,
+    "success_rate": 0.5,
+    "ci_95": 0.21913466179497937,
+    "avg_tokens_per_task": 183,
+    "avg_generation_latency_ms": 1140.669545000128,
+    "avg_retrieval_latency_ms": 1.4641649991972372,
+    "full_provenance_hits": 14,
+    "provenance_recall": 0.7,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0,
+    "memory_duplication_note": "in-process measured lower bound (lean states, shared key refs); cross-process higher; see test_boring_store_kill",
+    "in_process_join_overhead_ms": 0.0,
+    "benchmark_scope": "synthetic multi-document reasoning with retrieval; not natural-history discovery",
+    "task_logs": [
+      {
+        "task_id": "TASK_01_OPTIMAL_LR",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+        "tokens": 207,
+        "gen_ms": 1069.713100005174,
+        "retrieval_ms": 1.4310999977169558,
+        "retrieved_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_01_OPTIMAL_LR_A",
+          "synth_unseen_TASK_01_OPTIMAL_LR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_02_SRAM_TILE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 16",
+        "tokens": 96,
+        "gen_ms": 297.2680999955628,
+        "retrieval_ms": 1.3722000003326684,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_02_SRAM_TILE_A",
+          "synth_unseen_TASK_02_SRAM_TILE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_03_KV_DISTORTION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.38627",
+        "tokens": 242,
+        "gen_ms": 2314.5427999988897,
+        "retrieval_ms": 1.4348999975482002,
+        "retrieved_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_03_KV_DISTORTION_A",
+          "synth_unseen_TASK_03_KV_DISTORTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_04_LIPSCHITZ_STEP",
+        "passed": true,
+        "response_snippet": "MAX_STABLE_GRADIENT_STEP_delta_w = 1 / (2 * L)",
+        "tokens": 187,
+        "gen_ms": 664.4417999923462,
+        "retrieval_ms": 1.3133999891579151,
+        "retrieved_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_A",
+          "synth_unseen_TASK_04_LIPSCHITZ_STEP_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_05_WARP_OCCUPANCY",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 100%",
+        "tokens": 207,
+        "gen_ms": 355.1719000097364,
+        "retrieval_ms": 1.3218000094639137,
+        "retrieved_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_A",
+          "synth_unseen_TASK_05_WARP_OCCUPANCY_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: The epistemic transition matrix satisfies contractive decay.",
+        "tokens": 205,
+        "gen_ms": 584.5024000009289,
+        "retrieval_ms": 1.3697999966097996,
+        "retrieved_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_A",
+          "synth_unseen_TASK_06_SPECTRAL_CONTRACTION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_07_ATTENTION_SCALE",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.5/\u221a128",
+        "tokens": 97,
+        "gen_ms": 498.3897999918554,
+        "retrieval_ms": 1.4267999940784648,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_07_ATTENTION_SCALE_A",
+          "synth_unseen_TASK_07_ATTENTION_SCALE_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_08_LATENT_BOTTLENECK",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: d_min = 4",
+        "tokens": 143,
+        "gen_ms": 373.60989999433514,
+        "retrieval_ms": 1.4687000075355172,
+        "retrieved_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_A",
+          "synth_unseen_TASK_08_LATENT_BOTTLENECK_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_09_QUANTIZATION_SQNR",
+        "passed": true,
+        "response_snippet": "To calculate the minimum bit-width \\( b_{\\text{min}} \\) required for a given SQNR of 25.84 dB under uniform quantization",
+        "tokens": 313,
+        "gen_ms": 4861.8306999997,
+        "retrieval_ms": 1.4198999997461215,
+        "retrieved_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_A",
+          "synth_unseen_TASK_09_QUANTIZATION_SQNR_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_10_MMA_ACCUMULATION",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.19e-7",
+        "tokens": 186,
+        "gen_ms": 545.1580000080867,
+        "retrieval_ms": 1.2987999944016337,
+        "retrieved_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_A",
+          "synth_unseen_TASK_10_MMA_ACCUMULATION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_11_WARP_BARRIER_COST",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 20 cycles",
+        "tokens": 163,
+        "gen_ms": 405.56920001108665,
+        "retrieval_ms": 1.41050000092946,
+        "retrieved_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_A",
+          "synth_unseen_TASK_11_WARP_BARRIER_COST_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 1.35",
+        "tokens": 135,
+        "gen_ms": 432.5209999951767,
+        "retrieval_ms": 1.3998000067658722,
+        "retrieved_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_A",
+          "synth_unseen_TASK_12_GRADIENT_CLIP_NORM_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 512 * (1 - 0.125) = 460.8",
+        "tokens": 202,
+        "gen_ms": 1153.5773999930825,
+        "retrieval_ms": 1.412099998560734,
+        "retrieved_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_A",
+          "synth_unseen_TASK_13_EVICTABLE_CACHE_LINES_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 4200000000000000000 J",
+        "tokens": 123,
+        "gen_ms": 890.3224999958184,
+        "retrieval_ms": 1.7951999907381833,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_A",
+          "synth_unseen_TASK_14_TOTAL_ENERGY_PJ_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 1 / (1 - 0.90) = 2.0",
+        "tokens": 187,
+        "gen_ms": 844.7161999938544,
+        "retrieval_ms": 1.7927000008057803,
+        "retrieved_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_A",
+          "synth_unseen_TASK_15_EFFECTIVE_EMA_WINDOW_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: 0.25",
+        "tokens": 179,
+        "gen_ms": 364.9335000081919,
+        "retrieval_ms": 1.4127000031294301,
+        "retrieved_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_A",
+          "synth_unseen_TASK_16_RESIDUAL_CONTRACTION_4_STEPS_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+        "passed": false,
+        "response_snippet": "To calculate the stage time in nanoseconds for a k = 3 cycle pipeline stage operating at clock frequency f = 1.50 GHz:  ",
+        "tokens": 305,
+        "gen_ms": 4885.310899990145,
+        "retrieval_ms": 1.4915999927325174,
+        "retrieved_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_A",
+          "synth_unseen_TASK_17_PIPELINE_STAGE_TIME_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 32 - 8 = 24",
+        "tokens": 187,
+        "gen_ms": 525.2984000107972,
+        "retrieval_ms": 1.5290000010281801,
+        "retrieved_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_A",
+          "synth_unseen_TASK_18_NULL_SPACE_DIMENSION_B"
+        ],
+        "provenance_complete": true
+      },
+      {
+        "task_id": "TASK_19_SPECTRAL_GAP",
+        "passed": true,
+        "response_snippet": "FINAL ANSWER: 0.80",
+        "tokens": 107,
+        "gen_ms": 377.89030000567436,
+        "retrieval_ms": 1.8022000003838912,
+        "retrieved_eids": [],
+        "required_eids": [
+          "synth_unseen_TASK_19_SPECTRAL_GAP_A",
+          "synth_unseen_TASK_19_SPECTRAL_GAP_B"
+        ],
+        "provenance_complete": false
+      },
+      {
+        "task_id": "TASK_20_NATURAL_FREQUENCY",
+        "passed": false,
+        "response_snippet": "FINAL ANSWER: omega_n = sqrt(1 - (zeta^2) / (1 + zeta^2)) * omega_n_damped",
+        "tokens": 201,
+        "gen_ms": 1368.623000002117,
+        "retrieval_ms": 1.3801000022795051,
+        "retrieved_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "required_eids": [
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_A",
+          "synth_unseen_TASK_20_NATURAL_FREQUENCY_B"
+        ],
+        "provenance_complete": true
+      }
+    ]
+  }
+}

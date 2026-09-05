@@ -305,10 +305,17 @@ class ContextManager:
     Sits between CortexEngine and the TopologicalSynapse.
     """
 
-    def __init__(self, synapse, compactor: AutoCompactor, skill_registry: Optional[SkillRegistry] = None):
+    def __init__(
+        self,
+        synapse,
+        compactor: AutoCompactor,
+        skill_registry: Optional[SkillRegistry] = None,
+        shared_context_getter: Optional[Callable[[str], str]] = None,
+    ):
         self.synapse = synapse
         self.compactor = compactor
         self.skills = skill_registry or SkillRegistry()
+        self.shared_context_getter = shared_context_getter
 
     def step(self, past_key_values, query_states=None):
         """
@@ -323,11 +330,19 @@ class ContextManager:
         """
         If a persistent skill matches the prompt, prepend its system prompt.
         """
+        enriched = prompt
         skill = self.skills.match(prompt)
         if skill:
             print(f"[Context] Activated skill: {skill.name}")
-            return f"{skill.system_prompt}\n{prompt}"
-        return prompt
+            enriched = f"{skill.system_prompt}\n{enriched}"
+
+        if self.shared_context_getter is not None:
+            shared_context = self.shared_context_getter(prompt)
+            if shared_context:
+                print("[Context] Activated shared manifold context")
+                enriched = f"{shared_context}\n{enriched}"
+
+        return enriched
 
     def get_stats(self) -> Dict[str, Any]:
         return {

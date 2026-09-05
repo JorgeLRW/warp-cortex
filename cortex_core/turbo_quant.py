@@ -27,10 +27,11 @@ References:
   - PolarQuant: https://arxiv.org/abs/2502.02617
 """
 
+import math
+from typing import Any, Dict, List, Optional, Tuple
+
 import torch
 import torch.nn.functional as F
-import math
-from typing import Tuple, Optional
 
 
 # ======================================================================
@@ -385,6 +386,94 @@ class TurboQuantCache:
 
     def num_layers(self) -> int:
         return len(self._layers)
+
+    def layer_memory_bytes(self) -> List[int]:
+        layer_bytes: List[int] = []
+        for kq, _, ksk, vq, _, vsk in self._layers:
+            total_bits = kq.nelement() * self.bits + vq.nelement() * self.bits + 64
+            if ksk is not None:
+                total_bits += ksk.nelement()
+            if vsk is not None:
+                total_bits += vsk.nelement()
+            layer_bytes.append(total_bits // 8)
+        return layer_bytes
+
+    def export_state(self) -> Dict[str, Any]:
+        layers = []
+        for kq, ks, ksk, vq, vs, vsk in self._layers:
+            layers.append({
+                "keys_q": kq.detach().cpu(),
+                "keys_scale": ks.detach().cpu(),
+                "keys_sketch": None if ksk is None else ksk.detach().cpu(),
+                "values_q": vq.detach().cpu(),
+                "values_scale": vs.detach().cpu(),
+                "values_sketch": None if vsk is None else vsk.detach().cpu(),
+            })
+        return {
+            "version": 1,
+            "bits": self.bits,
+            "qjl_enabled": self.qjl_enabled,
+            "layers": layers,
+        }
+
+    @classmethod
+    def from_state(cls, payload: Dict[str, Any], *, device: str = 'cpu') -> 'TurboQuantCache':
+        cache = cls(
+            bits=int(payload.get("bits", 4)),
+            device=device,
+            qjl_enabled=bool(payload.get("qjl_enabled", True)),
+        )
+        cache._layers = []
+        for layer in payload.get("layers", []):
+            cache._layers.append((
+                layer["keys_q"].to(device),
+                layer["keys_scale"].to(device),
+                None if layer.get("keys_sketch") is None else layer["keys_sketch"].to(device),
+                layer["values_q"].to(device),
+                layer["values_scale"].to(device),
+                None if layer.get("values_sketch") is None else layer["values_sketch"].to(device),
+            ))
+        return cache
+
+
+def estimate_kv_memory_bytes(kv_tuples) -> int:
+    if not kv_tuples:
+        return 0
+    return sum(
+        k.nelement() * k.element_size() + v.nelement() * v.element_size()
+        for k, v in kv_tuples
+    )
+
+
+def summarize_kv_cache(kv_tuples, compressed: Optional[TurboQuantCache] = None) -> Dict[str, Any]:
+    layers: List[Dict[str, Any]] = []
+    for index, (k, v) in enumerate(kv_tuples or []):
+        layers.append({
+            "layer": index,
+            "key_shape": list(k.shape),
+            "value_shape": list(v.shape),
+            "sequence_length": int(k.shape[2]) if k.dim() >= 3 else 0,
+            "head_count": int(k.shape[1]) if k.dim() >= 2 else 0,
+            "head_dim": int(k.shape[-1]) if k.dim() >= 1 else 0,
+            "bytes": int(k.nelement() * k.element_size() + v.nelement() * v.element_size()),
+        })
+
+    original_bytes = estimate_kv_memory_bytes(kv_tuples)
+    summary: Dict[str, Any] = {
+        "layer_count": len(layers),
+        "layers": layers,
+        "original_bytes": int(original_bytes),
+    }
+    if compressed is not None:
+        compressed_bytes = int(compressed.memory_bytes())
+        summary.update({
+            "compressed_bytes": compressed_bytes,
+            "compression_ratio": float(compressed.compression_ratio(original_bytes)) if original_bytes else 1.0,
+            "bits": int(compressed.bits),
+            "qjl_enabled": bool(compressed.qjl_enabled),
+            "compressed_layer_bytes": [int(value) for value in compressed.layer_memory_bytes()],
+        })
+    return summary
 
 
 # ======================================================================

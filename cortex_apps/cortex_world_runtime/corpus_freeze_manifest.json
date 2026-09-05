@@ -1,0 +1,3796 @@
+{
+  "benchmark_freeze_timestamp_utc": "2026-09-05T03:07:50Z",
+  "root_corpus_merkle_sha256": "11fe73c046866559f7681df905e551599e448fa51507b66826f74204b26912bf",
+  "total_source_files_fingerprinted": 540,
+  "pipeline_provenance": {
+    "harvester_code_sha256": "b4004945d5808732403f55c66b5eac5c2869a764907b824ac53921f9d089c7ff",
+    "encoder_type": "GenericFrozenAspectEncoder",
+    "encoder_base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "aspect_dim": 64,
+    "random_projection_seed": 42,
+    "graph_k_nearest": 4,
+    "graph_sim_threshold": 0.45
+  },
+  "all_corpus_files": [
+    {
+      "project": "inference_wedge",
+      "relative_path": "inference_wedge/README.md",
+      "file_size_bytes": 2596,
+      "last_modified_utc": "2026-05-04T05:35:39Z",
+      "sha256_hash": "7d1384258bf2bf9bfd1be9aa64c0e752a5a8407e424eecfb4a305b3c8a3affe6"
+    },
+    {
+      "project": "inference_wedge",
+      "relative_path": "inference_wedge/kv_object_benchmark.py",
+      "file_size_bytes": 10994,
+      "last_modified_utc": "2026-05-04T05:24:46Z",
+      "sha256_hash": "460b921cfbe52fd9dc569c86fbdde423951fedc45074e3405574438c711d861f"
+    },
+    {
+      "project": "inference_wedge",
+      "relative_path": "inference_wedge/real_kv_model_benchmark.py",
+      "file_size_bytes": 15202,
+      "last_modified_utc": "2026-05-04T05:35:39Z",
+      "sha256_hash": "0b9addf4da48212df3c9992232b1d906b81afab9a0af85aa134b0c22c4f492cb"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/README.md",
+      "file_size_bytes": 4002,
+      "last_modified_utc": "2026-09-03T22:04:59Z",
+      "sha256_hash": "4ebcd343e4190692393ec360590b8d23ca2be80cf22f2697b51e9ac8fa0f1057"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/benchmark_honest.py",
+      "file_size_bytes": 4201,
+      "last_modified_utc": "2026-09-03T22:04:33Z",
+      "sha256_hash": "196154ac4068adf824c53617809e9ba2c8feadb39be8c7eb3a8ec939a55e69ef"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/demonstrate_compilation.py",
+      "file_size_bytes": 2728,
+      "last_modified_utc": "2026-01-13T00:26:06Z",
+      "sha256_hash": "7ea082b50f3a336c3a37a6b2665c8e6d6d60726178a5d2d3777872dce786f252"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/measure_accuracy.py",
+      "file_size_bytes": 2148,
+      "last_modified_utc": "2026-05-04T05:01:21Z",
+      "sha256_hash": "8a36f5f0f9e0969046bfa070b0c9644d5bb69fea11a4935021a9c65141660683"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/model_simulation.py",
+      "file_size_bytes": 449,
+      "last_modified_utc": "2026-05-04T05:04:16Z",
+      "sha256_hash": "f02aa665c20cc15391f18823f2dd5167b56b1ed9784cc273b838abd6db91f89e"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/roofline_comparison.py",
+      "file_size_bytes": 4113,
+      "last_modified_utc": "2026-01-12T12:15:14Z",
+      "sha256_hash": "d033dffe3bea521cec88b8f8a9e70825df88539a41b613bf7363bd52fd4277b2"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/benchmarks/run_validation.py",
+      "file_size_bytes": 1663,
+      "last_modified_utc": "2025-12-26T03:58:20Z",
+      "sha256_hash": "54b013075ce4197205f4c1755f0ee6c75a89710fe7f948e8cca9a3829fcb0654"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/extract_real_data.py",
+      "file_size_bytes": 5964,
+      "last_modified_utc": "2025-12-26T03:03:05Z",
+      "sha256_hash": "c0cf295ac0e9b9da251714b432e1e7162f4db58f4c3ddefc2abbb68d8c194c05"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/generate_layer0_inputs.py",
+      "file_size_bytes": 4539,
+      "last_modified_utc": "2025-12-26T03:58:01Z",
+      "sha256_hash": "90a96bceb774344d9aa78fd25ab8dad5fe6224837f731b0a2655e84e9c9ac441"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/generate_proxy_data.py",
+      "file_size_bytes": 3469,
+      "last_modified_utc": "2025-12-26T03:08:19Z",
+      "sha256_hash": "cb82a0b9febc6502f98e2d622cb839e1bfc459e360ef7d56996866b36ba5dd3b"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/prepare_olmoe_cuda.py",
+      "file_size_bytes": 2849,
+      "last_modified_utc": "2025-12-26T02:18:12Z",
+      "sha256_hash": "435401c83d4d5e3fd153e9074ceec07838721f80473a30c116b5788685626de1"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/recluster.py",
+      "file_size_bytes": 2910,
+      "last_modified_utc": "2025-12-26T03:58:17Z",
+      "sha256_hash": "b094e942a7d336e3779f49542e967d9559ad3abbff1f9b0f7329ac0d29b0962a"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/research_sand_patterns.py",
+      "file_size_bytes": 4781,
+      "last_modified_utc": "2025-12-26T02:50:07Z",
+      "sha256_hash": "39ddfca73bc26560f7e4c632ca5857244e0f47665210aaad171d57c6b470d6e7"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/research/surgical_extract.py",
+      "file_size_bytes": 3642,
+      "last_modified_utc": "2025-12-26T03:41:19Z",
+      "sha256_hash": "38689efb2351693a1ab81a6086f56eb1566728a8edb594b046f3c1099b1bcb4f"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/setup.py",
+      "file_size_bytes": 1844,
+      "last_modified_utc": "2026-09-03T22:02:06Z",
+      "sha256_hash": "37d9caa394fe6542b7fa945e1e2a93b8cf0366c71000f657bbe9a07169c19f4c"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/tests/test_olmoe_real.py",
+      "file_size_bytes": 6569,
+      "last_modified_utc": "2026-09-03T22:04:18Z",
+      "sha256_hash": "64fd823b53df03dd7117d49424a20de7fb34c77c5593c7425e0ca7cf6da58b48"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align/__init__.py",
+      "file_size_bytes": 164,
+      "last_modified_utc": "2026-09-03T22:02:02Z",
+      "sha256_hash": "5185b9d61ae6752fb2733df784cab1d12f2752ec8011d5f63c662944f6a78772"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align/router.py",
+      "file_size_bytes": 8535,
+      "last_modified_utc": "2026-09-03T22:01:56Z",
+      "sha256_hash": "b462fb9b27e61f0fc34913f4ff778a7523d00cbaf191c396ef027c3c9257b28a"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/README.md",
+      "file_size_bytes": 2334,
+      "last_modified_utc": "2026-05-04T05:01:14Z",
+      "sha256_hash": "e739436bd66380a1887be68599c171ea39a3091f049c7f77ab0fbde8066bed67"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_bench_tda.py",
+      "file_size_bytes": 1940,
+      "last_modified_utc": "2026-03-06T03:25:52Z",
+      "sha256_hash": "373de37857d1f4e00374412573d2e519e8d340727329ddc431d760d0d1d08200"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_bench_v4_full.py",
+      "file_size_bytes": 46328,
+      "last_modified_utc": "2026-03-06T03:48:04Z",
+      "sha256_hash": "1ed461a67952dd087e09c30da91b04434ed23d17366a737c42a42ea0937c76af"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_bench_v4_hardened.py",
+      "file_size_bytes": 31773,
+      "last_modified_utc": "2026-03-06T05:08:42Z",
+      "sha256_hash": "12ec18d0eb894b61159e2075fa2d1b25e36d3b7db0a7875345f418126c2b3fc5"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_bench_v5.py",
+      "file_size_bytes": 11962,
+      "last_modified_utc": "2026-03-22T23:50:19Z",
+      "sha256_hash": "1579bd4e4d394e5d8df2154e0e410a489e68b87d5bcdc368b8daabd2bbacdb75"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_diag.py",
+      "file_size_bytes": 2564,
+      "last_modified_utc": "2026-03-06T05:05:05Z",
+      "sha256_hash": "3f629f10a269e5973940355016853de621619d57bad1f6dc635e006104ffc1c0"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_diag_ema.py",
+      "file_size_bytes": 1867,
+      "last_modified_utc": "2026-03-06T05:08:57Z",
+      "sha256_hash": "2164bffda1747663736a2ccda8e73212b35968a513e23c9c1fdffad604ffd763"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_roofline.py",
+      "file_size_bytes": 10299,
+      "last_modified_utc": "2026-03-22T23:50:19Z",
+      "sha256_hash": "a1fb66d2812d2970323e759e0bafa1bc12114444df9f02d5a58593e2d80f8fd6"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_skip_honest_test.py",
+      "file_size_bytes": 2912,
+      "last_modified_utc": "2026-03-22T23:53:35Z",
+      "sha256_hash": "8cad256573920fc06161c2b3c614e532d6ea065f889a608815b300898fa4931e"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_validate_olmoe.py",
+      "file_size_bytes": 13392,
+      "last_modified_utc": "2026-03-23T00:38:26Z",
+      "sha256_hash": "21cd967dd20a3c7f0622728eecb3bf3839bda02f9cb5490745303fa4d8ec8190"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/_validate_v5.py",
+      "file_size_bytes": 17414,
+      "last_modified_utc": "2026-03-22T23:53:35Z",
+      "sha256_hash": "bde6fbba4d14be3e3b7190d314883af2902e0c34d50f3f6201c1f987d6adafe1"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/archive/v5_ema_era/warp_sieve.py",
+      "file_size_bytes": 14244,
+      "last_modified_utc": "2026-05-04T05:04:16Z",
+      "sha256_hash": "4585ca7eb4b69e9f361075cc7c9c8977c28573b51ad63b3db1d34b2e0b40e8a9"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/build/lib.win-amd64-cpython-311/warp_sieve.py",
+      "file_size_bytes": 7238,
+      "last_modified_utc": "2026-05-04T05:04:16Z",
+      "sha256_hash": "68ffd7c4246ff326ddbd2ad312ecca4ce4a7e8e7010bd0f7a94d646280c49715"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/check_env.py",
+      "file_size_bytes": 12076,
+      "last_modified_utc": "2026-02-05T16:50:16Z",
+      "sha256_hash": "627e89f34699d9149f395ddcff806f171d05f50068290ace1802a30d19580bef"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/setup.py",
+      "file_size_bytes": 4002,
+      "last_modified_utc": "2026-05-04T18:15:58Z",
+      "sha256_hash": "2d98e29fd1ebf792d3bd05ab5e8647ff77ba8947415144d8312f5ba93f158ded"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/test_e2e_generation.py",
+      "file_size_bytes": 1651,
+      "last_modified_utc": "2026-05-04T18:15:58Z",
+      "sha256_hash": "9ca40916b0c3da7482d3d32ea675262e12ab83a2d55aaecad44e7aeed21e7c41"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/verify_install.py",
+      "file_size_bytes": 9609,
+      "last_modified_utc": "2026-05-04T04:59:55Z",
+      "sha256_hash": "c217835e7c346de3e84741676566e018a4a61c6a062174d5070e13afddf2da0f"
+    },
+    {
+      "project": "warp_align",
+      "relative_path": "warp_align/warp_align_sdk/warp_sieve.py",
+      "file_size_bytes": 8320,
+      "last_modified_utc": "2026-09-03T22:02:17Z",
+      "sha256_hash": "462816b6c5341df5c763a1b7779b2a8301dfc419a9e9103d418697c0d0353a79"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/README.md",
+      "file_size_bytes": 16271,
+      "last_modified_utc": "2026-09-03T22:30:25Z",
+      "sha256_hash": "6ba1ad88d313626df6f6db4851cbbe7fd1983309ff2cad9647f53eae0ff1e062"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/async_delegate.py",
+      "file_size_bytes": 130,
+      "last_modified_utc": "2026-04-11T06:40:14Z",
+      "sha256_hash": "819003e674d91880c016aca6a5f1e84086153d2db51558ef3f24acb56efc8941"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_benchmarks/__init__.py",
+      "file_size_bytes": 59,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "2f754fdb26813bc89bfacfeb32f8e664acc80a4e30de4e962d87954f0d54239c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_benchmarks/benchmark_cortex_gsm8k.py",
+      "file_size_bytes": 16850,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "ed461e196f7f481671126633be6de6075dce553dd37c5e8db33b928609782fdb"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_benchmarks/benchmark_shared_manifold.py",
+      "file_size_bytes": 148143,
+      "last_modified_utc": "2026-04-14T08:23:01Z",
+      "sha256_hash": "3f1e2a71f7bc8ae071304d7f8e9b0d930509b0ac23da22f971e4d89882244c0d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_benchmarks/full_shared_manifold_evaluation.py",
+      "file_size_bytes": 32631,
+      "last_modified_utc": "2026-04-14T04:24:03Z",
+      "sha256_hash": "6789ccb3414aeb39e4d8038dd3fd87feb8dbe6bc73f0514373cfe68039f95c91"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_benchmarks/scaled_shared_manifold_tasks.py",
+      "file_size_bytes": 17866,
+      "last_modified_utc": "2026-04-14T04:24:03Z",
+      "sha256_hash": "7249ef7ccb3e67abd0886ff5bb4802e097afd6ccb8a8b4e39ff5798d3f104d10"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/__init__.py",
+      "file_size_bytes": 49,
+      "last_modified_utc": "2026-04-11T03:35:17Z",
+      "sha256_hash": "c7b9ec60356fe2d129d5bc233b64153ef5af6285ef6d303672c2f496aa09af48"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/adaptive_engine.py",
+      "file_size_bytes": 41355,
+      "last_modified_utc": "2026-04-13T01:21:45Z",
+      "sha256_hash": "cffcdf4e7468fcbfaf960396726304bc0facfab56fb15188d456e43650c7ada1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/agent_cloud.py",
+      "file_size_bytes": 112328,
+      "last_modified_utc": "2026-04-13T23:28:37Z",
+      "sha256_hash": "018fa97e6441893a74b33b71f1a342cd5ad50f7ab090e37adadf96cb8df2a535"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/async_delegate.py",
+      "file_size_bytes": 26883,
+      "last_modified_utc": "2026-04-11T05:42:51Z",
+      "sha256_hash": "9b4b155c2b443bb0cf55dc4dbd1f18095ddea5ed364ef2ca8f0742c7fb8cf206"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/cortex_attention.py",
+      "file_size_bytes": 6316,
+      "last_modified_utc": "2026-04-13T04:28:51Z",
+      "sha256_hash": "ff3bb84809e8b7c292e39987c6633d2ed1db5199257bf0a295ac5235e846f5f4"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/cortex_hooks.py",
+      "file_size_bytes": 10883,
+      "last_modified_utc": "2026-04-11T01:55:17Z",
+      "sha256_hash": "8239d30908708cac8379100c8acca3d5d1268c7bb04d51c03c2ad8f6df4a31bc"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/cortex_memory.py",
+      "file_size_bytes": 13287,
+      "last_modified_utc": "2026-04-12T06:12:29Z",
+      "sha256_hash": "3dab8c41a8cb72a8807e8280da9922b8bd82219cb8e93b8acdc9542c0dc603f3"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/cortex_orchestrator.py",
+      "file_size_bytes": 16998,
+      "last_modified_utc": "2026-04-13T08:34:08Z",
+      "sha256_hash": "15181f7bec942406fc7318f94d2392ac3ebed916bee0d86e76bc86828806764b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/cortex_router.py",
+      "file_size_bytes": 9193,
+      "last_modified_utc": "2026-04-14T08:42:36Z",
+      "sha256_hash": "54c1b51e51818bd5496eef3e1a7af8428ff2d679494ff3008091cb493e20a06d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/delegation_gate.py",
+      "file_size_bytes": 5331,
+      "last_modified_utc": "2026-04-11T07:25:18Z",
+      "sha256_hash": "9b08af7bb4fc1d175cd9c964ed901f49e46423fe679466632e0cd46b972313cc"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/distributed_synapse.py",
+      "file_size_bytes": 6055,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "59eef8f1bf707a31ad5192f2ed1c602eaa0322454f900ab6ed506df2063b6cd8"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/entropy_router.py",
+      "file_size_bytes": 13807,
+      "last_modified_utc": "2026-04-11T05:59:25Z",
+      "sha256_hash": "1f566fee4217454f3de0a0c389d6fdcfa9cb818a3e7eee63d6f245542532170b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/hf_utils.py",
+      "file_size_bytes": 4045,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "3bdbd9880cea98e28cbd5b0d8eedf149c86c921e383b66ecc6800b6c823966ac"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/manifold_topology.py",
+      "file_size_bytes": 11774,
+      "last_modified_utc": "2026-04-13T08:11:48Z",
+      "sha256_hash": "bc7c30ea8fb773405f6a5d700792b4e3e84ec595501dd7fc5693836d8f191a6f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/red_team.py",
+      "file_size_bytes": 14161,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "b6d2d47a1b9110ca594493b11d2f88ff95ce02e9d5465118136f09dec8a0857a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/settings.py",
+      "file_size_bytes": 2898,
+      "last_modified_utc": "2026-04-11T05:57:23Z",
+      "sha256_hash": "e94f14b64d89be4d2a96fc9e2c2877d6baf1334548038dea0552d5458c4b5461"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/shared_manifold_store.py",
+      "file_size_bytes": 7156,
+      "last_modified_utc": "2026-04-13T08:37:42Z",
+      "sha256_hash": "b53a406f294cc347d4611be0bf66cf84c122ccac7232ea6fbf8211b626468571"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/speculative.py",
+      "file_size_bytes": 13436,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "45e4639b5648181aaf674d7660fe3bfc1dedb788687c8f26db05f81d8a62099b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/stream_inject.py",
+      "file_size_bytes": 13033,
+      "last_modified_utc": "2026-04-11T04:06:22Z",
+      "sha256_hash": "9e18fccc5b9e81d347c7730f269441ce3faae7644c9d72b8b56d651ab68fb41b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/synapse.py",
+      "file_size_bytes": 25397,
+      "last_modified_utc": "2026-04-13T04:28:51Z",
+      "sha256_hash": "6d030f9336f240ad886b0a9a50af6131e005a698ba097eb525d0bfb451fdd567"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_core/turbo_quant.py",
+      "file_size_bytes": 22429,
+      "last_modified_utc": "2026-04-13T01:15:02Z",
+      "sha256_hash": "52647ed2f79a25a227fffe369674d34deaa10b062f2f69245f38e81fa9b869f7"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_engine.py",
+      "file_size_bytes": 65011,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "8f7920b188e16ac9334c03d7abb28f7fb9fd9784cd86ea1d8fba7d4b37e40ee7"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_resources/__init__.py",
+      "file_size_bytes": 48,
+      "last_modified_utc": "2026-04-11T06:22:56Z",
+      "sha256_hash": "fc837d9242bb459ceadee96dd793319c645d78c4f11b7b4274ddafc402497b13"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/__init__.py",
+      "file_size_bytes": 243,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "f55f2972e4cf98008eeb39dab2fade5f92a91db51fa76ddb178666f185059ad4"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/backends.py",
+      "file_size_bytes": 7944,
+      "last_modified_utc": "2026-05-04T07:26:58Z",
+      "sha256_hash": "4528c34ceeb2dbff314213e750cfdb4de35179a1c8620e1cfa20c8b890dbd6f1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/cli.py",
+      "file_size_bytes": 3709,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "b4212fdac6b1a79a99442c41ec9f615664336665a61db4d3c46884e24514ee94"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/runner.py",
+      "file_size_bytes": 18497,
+      "last_modified_utc": "2026-05-04T07:27:45Z",
+      "sha256_hash": "88a0201dda384196a8a01a27ef2f7dfc764084fe216cb7cd2b6fd5ee85ade5a0"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/schema.py",
+      "file_size_bytes": 4087,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "24509eb773f95ba4962c9c5e3ac59a8a7e5194eb1923ddd617d9ab4d01344392"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/tasks.py",
+      "file_size_bytes": 3478,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "21e6ee075e3feb4b595447918570bb8b9cce0e2415269d4ae9c0587aa919f72e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scorecard/validators.py",
+      "file_size_bytes": 3014,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "f28ee6770efde080d75f203de09b56ad9258eab689e14e47f4bbc304c3b8d0b6"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scripts/__init__.py",
+      "file_size_bytes": 48,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "5cb4156adf612dc2d2a663b84bdd35afab023eb206c04e347292ee143f6e7a40"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/build/lib/cortex_scripts/council_live.py",
+      "file_size_bytes": 47265,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "09fa0ed649d89d68840e7dc97acdb25329db14f9ab8534aa92ab1782e380dc0f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/config/settings.local.example.yaml",
+      "file_size_bytes": 576,
+      "last_modified_utc": "2026-04-11T07:34:49Z",
+      "sha256_hash": "96d25965820e42e3cbd09d906013cfda229cf7b444dd47ee26725e39de748d2f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/config/settings.yaml",
+      "file_size_bytes": 1352,
+      "last_modified_utc": "2026-04-13T01:21:45Z",
+      "sha256_hash": "be99a1d6bd499d75193fe61d9b0e79c5f7dddc87493d24ab26a876eaab7c33ce"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/__init__.py",
+      "file_size_bytes": 574,
+      "last_modified_utc": "2026-09-04T23:39:41Z",
+      "sha256_hash": "03d38badfc088527204a21acb09477d3a8527264c4634a46f90163692a21fcbb"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/ast_graph_extractor.py",
+      "file_size_bytes": 11149,
+      "last_modified_utc": "2026-09-04T23:49:17Z",
+      "sha256_hash": "674f11a0d2da6e6f226d40b4049108b62deb33ac4a9afe6a4ab7028e2523265a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/benchmark_dev_runtime.py",
+      "file_size_bytes": 16629,
+      "last_modified_utc": "2026-09-05T00:00:44Z",
+      "sha256_hash": "682c19cb5a62587850f04752ecb826a753944cb643c6589b1879e1fb90d80622"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/conventional_dev_runtime.py",
+      "file_size_bytes": 14548,
+      "last_modified_utc": "2026-09-04T23:49:34Z",
+      "sha256_hash": "7b363478abab079c1373bf0e887c656a6c47fa3e8400762e84008acafb103b0d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/dev_agents.py",
+      "file_size_bytes": 3735,
+      "last_modified_utc": "2026-09-04T23:42:11Z",
+      "sha256_hash": "434d47ea1ceca8e76f8558a05b17baf42029a3225b45ed82c1627873eeecda4c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/dev_runtime_api.py",
+      "file_size_bytes": 5417,
+      "last_modified_utc": "2026-09-04T23:59:28Z",
+      "sha256_hash": "4e76f9293e596f8b44c0ec89f2d4728d282c5eb78e91837632785ec3638125a6"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/event_history_log.py",
+      "file_size_bytes": 3092,
+      "last_modified_utc": "2026-09-04T23:41:41Z",
+      "sha256_hash": "6697c5551cf5a143ccf898db5cf227c2604b40912a4c40dfcb2859bcfe13a201"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/persistent_conventional_runtime.py",
+      "file_size_bytes": 17895,
+      "last_modified_utc": "2026-09-04T23:59:55Z",
+      "sha256_hash": "3840656a66f21c995ccd5a40018ce145c9daaf128c5389e7ecdd354af2f37851"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/real_tasks_suite.py",
+      "file_size_bytes": 16514,
+      "last_modified_utc": "2026-09-04T23:42:35Z",
+      "sha256_hash": "b2497288622c835ec0cf1590f4e1834962cb6c01ac981a8fcd8c352cd32f683f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/semantic_code_indexer.py",
+      "file_size_bytes": 9093,
+      "last_modified_utc": "2026-09-04T23:41:36Z",
+      "sha256_hash": "3b8d60880b2ac6c7bdbc8259bbc379675d9afd0ed80ee561804d91d2b212faea"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/service6_why_changed.py",
+      "file_size_bytes": 6999,
+      "last_modified_utc": "2026-09-05T00:00:05Z",
+      "sha256_hash": "73ddaaebeb3298350cff6a9c784374e74c97691d4a8ec1c32a3a73c63d07217f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/test_cortex_dev_runtime.py",
+      "file_size_bytes": 6623,
+      "last_modified_utc": "2026-09-05T00:00:52Z",
+      "sha256_hash": "8baa47186283f496760bd6de8e7ab907f52021bddb866307cecdb81bd348b172"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/test_status_tracker.py",
+      "file_size_bytes": 5490,
+      "last_modified_utc": "2026-09-05T00:00:24Z",
+      "sha256_hash": "e18960821c0608feb84d4d9cdf5ff2db74af713136a98ffbd67fa1dc7970045f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_dev_runtime/unified_dev_substrate.py",
+      "file_size_bytes": 14477,
+      "last_modified_utc": "2026-09-04T23:49:27Z",
+      "sha256_hash": "3e186c334f58b0b25c228bf393238519f0b58111a9ccb5ceed86379c832d7e35"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/__init__.py",
+      "file_size_bytes": 801,
+      "last_modified_utc": "2026-09-05T00:12:41Z",
+      "sha256_hash": "b4fd6811d71e23e9e99b025bf8167e2e4e48f5f6e17b6709a8a1bf5ebc889120"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/benchmark_1m_and_generalization.py",
+      "file_size_bytes": 13693,
+      "last_modified_utc": "2026-09-05T00:25:53Z",
+      "sha256_hash": "d5cd3098c5e086757e448257b3dfc5fd1de66e67c39de8d71357a0090d6762ca"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/benchmark_kill_tests.py",
+      "file_size_bytes": 12998,
+      "last_modified_utc": "2026-09-05T00:22:40Z",
+      "sha256_hash": "04197bf597469d19f85cc0e89b923f245d435d730477c09f51d4aad64f0c7cea"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/benchmark_multi_agent_scale.py",
+      "file_size_bytes": 6672,
+      "last_modified_utc": "2026-09-05T00:16:26Z",
+      "sha256_hash": "9775e17d1517c3ed59d0ffd2368dbb6af1d11e574d673f585c897211e266959e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/benchmark_skill_experience.py",
+      "file_size_bytes": 14424,
+      "last_modified_utc": "2026-09-05T00:14:16Z",
+      "sha256_hash": "6d8ff48acf282add2df21b69cd23c4aa1ba63a609ca9549e2d655e3fae9844c0"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/benchmark_world_capacity.py",
+      "file_size_bytes": 6243,
+      "last_modified_utc": "2026-09-05T00:13:47Z",
+      "sha256_hash": "da850e2dd9769b4693c2bc56946f6b816a259203b318768767ea944efb8cc4f1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/causal_consistency.py",
+      "file_size_bytes": 15506,
+      "last_modified_utc": "2026-09-05T02:18:49Z",
+      "sha256_hash": "3d8aa1977493bdbe8621114dec57f32463c87099e1af6fd3824677f5972471e4"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/fast_world_substrate.py",
+      "file_size_bytes": 12888,
+      "last_modified_utc": "2026-09-05T02:47:49Z",
+      "sha256_hash": "25958b9b87e95600bca260ec05621ea0875cd124abd14423d45c1a7db5ab2e97"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/heterogeneous_agent_society.py",
+      "file_size_bytes": 12081,
+      "last_modified_utc": "2026-09-05T00:35:12Z",
+      "sha256_hash": "9a74753286296d4592cef2aa59c76918b5ef790317eb9f48342aa8bf4a4e35f0"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/multi_project_synthesis.py",
+      "file_size_bytes": 9369,
+      "last_modified_utc": "2026-09-05T02:19:22Z",
+      "sha256_hash": "88c575ee1b341bdc98f98955cb74b7cafdb5f5fbeebd86ce74a911230e9f7990"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/sharded_world_substrate.py",
+      "file_size_bytes": 9775,
+      "last_modified_utc": "2026-09-05T00:22:38Z",
+      "sha256_hash": "a9e198fa27c5e4bbb0defa6edfaa4a603256a0975c2ca96691006be191dda883"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/skill_registry.py",
+      "file_size_bytes": 8999,
+      "last_modified_utc": "2026-09-05T00:25:44Z",
+      "sha256_hash": "7860fd8916fc74ac8a1af93b1ac9852de62c7b171ec8dd6a8c5f58ed78edda65"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/team_efficiency_frontier.py",
+      "file_size_bytes": 27215,
+      "last_modified_utc": "2026-09-05T02:44:08Z",
+      "sha256_hash": "f3d4c65ca65e693dfeffc82b5764cc513245f13522cbaf69b9961d5ae7f592ee"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/test_consistency_and_society.py",
+      "file_size_bytes": 3242,
+      "last_modified_utc": "2026-09-05T00:35:19Z",
+      "sha256_hash": "7b63fe4ce894139529decc032cab4704066d85f428b0a205ba9b00851c784da6"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/test_efficiency_and_synthesis.py",
+      "file_size_bytes": 5576,
+      "last_modified_utc": "2026-09-05T03:00:14Z",
+      "sha256_hash": "437761a030b6219d2318fb450248580d445c05cb89a47499155126a7d3daf7cf"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/test_world_runtime.py",
+      "file_size_bytes": 4597,
+      "last_modified_utc": "2026-09-05T00:13:13Z",
+      "sha256_hash": "f7d9e972e300b9a6f4052baed41702cc8732dd0def87a7981f79440ea2575779"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/unsignaled_synthesis_benchmark.py",
+      "file_size_bytes": 43872,
+      "last_modified_utc": "2026-09-05T02:59:44Z",
+      "sha256_hash": "cc5849bfa326f92f7878fac6b34ea023c222c856361a599bf861e3771d4fb24f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/cortex_world_runtime/workspace_knowledge_harvester.py",
+      "file_size_bytes": 19337,
+      "last_modified_utc": "2026-09-05T03:07:29Z",
+      "sha256_hash": "b4004945d5808732403f55c66b5eac5c2869a764907b824ac53921f9d089c7ff"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/__init__.py",
+      "file_size_bytes": 284,
+      "last_modified_utc": "2026-09-04T21:52:31Z",
+      "sha256_hash": "b6a340f192028422e32ba1ae891eb77f68a23ecb4c5b1fc94c20619a211ccf7e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/benchmark_scale_curve.py",
+      "file_size_bytes": 6487,
+      "last_modified_utc": "2026-09-04T22:10:53Z",
+      "sha256_hash": "3001ed3ee55ecfebc4a35011e91f4bc550e106d4e7cc8ab4f34da3467fa47b19"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/benchmark_shapley_cost.py",
+      "file_size_bytes": 11473,
+      "last_modified_utc": "2026-09-04T22:09:59Z",
+      "sha256_hash": "a275d0653d1a4e15ea69be298f6a70f8bc857eef96c89924d4de8aa814a6ae25"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/benchmark_systems_kill.py",
+      "file_size_bytes": 23265,
+      "last_modified_utc": "2026-09-04T22:00:25Z",
+      "sha256_hash": "68c6d9573580d425748ce4d2fb1908eb505fecd8844239b6ff04ad9db9b5f76a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/benchmark_versatility.py",
+      "file_size_bytes": 19284,
+      "last_modified_utc": "2026-09-04T21:56:05Z",
+      "sha256_hash": "22e4308de538f06249852086799c40fdadb263bc48f0bf6bddf1f1cdb9eece88"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/fault_injection_test.py",
+      "file_size_bytes": 11538,
+      "last_modified_utc": "2026-09-04T22:06:23Z",
+      "sha256_hash": "f0e1493d15fb84eefc9e23be10db7fa29c4cc5c411a661d62ba95f562de3b611"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/fragmented_naive.py",
+      "file_size_bytes": 19906,
+      "last_modified_utc": "2026-09-04T21:54:20Z",
+      "sha256_hash": "d0c31d8fe809bb811848bb5685992262279756975aae4de1e61320ef943bb79a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/fragmented_production.py",
+      "file_size_bytes": 21625,
+      "last_modified_utc": "2026-09-04T21:55:48Z",
+      "sha256_hash": "b47e83c58562390084b0eb4fed78124ab0e8603a7b5eb6dd43dd21a41e13ae4e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/memory_profiler.py",
+      "file_size_bytes": 4148,
+      "last_modified_utc": "2026-09-04T22:05:32Z",
+      "sha256_hash": "4a1f0015538332c7680bcfe773f3472dde23a70564047a8ca7023af959c826c5"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/modular_monolith.py",
+      "file_size_bytes": 18795,
+      "last_modified_utc": "2026-09-04T21:59:29Z",
+      "sha256_hash": "2afd70e9064a61b34c13f5e97b18649cee48183bfd73b816de8bcc377d30c80b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/network_ipc_service.py",
+      "file_size_bytes": 8667,
+      "last_modified_utc": "2026-09-04T21:59:38Z",
+      "sha256_hash": "44837d41d94370716cd327f44723afce7d36dfd41a25c7c4b0afcb3c882b2e8b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/representation_matched_monolith.py",
+      "file_size_bytes": 23867,
+      "last_modified_utc": "2026-09-04T22:08:29Z",
+      "sha256_hash": "781460756ca2c3d6b827a32bb96fc28b81c59ca4c310bc4dddbd4d0e1b2ca6fd"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/scale_catalog.py",
+      "file_size_bytes": 6132,
+      "last_modified_utc": "2026-09-04T22:07:33Z",
+      "sha256_hash": "6319a8befd34ccfe0571aec5f5e941cd0ca1b6ed5240c7cd3e982f3f43adbf5c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/service7_explain_risk.py",
+      "file_size_bytes": 13121,
+      "last_modified_utc": "2026-09-04T22:09:48Z",
+      "sha256_hash": "a239eff4ec8ab96daa7fae6d10a86aff6bf493e958527a98682a3da502ef52ef"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/substrate_api.py",
+      "file_size_bytes": 5346,
+      "last_modified_utc": "2026-09-04T21:52:39Z",
+      "sha256_hash": "13d8c2fdc0b6c8aae5b46ac9c553f1b90a3893b4666b35dc7c942f192ec2e7df"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/test_multi_service.py",
+      "file_size_bytes": 3916,
+      "last_modified_utc": "2026-09-04T21:53:42Z",
+      "sha256_hash": "49cce7e6c9f40db043cd57d9cc9106703f32968231a9acc35613fd39e82ab90b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/test_representation_reuse.py",
+      "file_size_bytes": 3581,
+      "last_modified_utc": "2026-09-04T22:06:59Z",
+      "sha256_hash": "8e500bb76b2efce32785d6aee457a6d8fbe238b66c0f671731d711c49f35dfef"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/test_systems_kill.py",
+      "file_size_bytes": 3682,
+      "last_modified_utc": "2026-09-04T21:59:55Z",
+      "sha256_hash": "66109e8af6fccb0899a689eb94bc09e0ab81427ad1564be7031a7f312da0d423"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/unified_substrate.py",
+      "file_size_bytes": 20162,
+      "last_modified_utc": "2026-09-04T21:54:07Z",
+      "sha256_hash": "292ffa40c7e25132747866df877cecbf4395e9ee621cf53daa0a193476169111"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/multi_service_substrate/workload_generator.py",
+      "file_size_bytes": 6817,
+      "last_modified_utc": "2026-09-04T21:55:21Z",
+      "sha256_hash": "9acc72be975ccd0c9a37020f33ba8f31f20bc66a0178c7d18e5c0cc0a85d7670"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/__init__.py",
+      "file_size_bytes": 399,
+      "last_modified_utc": "2026-09-04T14:34:18Z",
+      "sha256_hash": "c1e31d91b000d7b87a9d8db5327711a5a18b3c19af16dc30aa33ec85f5b3dccb"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/agent_council.py",
+      "file_size_bytes": 7653,
+      "last_modified_utc": "2026-09-04T16:16:26Z",
+      "sha256_hash": "d002a461c1ff2c8585c1f4f00a9caea344d8c836a1fabbbc7d7a5289589d5909"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/evaluate_persistent_system.py",
+      "file_size_bytes": 29705,
+      "last_modified_utc": "2026-09-04T21:35:20Z",
+      "sha256_hash": "62b4d232949082a9c6886568d1d72711def0bd29d6108c5b7bc884f93dfdfe5a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/event_stream.py",
+      "file_size_bytes": 9551,
+      "last_modified_utc": "2026-09-04T14:43:33Z",
+      "sha256_hash": "cb2483ba311b24aa7a1a6ee4eef87adc327d46bdda69bf4e502457397a97b07c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/memory_baselines.py",
+      "file_size_bytes": 56540,
+      "last_modified_utc": "2026-09-04T21:33:33Z",
+      "sha256_hash": "8976aadd9cc583951e18dac82c55902c732657c4039478e4c82b6469a79f9311"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/test_research_system.py",
+      "file_size_bytes": 4981,
+      "last_modified_utc": "2026-09-04T14:43:52Z",
+      "sha256_hash": "ec281c21d0e6f1a5db804ad87485775fcdabdc3758a2f0fd59359d7dfe6e9f18"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_apps/research_agent_system/world_state.py",
+      "file_size_bytes": 12492,
+      "last_modified_utc": "2026-09-04T16:12:18Z",
+      "sha256_hash": "5becd5dc58b820e2e84d05be4acbe673abfaf8f44b3b3d41d200c5a1f2aa5492"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_benchmarks/__init__.py",
+      "file_size_bytes": 59,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "2f754fdb26813bc89bfacfeb32f8e664acc80a4e30de4e962d87954f0d54239c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_benchmarks/benchmark_cortex_gsm8k.py",
+      "file_size_bytes": 16850,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "ed461e196f7f481671126633be6de6075dce553dd37c5e8db33b928609782fdb"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_benchmarks/benchmark_shared_manifold.py",
+      "file_size_bytes": 150233,
+      "last_modified_utc": "2026-05-04T08:30:28Z",
+      "sha256_hash": "2eabe4bb60bcc3d4901ab5b7ab5ef6c13e8f5db1051aa3d925adf1fd97823a13"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_benchmarks/full_shared_manifold_evaluation.py",
+      "file_size_bytes": 32631,
+      "last_modified_utc": "2026-04-14T04:24:03Z",
+      "sha256_hash": "6789ccb3414aeb39e4d8038dd3fd87feb8dbe6bc73f0514373cfe68039f95c91"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_benchmarks/scaled_shared_manifold_tasks.py",
+      "file_size_bytes": 17866,
+      "last_modified_utc": "2026-04-14T04:24:03Z",
+      "sha256_hash": "7249ef7ccb3e67abd0886ff5bb4802e097afd6ccb8a8b4e39ff5798d3f104d10"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/__init__.py",
+      "file_size_bytes": 633,
+      "last_modified_utc": "2026-09-03T22:29:48Z",
+      "sha256_hash": "bf028dce49dd6591609a73e1c7a965dbad3275954866687a01809e384b6ef087"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/adaptive_engine.py",
+      "file_size_bytes": 42698,
+      "last_modified_utc": "2026-09-03T22:19:14Z",
+      "sha256_hash": "aab16f13e18e0bf84b6430b1e748dc39b95276feae284bb01203278e63050275"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/agent_cloud.py",
+      "file_size_bytes": 112328,
+      "last_modified_utc": "2026-04-13T23:28:37Z",
+      "sha256_hash": "018fa97e6441893a74b33b71f1a342cd5ad50f7ab090e37adadf96cb8df2a535"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/async_delegate.py",
+      "file_size_bytes": 26883,
+      "last_modified_utc": "2026-04-11T05:42:51Z",
+      "sha256_hash": "9b4b155c2b443bb0cf55dc4dbd1f18095ddea5ed364ef2ca8f0742c7fb8cf206"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_attention.py",
+      "file_size_bytes": 6316,
+      "last_modified_utc": "2026-04-13T04:28:51Z",
+      "sha256_hash": "ff3bb84809e8b7c292e39987c6633d2ed1db5199257bf0a295ac5235e846f5f4"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_hooks.py",
+      "file_size_bytes": 10883,
+      "last_modified_utc": "2026-04-11T01:55:17Z",
+      "sha256_hash": "8239d30908708cac8379100c8acca3d5d1268c7bb04d51c03c2ad8f6df4a31bc"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_memory.py",
+      "file_size_bytes": 13287,
+      "last_modified_utc": "2026-04-12T06:12:29Z",
+      "sha256_hash": "3dab8c41a8cb72a8807e8280da9922b8bd82219cb8e93b8acdc9542c0dc603f3"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_orchestrator.py",
+      "file_size_bytes": 16998,
+      "last_modified_utc": "2026-04-13T08:34:08Z",
+      "sha256_hash": "15181f7bec942406fc7318f94d2392ac3ebed916bee0d86e76bc86828806764b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_router.py",
+      "file_size_bytes": 9193,
+      "last_modified_utc": "2026-04-14T08:42:36Z",
+      "sha256_hash": "54c1b51e51818bd5496eef3e1a7af8428ff2d679494ff3008091cb493e20a06d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/cortex_runtime.py",
+      "file_size_bytes": 27155,
+      "last_modified_utc": "2026-09-04T21:33:26Z",
+      "sha256_hash": "7f2c1a31931c70caee67dd1f8a3f3d5e8b6bc4f9855b156fe5cab30d8084ca36"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/delegation_gate.py",
+      "file_size_bytes": 5331,
+      "last_modified_utc": "2026-04-11T07:25:18Z",
+      "sha256_hash": "9b08af7bb4fc1d175cd9c964ed901f49e46423fe679466632e0cd46b972313cc"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/distributed_synapse.py",
+      "file_size_bytes": 6055,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "59eef8f1bf707a31ad5192f2ed1c602eaa0322454f900ab6ed506df2063b6cd8"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/entropy_router.py",
+      "file_size_bytes": 14418,
+      "last_modified_utc": "2026-09-03T22:18:28Z",
+      "sha256_hash": "535a379ceb52eb5f4fce5a0bdbeb4315efb8d4c7de8dc8054c16549b8cdf016a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/epistemic_manifold.py",
+      "file_size_bytes": 19153,
+      "last_modified_utc": "2026-09-03T23:34:52Z",
+      "sha256_hash": "21f7407d8278e4ee4c49b7c75e3c5008927a31732b16f948433bb15ddc02001b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/hf_utils.py",
+      "file_size_bytes": 4045,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "3bdbd9880cea98e28cbd5b0d8eedf149c86c921e383b66ecc6800b6c823966ac"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/manifold_topology.py",
+      "file_size_bytes": 11774,
+      "last_modified_utc": "2026-04-13T08:11:48Z",
+      "sha256_hash": "bc7c30ea8fb773405f6a5d700792b4e3e84ec595501dd7fc5693836d8f191a6f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/reaction_harness.py",
+      "file_size_bytes": 11302,
+      "last_modified_utc": "2026-09-04T21:17:39Z",
+      "sha256_hash": "e291539b7aa86cb016bd3ed41392853e7a036ec7e632c85da46b57bdf2072eb3"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/red_team.py",
+      "file_size_bytes": 14161,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "b6d2d47a1b9110ca594493b11d2f88ff95ce02e9d5465118136f09dec8a0857a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/semantic_fabric.py",
+      "file_size_bytes": 17012,
+      "last_modified_utc": "2026-09-04T00:38:08Z",
+      "sha256_hash": "6807db09a82323e6757f757df82d196b275289ebb2f0ef71de81a52171d1ce22"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/settings.py",
+      "file_size_bytes": 2898,
+      "last_modified_utc": "2026-04-11T05:57:23Z",
+      "sha256_hash": "e94f14b64d89be4d2a96fc9e2c2877d6baf1334548038dea0552d5458c4b5461"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/shared_manifold_store.py",
+      "file_size_bytes": 7156,
+      "last_modified_utc": "2026-04-13T08:37:42Z",
+      "sha256_hash": "b53a406f294cc347d4611be0bf66cf84c122ccac7232ea6fbf8211b626468571"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/speculative.py",
+      "file_size_bytes": 13436,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "45e4639b5648181aaf674d7660fe3bfc1dedb788687c8f26db05f81d8a62099b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/stream_inject.py",
+      "file_size_bytes": 13033,
+      "last_modified_utc": "2026-04-11T04:06:22Z",
+      "sha256_hash": "9e18fccc5b9e81d347c7730f269441ce3faae7644c9d72b8b56d651ab68fb41b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/synapse.py",
+      "file_size_bytes": 25397,
+      "last_modified_utc": "2026-04-13T04:28:51Z",
+      "sha256_hash": "6d030f9336f240ad886b0a9a50af6131e005a698ba097eb525d0bfb451fdd567"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/transition_governor.py",
+      "file_size_bytes": 16567,
+      "last_modified_utc": "2026-09-04T00:17:07Z",
+      "sha256_hash": "f05a30cb341c31efac44ef3c4ab1e372f82d4a7f4bf5bd548a4b22a9178e836f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_core/turbo_quant.py",
+      "file_size_bytes": 22429,
+      "last_modified_utc": "2026-04-13T01:15:02Z",
+      "sha256_hash": "52647ed2f79a25a227fffe369674d34deaa10b062f2f69245f38e81fa9b869f7"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_engine.py",
+      "file_size_bytes": 65011,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "8f7920b188e16ac9334c03d7abb28f7fb9fd9784cd86ea1d8fba7d4b37e40ee7"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_resources/__init__.py",
+      "file_size_bytes": 48,
+      "last_modified_utc": "2026-04-11T06:22:56Z",
+      "sha256_hash": "fc837d9242bb459ceadee96dd793319c645d78c4f11b7b4274ddafc402497b13"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/__init__.py",
+      "file_size_bytes": 243,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "f55f2972e4cf98008eeb39dab2fade5f92a91db51fa76ddb178666f185059ad4"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/backends.py",
+      "file_size_bytes": 21598,
+      "last_modified_utc": "2026-05-04T23:00:33Z",
+      "sha256_hash": "5af73257ce870fbc69edadaf6c902af8250bc25cc4d93cf5286b0c6ea184e100"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/cli.py",
+      "file_size_bytes": 3709,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "b4212fdac6b1a79a99442c41ec9f615664336665a61db4d3c46884e24514ee94"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/runner.py",
+      "file_size_bytes": 27020,
+      "last_modified_utc": "2026-05-04T21:02:44Z",
+      "sha256_hash": "02589f2b31f81836d50c3abf71a5a5903d28121983d214e9e5032a82d5aac383"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/schema.py",
+      "file_size_bytes": 4439,
+      "last_modified_utc": "2026-05-04T19:59:30Z",
+      "sha256_hash": "f54ef01c4136e1b0a78d639262b6b4b36c90822d4e164705d42ca25e999aa66c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/tasks.py",
+      "file_size_bytes": 3478,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "21e6ee075e3feb4b595447918570bb8b9cce0e2415269d4ae9c0587aa919f72e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scorecard/validators.py",
+      "file_size_bytes": 4018,
+      "last_modified_utc": "2026-05-04T22:10:10Z",
+      "sha256_hash": "7ebc238a678b5b707d9e4c6e0e87d8287e985219ac28700105da14c57d14f0b1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scripts/__init__.py",
+      "file_size_bytes": 48,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "5cb4156adf612dc2d2a663b84bdd35afab023eb206c04e347292ee143f6e7a40"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_scripts/council_live.py",
+      "file_size_bytes": 47265,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "09fa0ed649d89d68840e7dc97acdb25329db14f9ab8534aa92ab1782e380dc0f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/__init__.py",
+      "file_size_bytes": 62,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "3474c6e900cd54127e7a748d4126dff99aed82e45563823780c32afe5cb2261c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_ablation_study.py",
+      "file_size_bytes": 26882,
+      "last_modified_utc": "2026-09-03T23:20:19Z",
+      "sha256_hash": "e22b330fc07545fe0994dc12e94b668bd343a7ca37fe09c6bec6ff648d50171d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_action_verifier.py",
+      "file_size_bytes": 22658,
+      "last_modified_utc": "2026-09-03T23:59:38Z",
+      "sha256_hash": "acb2bee6490d1aa4d565bbad404948ea4818acbc516ee9c145ab196e72c866cd"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_context_fabric.py",
+      "file_size_bytes": 16877,
+      "last_modified_utc": "2026-09-04T00:31:38Z",
+      "sha256_hash": "2fdf7b40b739cb501a65eac5d4aa0f47ccffcb7161b5c3d5bd7c7cd7e77460b1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_context_fabric_rigorous.py",
+      "file_size_bytes": 26023,
+      "last_modified_utc": "2026-09-04T14:18:34Z",
+      "sha256_hash": "7f42b99e78c4083bcf3d72f00be1c7603ea6cc4f7b2b25d902d79b1b06141631"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_e2e_concurrency.py",
+      "file_size_bytes": 14656,
+      "last_modified_utc": "2026-09-04T00:30:22Z",
+      "sha256_hash": "96291a87b2d4dfd76d32ff76321d2403e17dde2ed369660e01a18107ba1549d0"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_epistemic_multi_world.py",
+      "file_size_bytes": 25077,
+      "last_modified_utc": "2026-09-03T23:39:37Z",
+      "sha256_hash": "c6093a853a3de2a455aa7ccb1bb66f66f9c1996c2fb66916d168c28ff0358cba"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_latent_truth_governor.py",
+      "file_size_bytes": 22719,
+      "last_modified_utc": "2026-09-03T23:30:50Z",
+      "sha256_hash": "a3016c62fd11ee14e6905a8faf99f7a7990de20402c4a72009922b7d13396130"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_multi_model_manifold.py",
+      "file_size_bytes": 11596,
+      "last_modified_utc": "2026-09-03T22:44:12Z",
+      "sha256_hash": "443b5f73a0dc0c6b9fc25003849a02915f092610bad13231c1f7112e17621a9b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_multi_world.py",
+      "file_size_bytes": 31026,
+      "last_modified_utc": "2026-09-03T23:25:22Z",
+      "sha256_hash": "c576e538b932644d79247c3f468eae93ecd6e74858203c630b055b29c3c7e368"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_pristine_final.py",
+      "file_size_bytes": 14370,
+      "last_modified_utc": "2026-09-04T00:03:19Z",
+      "sha256_hash": "d93b34151fcb00d200bbe96340e8d3da528388eb73321eaeef28570e2e2210cf"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_reaction_frontier.py",
+      "file_size_bytes": 24508,
+      "last_modified_utc": "2026-09-03T23:03:14Z",
+      "sha256_hash": "b97cf44e34ee296fbb667ca323a81af62035cf07fb971c8750cde4f1d47ceda0"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_representation_controls.py",
+      "file_size_bytes": 10947,
+      "last_modified_utc": "2026-09-03T23:20:06Z",
+      "sha256_hash": "a630347c2ff7bc7eaa4eeeb85a9faf64bda2deedf10a745f97251862a0464172"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_research_project_transfer.py",
+      "file_size_bytes": 17001,
+      "last_modified_utc": "2026-09-04T00:05:43Z",
+      "sha256_hash": "66b85fbc3f118f9292037289918b81b31c9e88c21f3f1298d1ad3ea9354db7e5"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_runtime_usecase.py",
+      "file_size_bytes": 19248,
+      "last_modified_utc": "2026-09-04T00:17:44Z",
+      "sha256_hash": "3d882404e4e473617f61d6070e8c00b9bf982b849e71f7e35c973b2488b6c18a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_scientific_replication.py",
+      "file_size_bytes": 13226,
+      "last_modified_utc": "2026-09-03T22:39:17Z",
+      "sha256_hash": "b3a01cc567147934318954ec03f36f29f2f33ecaf9b4cc8823b59b68d17e86bc"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_semantic_materialization.py",
+      "file_size_bytes": 16494,
+      "last_modified_utc": "2026-09-04T14:27:39Z",
+      "sha256_hash": "77c172145976db1ef009e36739da4f91f5ab89496261f1a8c75ef482af15d690"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_server_saturation.py",
+      "file_size_bytes": 24517,
+      "last_modified_utc": "2026-09-04T14:28:20Z",
+      "sha256_hash": "33312ec7ac9cee4ecc9ce351b2f389ebf657c01e7bb7e7a7edbf64ed9db5e26c"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_transition_governor.py",
+      "file_size_bytes": 8974,
+      "last_modified_utc": "2026-09-03T23:10:30Z",
+      "sha256_hash": "caf1f5f6cae5d7742a226a9b57d091a90cd93471ea7491816fdbce8d96d2382a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/benchmark_twin_world_history.py",
+      "file_size_bytes": 17306,
+      "last_modified_utc": "2026-09-04T14:31:27Z",
+      "sha256_hash": "8151309637bc168002e7d55c9845a4c826c1444649764fc797052f70d9bd37df"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_automation.py",
+      "file_size_bytes": 1942,
+      "last_modified_utc": "2026-04-11T03:38:18Z",
+      "sha256_hash": "da2635f2420cb7417bff06a23d317d80b1555caf06d2b18e1f71ae515652187d"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_cortex_fixes.py",
+      "file_size_bytes": 7901,
+      "last_modified_utc": "2026-09-03T22:19:58Z",
+      "sha256_hash": "a1168617fc9a5e65be0d7b6963b6d176bc1a97c606d118cb6064fc9510c7d488"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_council.py",
+      "file_size_bytes": 2065,
+      "last_modified_utc": "2026-04-11T02:38:07Z",
+      "sha256_hash": "4fa9749f06d683e3bde33bc3d9dce656495adab0171c78acaab2131050c9f3aa"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_epistemic_manifold.py",
+      "file_size_bytes": 8652,
+      "last_modified_utc": "2026-09-03T22:56:47Z",
+      "sha256_hash": "3582ad532f880b66a4ebb2206b8aff507df5f15029f069d7ec30435fff5aa23a"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_reaction_manifold.py",
+      "file_size_bytes": 8627,
+      "last_modified_utc": "2026-09-03T22:56:55Z",
+      "sha256_hash": "f013b6fe8ed3f03c520a3a0833e1e7fcd3363077b0134196475afac4c1926423"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_semantic_fabric_and_occ.py",
+      "file_size_bytes": 13032,
+      "last_modified_utc": "2026-09-04T00:36:57Z",
+      "sha256_hash": "eae6aad839469c697a27f16c81c6aae4124d206a8a7c3af18a99f776c6625d86"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_transition_governor.py",
+      "file_size_bytes": 12554,
+      "last_modified_utc": "2026-09-03T23:38:01Z",
+      "sha256_hash": "138054d69bbb1ebd4f923d1d6b1e80c7e8b1ced70b3cb9a7046506dcc5253ebd"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/test_upgrades.py",
+      "file_size_bytes": 5571,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "5b45ba40267cac104a6ac44d3730db4a477876aa50a5c0f257f4c35e597bd1ff"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/cortex_validation/tests.py",
+      "file_size_bytes": 125691,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "56724425f8751efa63a9f4eb7c2e861dbf83bb24f526f25db41b7088c4ec9796"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/docs/ARCHITECTURE.md",
+      "file_size_bytes": 8438,
+      "last_modified_utc": "2026-04-14T06:37:50Z",
+      "sha256_hash": "cf491b0cf1cac930fe339a75acc71e56845a3f3e355414d902bc7b1ad2469350"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/docs/CORTEX_OS.md",
+      "file_size_bytes": 5656,
+      "last_modified_utc": "2026-09-03T22:30:17Z",
+      "sha256_hash": "29a554cbbc31ec2f98d3e3534ebda3c133c75875c9c254391ea4817ada7ff6cf"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/docs/PROJECT_LAYOUT.md",
+      "file_size_bytes": 2124,
+      "last_modified_utc": "2026-04-11T06:50:55Z",
+      "sha256_hash": "e0e6e77c63513d2adee7f740a827c74fb263f265a88b4bb927617cb31330106f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/huggingface/hub/datasets--gsm8k/snapshots/740312add88f781978c0658806c59bc2815b9866/README.md",
+      "file_size_bytes": 7935,
+      "last_modified_utc": "2026-04-11T03:15:26Z",
+      "sha256_hash": "a17e882503578c9e324560630e31017617714ee025c87cf4fea6fd916895f3c1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/huggingface/hub/datasets--mbpp/snapshots/4bb6404fdc6cacfda99d4ac4205087b89d32030c/README.md",
+      "file_size_bytes": 9058,
+      "last_modified_utc": "2026-04-12T00:59:07Z",
+      "sha256_hash": "6377d5c76ba46b9e650daa6d5eb592e671c9b15586e39f23f50ed9bf2ac54cf6"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/api_skip_smoke/policy.yaml",
+      "file_size_bytes": 62,
+      "last_modified_utc": "2026-05-04T07:27:04Z",
+      "sha256_hash": "078a230f752852242715e956c0bf0b08f1303a47f98accdb118c536daa9fc7ba"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/api_skip_smoke/scorecard.md",
+      "file_size_bytes": 470,
+      "last_modified_utc": "2026-05-04T07:27:04Z",
+      "sha256_hash": "3f82e0a8f314ae83bfdf36ed06e6d6e641da79e2c7dfe20e8eb18c167b3a4426"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/entrypoint_smoke/policy.yaml",
+      "file_size_bytes": 275,
+      "last_modified_utc": "2026-05-04T07:30:03Z",
+      "sha256_hash": "f921803738e31da566225cfcd874f3140ea0732bc969efb0a6caf9a1c4031ba1"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/entrypoint_smoke/scorecard.md",
+      "file_size_bytes": 650,
+      "last_modified_utc": "2026-05-04T07:30:03Z",
+      "sha256_hash": "5000f4e4ead0aa29843bfc2c9657ab9d0724de83fe0552dd61cfd34a770f457e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/latest/policy.yaml",
+      "file_size_bytes": 490,
+      "last_modified_utc": "2026-09-03T22:16:08Z",
+      "sha256_hash": "734d3c08e5102c77d595b8f3e9b602b2701c23bc8d9e10d596781761fd70865f"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/latest/scorecard.md",
+      "file_size_bytes": 1175,
+      "last_modified_utc": "2026-09-03T22:16:08Z",
+      "sha256_hash": "8dbac5ca54de101bb4dc19146fe48cef1a7d55eeeaeab7f3046a44cca5e22984"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/local_qwen_smoke/policy.yaml",
+      "file_size_bytes": 284,
+      "last_modified_utc": "2026-05-04T07:27:21Z",
+      "sha256_hash": "3361e0a2909973cb22cafbf8c7d577832088e476333167a5c8e1e6368993cad7"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/local_qwen_smoke/scorecard.md",
+      "file_size_bytes": 654,
+      "last_modified_utc": "2026-05-04T07:27:21Z",
+      "sha256_hash": "b10b9bfaadd754daad344249471184de85c832dfb5fa0dd28e72735fc30081e9"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/os_smoke/policy.yaml",
+      "file_size_bytes": 275,
+      "last_modified_utc": "2026-05-04T07:27:59Z",
+      "sha256_hash": "8f36ea6f30d45e9733aa98b957b4415629ab4ecea9b5831678da3015e3395dcf"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/os_smoke/scorecard.md",
+      "file_size_bytes": 707,
+      "last_modified_utc": "2026-05-04T07:27:59Z",
+      "sha256_hash": "3623b36cf36840d788d71cddafb94bba5b5fd193bc44da6bcdfe3896dc0e1123"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/test_smoke/policy.yaml",
+      "file_size_bytes": 275,
+      "last_modified_utc": "2026-09-04T22:42:01Z",
+      "sha256_hash": "f2bbaf3ddda176ea1d7c58d00eda443e61620981d1e62be922871d1a5645abf5"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/local_artifacts/scorecards/test_smoke/scorecard.md",
+      "file_size_bytes": 834,
+      "last_modified_utc": "2026-09-04T22:42:01Z",
+      "sha256_hash": "2f76c38a61ffc79a2c26270982570a4d86a41142da6b5363ea17665eb8e65493"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/paper/README.md",
+      "file_size_bytes": 625,
+      "last_modified_utc": "2026-04-13T03:45:19Z",
+      "sha256_hash": "cc645a74db1e7f3ba9ed16da988b11d69e49c1d134954b46d1c1504d318ce59e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/README.md",
+      "file_size_bytes": 518,
+      "last_modified_utc": "2026-04-11T06:30:28Z",
+      "sha256_hash": "4109cce2e88449498bfccc3f6d8e9beac1011e0e420bf2c2c137e4207e7c7e55"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/_debug_kv.py",
+      "file_size_bytes": 2822,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "2d50ac606665022d4454312db206fb8853e733449dd457f3b7992de793a7d202"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/adaptive_engine_demo.py",
+      "file_size_bytes": 15993,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "07fc689e6acb04c8a534b9fc7cfcd57dd89cf84c966ab37b2598394ecb3cd725"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/benchmark_capacity.py",
+      "file_size_bytes": 4276,
+      "last_modified_utc": "2026-04-11T06:30:28Z",
+      "sha256_hash": "753e2d8a5df979244c0d7e800ad2a4ad07d4ab9a244a618d29517b3889fb3731"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/coding_hybrid_eval/README.md",
+      "file_size_bytes": 4182,
+      "last_modified_utc": "2026-04-12T02:09:43Z",
+      "sha256_hash": "7af8ac95253d99dcc238a399d21f8879ce55673e4e9eb623edb93e398c8833aa"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/coding_hybrid_eval/run_private_code_eval.py",
+      "file_size_bytes": 45480,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "836168f94b3f586429060fead234905d619ecb644f371e1ab703e7727bbab79b"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/entropy_generative.py",
+      "file_size_bytes": 13063,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "db534db549e070607e4aa1237b7762e83b93d4d790976accf2e4dbd223a92580"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/entropy_probe.py",
+      "file_size_bytes": 16015,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "b16ab25d09989c0f7f303a30f15837ec4068244de23c7f9e9bf907c69a18363e"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/entropy_router_demo.py",
+      "file_size_bytes": 6898,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "c802f458143b9ae37a024d3e73065c926147c5458e8b71a2a166edf620aab3f5"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/gsm8k_ablation/README.md",
+      "file_size_bytes": 4383,
+      "last_modified_utc": "2026-04-11T21:49:37Z",
+      "sha256_hash": "2801a07cb7ce4f287b584bcd041732ae8967fe5a85f96b04c11df04d9663f543"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/gsm8k_ablation/run_private_ablation.py",
+      "file_size_bytes": 47111,
+      "last_modified_utc": "2026-04-14T08:34:36Z",
+      "sha256_hash": "d513fb4dff221e765d3539dece871dcf69b8af4d3913f828865bf66f0c3bdd66"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/research/scalability_analysis.py",
+      "file_size_bytes": 4235,
+      "last_modified_utc": "2026-04-11T03:20:29Z",
+      "sha256_hash": "06cde58a629e23a72024742802b3abd4d9158faf8edb298d0e87ab65419c7729"
+    },
+    {
+      "project": "warp_cortex",
+      "relative_path": "warp_cortex/setup.py",
+      "file_size_bytes": 1111,
+      "last_modified_utc": "2026-05-04T07:24:42Z",
+      "sha256_hash": "1a68827c175951c7cf23c791a69cd7f1869b1d41e50a2142257aa92add8bb89b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/README.md",
+      "file_size_bytes": 18985,
+      "last_modified_utc": "2026-05-07T23:32:36Z",
+      "sha256_hash": "ab372f3ed1841973ced60c1aeeb3abd6984e3bf213a989ef13c84fbc7ef9d93f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/README.md",
+      "file_size_bytes": 3302,
+      "last_modified_utc": "2026-09-01T03:44:37Z",
+      "sha256_hash": "12de7e83be76595353ebdbc583da3bbc900cc6eaa49a6183a485bb17cfccf2fe"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/brain/train_direct_attention.py",
+      "file_size_bytes": 4188,
+      "last_modified_utc": "2026-09-02T17:13:50Z",
+      "sha256_hash": "84c941817056b1ce9a534e11d363be0b8efe0263a0cb958ab26ee1f1b5518842"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/scratch/test_debug.py",
+      "file_size_bytes": 1072,
+      "last_modified_utc": "2026-09-03T04:03:49Z",
+      "sha256_hash": "f31ea6429de9823294bef23171bd3d5ced65343577b30723a7a85866eb95bdec"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/__init__.py",
+      "file_size_bytes": 182,
+      "last_modified_utc": "2026-08-23T20:19:17Z",
+      "sha256_hash": "259c2393507303ef25e0fcfd3e6445e8d9e6ce7c222f46d7ec16cabf6813495c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/cli.py",
+      "file_size_bytes": 12154,
+      "last_modified_utc": "2026-09-02T16:48:58Z",
+      "sha256_hash": "ff84d6d937c576b2aeb9d26ff51d1e71f5ea102da48b98899dd54d442f9ddfb7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/audits_benchmark.py",
+      "file_size_bytes": 31456,
+      "last_modified_utc": "2026-09-03T14:13:44Z",
+      "sha256_hash": "1eddb48cec287531eaebcbce9da6b4a26a145273559b611bf7353806e8e92ffa"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/baselines.py",
+      "file_size_bytes": 5345,
+      "last_modified_utc": "2026-09-03T02:56:00Z",
+      "sha256_hash": "8a393cede8be66c135055c44e0e7a4affc4a4639ecf34e45ea0454e7fae1175a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/dataset.py",
+      "file_size_bytes": 5342,
+      "last_modified_utc": "2026-09-03T02:57:51Z",
+      "sha256_hash": "0299c9728e751775af8d4b6d223a7b309b47cc2714e1e94624c6da99e19be997"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/direct_latent_recurrent.py",
+      "file_size_bytes": 6518,
+      "last_modified_utc": "2026-09-04T14:16:29Z",
+      "sha256_hash": "a2bbd9f9c4f583fde4c38339b9a3e68ee306f9095155e475ad943ae7f6305c3f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/fisher_geometry.py",
+      "file_size_bytes": 6431,
+      "last_modified_utc": "2026-09-03T04:03:24Z",
+      "sha256_hash": "e4030fe59f7ef25049fe4b55e1ff4d5d1522c95df5959fa6d18ebc1a348a6263"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/focused_reader.py",
+      "file_size_bytes": 12950,
+      "last_modified_utc": "2026-09-03T15:13:58Z",
+      "sha256_hash": "7b4cdaf1886a571f0521987e3a2df63066cead4172f543186ffc9bc8ec23331e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/geometric_manifold.py",
+      "file_size_bytes": 7827,
+      "last_modified_utc": "2026-09-03T03:24:44Z",
+      "sha256_hash": "04996f49330dc1ae6ed8896ad400e9e744d05e88b2ac015883c6bf25784186ff"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/graph_state_evaluator.py",
+      "file_size_bytes": 15841,
+      "last_modified_utc": "2026-09-04T00:36:28Z",
+      "sha256_hash": "fd74b6b2ad7be142e5b0b5358c63e3ec96be2d4fe68837377fe23d89fbd5f927"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/kinship_rules.py",
+      "file_size_bytes": 3310,
+      "last_modified_utc": "2026-09-03T02:55:42Z",
+      "sha256_hash": "a865727045da52b5c63e18a9ca4e0fb817ef3e9b59a124cf9534c51c9b4d006e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/leak_free_gender.py",
+      "file_size_bytes": 4478,
+      "last_modified_utc": "2026-09-03T17:20:08Z",
+      "sha256_hash": "138e0e83872786a2b1d14d89d91e86dd926c89d84553faff60314522673093ab"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/learned_transition_evaluator.py",
+      "file_size_bytes": 16228,
+      "last_modified_utc": "2026-09-03T22:51:31Z",
+      "sha256_hash": "cb245ef58e47587515a84369ccb1a844c78a2e5d3946bdec7872b98037f4e317"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/learned_transition_generator.py",
+      "file_size_bytes": 14451,
+      "last_modified_utc": "2026-09-03T22:18:28Z",
+      "sha256_hash": "6e6791b53ed4ca6042d7fa8fd7076c38afb33a3f334c66b8b875e33974485ec1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/proposal_gated_world.py",
+      "file_size_bytes": 6804,
+      "last_modified_utc": "2026-09-03T04:36:43Z",
+      "sha256_hash": "2ffc221d4fdc1205747296c04980955e9dd526eccf9bcdd63376c198be296020"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_1_experiment_suite.py",
+      "file_size_bytes": 30155,
+      "last_modified_utc": "2026-09-04T14:51:36Z",
+      "sha256_hash": "49478ee8108d1af5ef01da0e0a853cd3984bb5e0757e03e924a9275269cdafaa"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_1_relational_binding.py",
+      "file_size_bytes": 16922,
+      "last_modified_utc": "2026-09-04T14:49:50Z",
+      "sha256_hash": "ae228f415750b15ffad50678b0230477dc48df6736e829f3f340f1f89a9aa595"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_2_experiment_suite.py",
+      "file_size_bytes": 32968,
+      "last_modified_utc": "2026-09-04T16:17:34Z",
+      "sha256_hash": "4822ddcd8b544b5490234c7e393017e30657a0a1c2f7b0f4709e352a8fd1e4a6"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_2_latent_topology.py",
+      "file_size_bytes": 26744,
+      "last_modified_utc": "2026-09-04T15:36:31Z",
+      "sha256_hash": "54a98e11b81c773f820217c356763c99c80d546510e5ca039c9f1d8093a83217"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_3_experiment_suite.py",
+      "file_size_bytes": 30062,
+      "last_modified_utc": "2026-09-04T21:33:29Z",
+      "sha256_hash": "08b9b0edda00bc118fae57bcd4494efca9000714852c55395f6c34086517879a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_3_relational_grounding.py",
+      "file_size_bytes": 24454,
+      "last_modified_utc": "2026-09-04T21:20:34Z",
+      "sha256_hash": "c718ab3754da6b3f7bbfcd3274e8eadc8f1beaf0400e0f3902e248091565f4e6"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_experiment_suite.py",
+      "file_size_bytes": 50679,
+      "last_modified_utc": "2026-09-04T14:28:40Z",
+      "sha256_hash": "1498b3f4a71e039e7e5fad16624d2ad24aa8fcf05e11a0791bf58a7ad7e23754"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/r3_latent_world_model.py",
+      "file_size_bytes": 15741,
+      "last_modified_utc": "2026-09-04T14:16:20Z",
+      "sha256_hash": "6aec9878d240bc0c583c1eebe1428826fd2f6722e281a85bbe4627e5c6023492"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/relational_state_evaluator.py",
+      "file_size_bytes": 14707,
+      "last_modified_utc": "2026-09-04T00:38:41Z",
+      "sha256_hash": "8fb502183b86ab06773fbb5da1c1756b66ba340782104a1253b1faba40321a46"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rtr1_model.py",
+      "file_size_bytes": 2951,
+      "last_modified_utc": "2026-09-03T03:11:55Z",
+      "sha256_hash": "94a6124c6c8754d5d7a6ee5f7509facfa9689ec69b01dc9a53728d49c7c94b80"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rtr2_model.py",
+      "file_size_bytes": 4944,
+      "last_modified_utc": "2026-09-03T03:24:08Z",
+      "sha256_hash": "b902050028a1e762c50386fe2bbc8d9fb47984ee5abaa5d342fc41fe5cd0312e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rtr3_model.py",
+      "file_size_bytes": 8100,
+      "last_modified_utc": "2026-09-03T04:03:37Z",
+      "sha256_hash": "9ec2e55589af5758c9e154485ae1612e83fe119e922c56dcc5c3f28a391ce766"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rtr5_dual_world.py",
+      "file_size_bytes": 7651,
+      "last_modified_utc": "2026-09-03T04:18:20Z",
+      "sha256_hash": "2e128410e7635e29659d58b9ae66d0a8a06b1547855c3358df419f6330c7ef16"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rtr_clutrr_model.py",
+      "file_size_bytes": 7622,
+      "last_modified_utc": "2026-09-03T02:58:59Z",
+      "sha256_hash": "7430cca6632d16c816777b411f7a0aff6fdf425d3aee865c84f4fc8947268575"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/rule_induction.py",
+      "file_size_bytes": 4092,
+      "last_modified_utc": "2026-09-03T03:11:47Z",
+      "sha256_hash": "084fe0283a80e415f681eddd440856e6cb6f9e54bec4d1416f2698d6b0de5248"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_official_clutrr_audits.py",
+      "file_size_bytes": 19329,
+      "last_modified_utc": "2026-09-03T14:17:36Z",
+      "sha256_hash": "c750b2fe61c64b52595622b931950beaab084abe0b328d92e880a081ebfe59b3"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr52_focused_reader_bench.py",
+      "file_size_bytes": 25756,
+      "last_modified_utc": "2026-09-03T14:47:09Z",
+      "sha256_hash": "376ffb2242cc2437f68375d712b7a81c0220d4ec50aee495413985b77a8f6a8d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr52_recurrent_bench.py",
+      "file_size_bytes": 30671,
+      "last_modified_utc": "2026-09-03T15:14:49Z",
+      "sha256_hash": "9c05b66939a87cdbae9568a2b2630dd6610e058ad446904c188586712fa2c48e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr53_arbitrated_benchmark.py",
+      "file_size_bytes": 24778,
+      "last_modified_utc": "2026-09-03T19:21:23Z",
+      "sha256_hash": "787173719da67232ca67535adaf7a93857c51e50a9b700999e8aa9ff659ef264"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr53_bidirectional_bench.py",
+      "file_size_bytes": 22263,
+      "last_modified_utc": "2026-09-03T16:07:03Z",
+      "sha256_hash": "f85682e56638e8a34c24b26a8d04d8d6bac248cb5dcaad913e06faa5fb29ef75"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr53_definitive_benchmark.py",
+      "file_size_bytes": 31623,
+      "last_modified_utc": "2026-09-03T17:21:44Z",
+      "sha256_hash": "20b6a5c8675b0c9ac923628778e3cf8e7a3496f0f53e6dce926520b66093b659"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/run_rtr_division_audits.py",
+      "file_size_bytes": 19858,
+      "last_modified_utc": "2026-09-03T13:47:38Z",
+      "sha256_hash": "de49c87f128cd986d48ff21b66d187820e45922f1dc59ae99c5aaea2fa861e8e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/clutrr/world_model.py",
+      "file_size_bytes": 9064,
+      "last_modified_utc": "2026-09-03T04:11:32Z",
+      "sha256_hash": "1b29ae082a6c1df13400f4365ab0092b5714f63cf4c3bd2c2b8299215c27e408"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/data.py",
+      "file_size_bytes": 9964,
+      "last_modified_utc": "2026-09-02T16:45:44Z",
+      "sha256_hash": "41b53ba8ce4a37e24cc1e7e3849e3fd6b75d966681e3228982fb6c38df77f5e2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/diagnostics.py",
+      "file_size_bytes": 17994,
+      "last_modified_utc": "2026-09-01T03:44:37Z",
+      "sha256_hash": "8208618dceb29b8215608345c219d7f2600c957b475ae2fecda0e02565bb26b6"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/evaluation.py",
+      "file_size_bytes": 17214,
+      "last_modified_utc": "2026-09-02T16:46:47Z",
+      "sha256_hash": "fb7ac876bd2a60557e40517b6bae0c5aa8d9f6e2ca50538c714ad1a972719038"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/__init__.py",
+      "file_size_bytes": 2706,
+      "last_modified_utc": "2026-09-02T19:49:31Z",
+      "sha256_hash": "2e80d26f1774326004685ed1f44c61a1b20568aa247f0b347e6e6b16d57c03f8"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/assignment_reasoner.py",
+      "file_size_bytes": 12408,
+      "last_modified_utc": "2026-09-02T17:58:09Z",
+      "sha256_hash": "aacb3aa67202ea937daa6360f70cc59f75c878364dd92371c094f01c477c626a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/backbones.py",
+      "file_size_bytes": 5028,
+      "last_modified_utc": "2026-09-01T16:52:02Z",
+      "sha256_hash": "7177baf5664655fb247965c0a01c0703256684124e439e2a81f02d50e179ef08"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/config.py",
+      "file_size_bytes": 2516,
+      "last_modified_utc": "2026-09-01T14:50:15Z",
+      "sha256_hash": "399094fa330ac31c5cfa5b4f426f797226eba16200bfe682d185b657ab935c2a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/direct_attention.py",
+      "file_size_bytes": 13168,
+      "last_modified_utc": "2026-09-02T17:12:59Z",
+      "sha256_hash": "46cd6dee3809dc21db80b9e378194c376f10b15fa05ac92d221cd0acdc0b7cac"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/dual_tangent_reasoner.py",
+      "file_size_bytes": 6750,
+      "last_modified_utc": "2026-09-02T18:10:32Z",
+      "sha256_hash": "9e8f17d05e309bc75c277ff3a3613aa00c8e7f3f9d7805391a38eb27a28c8b9d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/entity_solver.py",
+      "file_size_bytes": 11304,
+      "last_modified_utc": "2026-09-02T18:18:09Z",
+      "sha256_hash": "bb489702f825b84f84ca3b98f7810bd0e87d70e2b0be0b2ea83923f60163508b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/factorized_sparse_solver.py",
+      "file_size_bytes": 10871,
+      "last_modified_utc": "2026-09-02T19:01:51Z",
+      "sha256_hash": "5c68074cfd600a2360043d5982f5b2718533c7146ab7d0577af933ec50591263"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/fisher_replicator.py",
+      "file_size_bytes": 10777,
+      "last_modified_utc": "2026-09-02T17:53:44Z",
+      "sha256_hash": "139433eb631bdf7fc7b5f6fd4d10285c43e6d9e7840ef20d64a25c29fb1b6b9b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/gated_world_model.py",
+      "file_size_bytes": 11616,
+      "last_modified_utc": "2026-09-02T17:17:36Z",
+      "sha256_hash": "05f4424a66a1c2bb9b4b7f2ed3bb315c4a266f440401fb4df92ba733ead0a879"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/geometric_trm.py",
+      "file_size_bytes": 12086,
+      "last_modified_utc": "2026-09-02T17:45:02Z",
+      "sha256_hash": "a183efc0a8752cf046457dc2ea66bcb0d30e28039a33db9d6fcdf1ce07b45c8c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/gru_baseline.py",
+      "file_size_bytes": 7634,
+      "last_modified_utc": "2026-09-02T17:17:47Z",
+      "sha256_hash": "d6527e2413fc5a808c35973bb4b19d1a3dcf14c644fc8c908785d1152540cf53"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/modules.py",
+      "file_size_bytes": 10166,
+      "last_modified_utc": "2026-09-01T14:50:56Z",
+      "sha256_hash": "953a416c046e93136197efdede7d83775662d615a99580bc0935a0fe1d83cb4a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/readers.py",
+      "file_size_bytes": 7043,
+      "last_modified_utc": "2026-09-02T16:43:29Z",
+      "sha256_hash": "a4a0b5bdfc828906a61dea342c3b45ab16c9fb4e8736630aaadff45c83445356"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/residual_token_reasoner.py",
+      "file_size_bytes": 6898,
+      "last_modified_utc": "2026-09-02T18:51:32Z",
+      "sha256_hash": "5227e6ab2bc45a5f089e542875dc236c2ceda91ea4c42aec58d09f060e91a3f4"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/residual_transformer_reasoner.py",
+      "file_size_bytes": 12629,
+      "last_modified_utc": "2026-09-02T19:49:28Z",
+      "sha256_hash": "ed84bfe9ebb99f978cd37771d0810cc585070f46a978d0b85a09dd02efee49bb"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/universal_solver.py",
+      "file_size_bytes": 12103,
+      "last_modified_utc": "2026-09-02T18:42:40Z",
+      "sha256_hash": "49fa1b70d204a37b77477933fddc8173db9308f99c54cb2f4acbbfe7ca9dee9c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/vib_reasoner.py",
+      "file_size_bytes": 10866,
+      "last_modified_utc": "2026-09-02T19:08:59Z",
+      "sha256_hash": "0e8a080079aec8453a6ab5ffd4246cf86b333ba4d61d5c0b885538f52a78a6ad"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/model/world_model.py",
+      "file_size_bytes": 11736,
+      "last_modified_utc": "2026-09-01T14:51:06Z",
+      "sha256_hash": "e8c28f8740dc04a46fe8c1c0610637857c8902eab827ce960f12923a449aa866"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/objectives.py",
+      "file_size_bytes": 13852,
+      "last_modified_utc": "2026-09-02T16:44:33Z",
+      "sha256_hash": "f6e8b1ad7d560c58b248d18b4d2b586e9a4ab27afb690fcb30e92d5fd258a94c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/planner.py",
+      "file_size_bytes": 18478,
+      "last_modified_utc": "2026-09-02T16:52:23Z",
+      "sha256_hash": "146c2de2f5d65b3a6dcfc4a8152908560aa882aad0079873672efc79b0ae2a5e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/baselines.py",
+      "file_size_bytes": 8026,
+      "last_modified_utc": "2026-09-02T23:59:25Z",
+      "sha256_hash": "7b22ddf97a8b0a25a13323232b613cfbdc347c00b07c6cb6754e42e61706d6f4"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/competent_continuous_baseline.py",
+      "file_size_bytes": 7365,
+      "last_modified_utc": "2026-09-03T02:13:26Z",
+      "sha256_hash": "b36a5aece9c91a295040ec0bfae6e80a8f6063fdb42f51afe246bbc672d348ab"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/dataset.py",
+      "file_size_bytes": 3440,
+      "last_modified_utc": "2026-09-02T23:59:08Z",
+      "sha256_hash": "a2c0e4c2b1afdeeb7bfd753d8bdf874784afb6114969bd1fdcfad32703eba1ab"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/equal_supervision_models.py",
+      "file_size_bytes": 6938,
+      "last_modified_utc": "2026-09-03T02:06:39Z",
+      "sha256_hash": "96b5b97974a7656d427f04a8ef28ddd5cb418f25dbd5e0705b6541f234497091"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/grounder.py",
+      "file_size_bytes": 13510,
+      "last_modified_utc": "2026-09-03T02:38:46Z",
+      "sha256_hash": "5a8f57aa0eb85df1e3da1889acb897bc965648c50045dcf02fc338ef35acc1cc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/learned_grounder.py",
+      "file_size_bytes": 12415,
+      "last_modified_utc": "2026-09-03T01:45:21Z",
+      "sha256_hash": "9148a478ad078241c2afa0d755fdfc53b825143890dea67695ddbaf5169d0dc0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/pretrained_baseline.py",
+      "file_size_bytes": 4847,
+      "last_modified_utc": "2026-09-03T01:44:31Z",
+      "sha256_hash": "265c85f039b5ada2daaefad40775acf89e2cd94b3efc6394c3c2edf846d2d41e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/rtr0_model.py",
+      "file_size_bytes": 2592,
+      "last_modified_utc": "2026-09-03T02:35:54Z",
+      "sha256_hash": "f4514d53e7d94a6597bc75fd8277856009da04645e1c9c93146cabab95bb67e5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/rtr0_native_scanner.py",
+      "file_size_bytes": 12324,
+      "last_modified_utc": "2026-09-03T02:53:58Z",
+      "sha256_hash": "39a99ab42055d39fd2d25c899c1474fdfba061a71ed354a078cc7feb26cf7e50"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/rtr0_rule_binder.py",
+      "file_size_bytes": 5612,
+      "last_modified_utc": "2026-09-03T02:49:04Z",
+      "sha256_hash": "2c1671bebaf7878e8be4e618d4f0cd3716b0f38b95cc7b86a2f93f31c828505a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/rtr_reasoner.py",
+      "file_size_bytes": 9401,
+      "last_modified_utc": "2026-09-02T23:53:11Z",
+      "sha256_hash": "b675a40d2a81ba8b8826dce1ca2ae4ffb197591b76bf84c825782c4cd5a9b819"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/proofwriter/shared_encoder_model.py",
+      "file_size_bytes": 12612,
+      "last_modified_utc": "2026-09-03T01:51:19Z",
+      "sha256_hash": "d39102c28e68efd3782f7cfb5eb23d78466635dfba46aa47992b23458b66a96c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/schema.py",
+      "file_size_bytes": 3581,
+      "last_modified_utc": "2026-09-01T00:00:40Z",
+      "sha256_hash": "ba3d636a4df3a1f694219c3b272ca9926f6c30ccd639b1e46428363ad6cad0a5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/training.py",
+      "file_size_bytes": 9605,
+      "last_modified_utc": "2026-09-02T16:44:58Z",
+      "sha256_hash": "362684ba60a8405a61403762c7c2420414e27475a421c282747e4632dcdf43a7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/__init__.py",
+      "file_size_bytes": 165,
+      "last_modified_utc": "2026-08-23T20:19:17Z",
+      "sha256_hash": "24e40bf7d42e73c36542ce6e0b59c643dd8632122be6381c5876d9d7d2b2b77f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/cascade_physics.py",
+      "file_size_bytes": 4188,
+      "last_modified_utc": "2026-09-02T18:13:59Z",
+      "sha256_hash": "9bd1c1f76d056f0a8b193bb24c15fa7020ffe29a134fd949447d6c4105357fa2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/graph.py",
+      "file_size_bytes": 19901,
+      "last_modified_utc": "2026-09-02T16:45:34Z",
+      "sha256_hash": "81f43bc848b6b9bcb1ac05f8fe1609682e41a19c27b85db40f1151d4581ee12c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/heterogeneous_verifier.py",
+      "file_size_bytes": 5122,
+      "last_modified_utc": "2026-09-02T22:14:10Z",
+      "sha256_hash": "b7ca4ae6241367d0c17ad1bec347c0d8ef588d5972ee8dde62ff48362cf3108a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/heterogeneous_world.py",
+      "file_size_bytes": 11398,
+      "last_modified_utc": "2026-09-02T22:11:59Z",
+      "sha256_hash": "8b228694c7e3e43bd4290ff0e81f1093b40aaa2f9718f80e09936f225c85fafe"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/relational_language_world.py",
+      "file_size_bytes": 7930,
+      "last_modified_utc": "2026-09-02T19:35:41Z",
+      "sha256_hash": "da14f35fa5750e42a81998ff065ecce7c6111ee9d685bb7bd2bbb00b087dddf1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/src/atlas_jepa/worlds/sudoku_world.py",
+      "file_size_bytes": 8018,
+      "last_modified_utc": "2026-09-02T18:42:32Z",
+      "sha256_hash": "e8faf780dd841b1212b73871c90cec937aca0bfc5928f07525bbdb0d761a281e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_adversarial_graph.py",
+      "file_size_bytes": 2835,
+      "last_modified_utc": "2026-09-01T00:04:35Z",
+      "sha256_hash": "ea7bd185b035ee96ed794b4da551a3e697705d43b5fbee0faeafa80f4d653622"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_assignment_reasoner.py",
+      "file_size_bytes": 3908,
+      "last_modified_utc": "2026-09-02T17:58:19Z",
+      "sha256_hash": "b00f75e5125f575dd27907da8195a878950840a2c3bac278e584a8dca8103d43"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_bellman_objective.py",
+      "file_size_bytes": 3007,
+      "last_modified_utc": "2026-09-02T16:48:03Z",
+      "sha256_hash": "6f2b51729349231c59afe93b770d537de3114aa80a554ecfb95b539d80b7ea3b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_clutrr.py",
+      "file_size_bytes": 2632,
+      "last_modified_utc": "2026-09-03T02:56:26Z",
+      "sha256_hash": "8397b1d9c84a9e6ae715e06149da595ebccd299f500e6a6a9cb099536e26fb2a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_competent_continuous.py",
+      "file_size_bytes": 2095,
+      "last_modified_utc": "2026-09-03T02:13:06Z",
+      "sha256_hash": "d8c440cadecbd9484fb78c59fd6ce6e4da9cc472997131635d6b59cde2ae6390"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_conflict_audits.py",
+      "file_size_bytes": 6502,
+      "last_modified_utc": "2026-09-03T13:40:36Z",
+      "sha256_hash": "ebe5d2333b61ac5472b96489b9931c239a1f3484a9063418c6334811017f15fb"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_data.py",
+      "file_size_bytes": 2351,
+      "last_modified_utc": "2026-09-01T00:04:35Z",
+      "sha256_hash": "c13f2626599da9dd4dcf9856a4e08906f76e481af29e1b2f81d9254d7c95052a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_diagnostics.py",
+      "file_size_bytes": 4358,
+      "last_modified_utc": "2026-08-24T00:38:04Z",
+      "sha256_hash": "12e0d937f3f489f6c85f84cd545555eae016a778ee3ea260d8f290fe85abd0a9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_direct_attention.py",
+      "file_size_bytes": 3451,
+      "last_modified_utc": "2026-09-02T17:12:15Z",
+      "sha256_hash": "6b151f4efa35c1a7f121548174b0d0b2bb9ea7ec971e7cf689b15a82efe6d99a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_dual_tangent_reasoner.py",
+      "file_size_bytes": 2466,
+      "last_modified_utc": "2026-09-02T18:14:12Z",
+      "sha256_hash": "4ba0b70de858b5a6bf402c4629b0172826d2ffc751536b654cfad72fe9a9774a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_entity_solver.py",
+      "file_size_bytes": 1524,
+      "last_modified_utc": "2026-09-02T18:18:19Z",
+      "sha256_hash": "01dc23b681401a8a9144e342de68e32cfca13e54937ff1f43b723d83f84b18ce"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_equal_supervision.py",
+      "file_size_bytes": 2438,
+      "last_modified_utc": "2026-09-03T02:00:58Z",
+      "sha256_hash": "6946e1aee3e8ac92e9ad2438c186b12b6c8bc2af528309468eafa5446001412d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_evaluation.py",
+      "file_size_bytes": 2660,
+      "last_modified_utc": "2026-09-01T00:33:01Z",
+      "sha256_hash": "8445907bfe5ad85291507fcfec33a05c7c4d8c52266129c397c5b6aec75e7a83"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_factorized_sparse.py",
+      "file_size_bytes": 1600,
+      "last_modified_utc": "2026-09-02T19:01:39Z",
+      "sha256_hash": "ffd8eb98d3a446706ce3dc53745d77ce894b56143fcc2531a08c0a188841ccbd"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_fair_proofwriter.py",
+      "file_size_bytes": 2713,
+      "last_modified_utc": "2026-09-02T23:59:37Z",
+      "sha256_hash": "34e04c1024a014be10fc3775719d0ff2fd0cd1dd835d74932469879d84091aa0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_fisher_replicator.py",
+      "file_size_bytes": 2987,
+      "last_modified_utc": "2026-09-02T17:52:08Z",
+      "sha256_hash": "6f10ae58f9b4144c63c93b85b6147dcca9c9757816bfd9b4feb652c92ca4c437"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_focused_reader_v2.py",
+      "file_size_bytes": 2568,
+      "last_modified_utc": "2026-09-03T15:14:06Z",
+      "sha256_hash": "a55b267c9352b84660c209d789a6acd174226b595aecde3cba4527d90017754b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_genuine_models.py",
+      "file_size_bytes": 3302,
+      "last_modified_utc": "2026-09-02T17:18:01Z",
+      "sha256_hash": "fc3dcd210ef9ffd31ef2065437c1bedf7274f08020884f13e152bc297dbb9bc1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_geometric_trm.py",
+      "file_size_bytes": 4406,
+      "last_modified_utc": "2026-09-02T17:45:07Z",
+      "sha256_hash": "e0cec78a587ac424e9a493b3fb8fbb28098c5b439cbd72db47d52c51325f401b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_graph_world.py",
+      "file_size_bytes": 2645,
+      "last_modified_utc": "2026-09-01T00:04:35Z",
+      "sha256_hash": "fd5dd3956d26bba556fe7deb8fa2128581625ee8cffab30955114372a5a78b47"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_leak_free_gender.py",
+      "file_size_bytes": 1421,
+      "last_modified_utc": "2026-09-03T17:19:39Z",
+      "sha256_hash": "f86a1748c00c4b398b9e5917b354412745132d8aa26a001a24e9f2e74eff4699"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_localized_sudoku.py",
+      "file_size_bytes": 1568,
+      "last_modified_utc": "2026-09-02T18:42:49Z",
+      "sha256_hash": "2c5d543cdec551e4bdcb9fe1b6acda0697f2e1e93936a7beb9e2c3c516055386"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_mcts_planner.py",
+      "file_size_bytes": 2674,
+      "last_modified_utc": "2026-09-02T16:47:29Z",
+      "sha256_hash": "355639db09b8ee32e604725a4519d7bf5b6c843ac5a1bdd84f38b71f898aa3ce"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_model_components.py",
+      "file_size_bytes": 6511,
+      "last_modified_utc": "2026-09-01T14:51:50Z",
+      "sha256_hash": "bd2f1363e4876dfb79da21cc69bc905b3e124b239087c9453ed1a51978b32aaa"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_objectives.py",
+      "file_size_bytes": 2353,
+      "last_modified_utc": "2026-09-01T03:44:37Z",
+      "sha256_hash": "e5cb0a670121ddcc9033f4ac15dd319a4d08f1b77dc6d0ba1ffc3af27d9a78fc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_official_clutrr_provenance.py",
+      "file_size_bytes": 3959,
+      "last_modified_utc": "2026-09-03T14:22:05Z",
+      "sha256_hash": "b54c5f2fdd7f56dedcbf6c8aa25c445802455aca5e7b71d6d9a5ae72bef9b132"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_open_vocabulary.py",
+      "file_size_bytes": 3550,
+      "last_modified_utc": "2026-09-02T16:47:36Z",
+      "sha256_hash": "dde3c40f63a6b544fac68a271322496af38bd7296ae43357b7e3ef1fc0cadf12"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_planner.py",
+      "file_size_bytes": 1953,
+      "last_modified_utc": "2026-08-23T20:28:01Z",
+      "sha256_hash": "d4266c0ab63f7258e8811ccec4c89e651f4cd32ea2521bc1df8a365811b795e9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_pretrained_baseline.py",
+      "file_size_bytes": 1834,
+      "last_modified_utc": "2026-09-03T01:44:53Z",
+      "sha256_hash": "626e3fb3cc2b0a92331b34e66b47e46c3d3476b186c3b201dc134fb0f4dd11ce"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_proofwriter_grounder.py",
+      "file_size_bytes": 2925,
+      "last_modified_utc": "2026-09-02T23:53:24Z",
+      "sha256_hash": "19cf339754698822f94610c79996b910c52aeb5b233e192c9a1f5cc8ff1c3831"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_r3_1_suite.py",
+      "file_size_bytes": 3545,
+      "last_modified_utc": "2026-09-04T14:49:57Z",
+      "sha256_hash": "c044c43d32a534767452208a89160b5eefb0729556431ef0f24275edb92ada32"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_r3_2_suite.py",
+      "file_size_bytes": 6186,
+      "last_modified_utc": "2026-09-04T15:36:38Z",
+      "sha256_hash": "9ac3768a7c36ecf9688a902449bcb11d2bb995a4c4976796e0efc6270243e32c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_r3_3_suite.py",
+      "file_size_bytes": 5673,
+      "last_modified_utc": "2026-09-04T21:20:43Z",
+      "sha256_hash": "bdfd893eedd153068a6c1b2d987dfb1b1b998adf9ebb0b1c50c560761694116d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_r3_suite.py",
+      "file_size_bytes": 3989,
+      "last_modified_utc": "2026-09-04T14:16:36Z",
+      "sha256_hash": "5116b2fdaecdffef59c8aeb3d627a717f7a9004486ee02d98a17c16d7e4d40cc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_relational_reasoner.py",
+      "file_size_bytes": 2447,
+      "last_modified_utc": "2026-09-02T18:51:41Z",
+      "sha256_hash": "3470f94f71d9127009a9adb396dec278d51d98532887e8aa7519d30fa45aea23"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_residual_transformer_reasoner.py",
+      "file_size_bytes": 2480,
+      "last_modified_utc": "2026-09-02T19:49:37Z",
+      "sha256_hash": "ec8b8dc1947ac9c189c46e9f120e21d68c5995ad0c0e92419d4abbcd15dc3883"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rollout.py",
+      "file_size_bytes": 1541,
+      "last_modified_utc": "2026-08-23T20:25:18Z",
+      "sha256_hash": "329851555539d144d6e754e5c4cc040ae695d90dc4afe3bbfe7f0532895c927d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr0_model.py",
+      "file_size_bytes": 2202,
+      "last_modified_utc": "2026-09-03T02:35:59Z",
+      "sha256_hash": "7628c617c5a5b02687bc895dc2ba4dc6ede1dc19d2d517b5cc5fb11c87138970"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr0_rule_binder.py",
+      "file_size_bytes": 2578,
+      "last_modified_utc": "2026-09-03T02:48:52Z",
+      "sha256_hash": "3bcc4120a920022c34ba5b9e2c3990cb3a7f9710ba5166cc6fa75b1497e2d8e5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr1_rule_induction.py",
+      "file_size_bytes": 2179,
+      "last_modified_utc": "2026-09-03T03:12:01Z",
+      "sha256_hash": "f3964d7f37c0c123f1d594c199f07319b74a9bb333e5dfff280d5b318f3f53cc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr2_geometry.py",
+      "file_size_bytes": 2726,
+      "last_modified_utc": "2026-09-03T03:24:57Z",
+      "sha256_hash": "fa272f69b478624130038eb108fc355bee47b198969644c8ff0c60a7bb11bd41"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr3_fisher.py",
+      "file_size_bytes": 2590,
+      "last_modified_utc": "2026-09-03T04:01:39Z",
+      "sha256_hash": "73063d0f6749a075812f965c7aaea3373b50a798b8ca608845a7b73307bf46fe"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_rtr5_dual_world.py",
+      "file_size_bytes": 2081,
+      "last_modified_utc": "2026-09-03T04:18:25Z",
+      "sha256_hash": "d6b1ab563cd621a6d215379bd8681c8e99d0071c9ea97c0b01a5b21a9ca4ca20"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_shared_encoder.py",
+      "file_size_bytes": 1522,
+      "last_modified_utc": "2026-09-03T01:51:25Z",
+      "sha256_hash": "0a860bf5ac8a4e9f30d9322d31d159bd79134b355a2c43f3564c877a8e8a3378"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_sudoku_solver.py",
+      "file_size_bytes": 2183,
+      "last_modified_utc": "2026-09-02T18:37:57Z",
+      "sha256_hash": "c217c2639748fd8c3b5ccbe14bbf07802b57a1baac7cf300ecf66f02dca67adf"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_training.py",
+      "file_size_bytes": 1773,
+      "last_modified_utc": "2026-09-01T00:05:14Z",
+      "sha256_hash": "c2f77a0560583ecc6fed34ce29009eadd9cf6c202a3e04bdbb161f81cc89532e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_vib_reasoner.py",
+      "file_size_bytes": 1880,
+      "last_modified_utc": "2026-09-02T19:09:08Z",
+      "sha256_hash": "0238430e3a41904b600b07ec6c9f0a1935f9786246aab1f70066f1efb76cca8e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/atlas-jepa/tests/test_world_model.py",
+      "file_size_bytes": 2129,
+      "last_modified_utc": "2026-09-03T04:11:36Z",
+      "sha256_hash": "5c796ada6e55f3e41fdb797518f1959b78bb4895d1b9f7d8101cf1fe639ffc45"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/action_principle.md",
+      "file_size_bytes": 2003,
+      "last_modified_utc": "2026-05-06T03:19:36Z",
+      "sha256_hash": "8b34b41c7956f6e05dce1300d73373d294ddda4432e2e91cab6c3972871b0681"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/autonomous_self_consistency.md",
+      "file_size_bytes": 2504,
+      "last_modified_utc": "2026-05-06T04:34:25Z",
+      "sha256_hash": "6d17a4ddb38c118a21184f96bffa9bc2aad6a635faaa5ac9809f1c8ea95bff1c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/boundary_data_action.md",
+      "file_size_bytes": 1974,
+      "last_modified_utc": "2026-05-06T05:07:33Z",
+      "sha256_hash": "de550471f2bef71a252952a42320753127c271abfa8143fcc47dad4c7ed1ce23"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/boundary_generalization.md",
+      "file_size_bytes": 2081,
+      "last_modified_utc": "2026-05-06T05:44:27Z",
+      "sha256_hash": "83f0598cb7f3cc329ddc5811b32530150c3816ec4cf06cedf784226b25de5fe0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/closed_loop.md",
+      "file_size_bytes": 5299,
+      "last_modified_utc": "2026-05-06T23:32:33Z",
+      "sha256_hash": "e021c64ab0784b25016ff1323ffdaef00ee8e432b81167ce8da2dfc0355e5220"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/common_trajectory_selector.md",
+      "file_size_bytes": 2324,
+      "last_modified_utc": "2026-05-06T08:10:27Z",
+      "sha256_hash": "e427e0cb095acc55e9bdf4dcc1ba57b747cbcd0ea986a8174abcbc522c21ab68"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/constraint_principles.md",
+      "file_size_bytes": 2157,
+      "last_modified_utc": "2026-05-06T02:45:14Z",
+      "sha256_hash": "b72543d96dca2082b8ab8c679788ec54c897f7c68c319d8dd0fd1f3c452a1f93"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/continuum_limit.md",
+      "file_size_bytes": 1252,
+      "last_modified_utc": "2026-05-06T02:32:56Z",
+      "sha256_hash": "8e7e883db662177ecf2ba74dfe613a9e6344f1d38dcb4f3f214973fb979b28f1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/derivation_program.md",
+      "file_size_bytes": 2902,
+      "last_modified_utc": "2026-05-06T02:25:27Z",
+      "sha256_hash": "924b20dfecd1826d7515dc4ec7a952bccc1c7560f434e0a258d0c8a8f85ce864"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/field_update_action.md",
+      "file_size_bytes": 2218,
+      "last_modified_utc": "2026-05-06T04:29:02Z",
+      "sha256_hash": "558ac39c490dec87892f7a6eb0dfd9c930838595456bfcaa2739aab167d6ffe2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/formal_model.md",
+      "file_size_bytes": 4286,
+      "last_modified_utc": "2026-05-06T02:16:00Z",
+      "sha256_hash": "dbc62a5434f3f1e846f565cabdc3cb10ed7c0728aa7bde5f05ad1230ed6e3afc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/intrinsic_multihorizon_selector.md",
+      "file_size_bytes": 5223,
+      "last_modified_utc": "2026-05-07T23:32:36Z",
+      "sha256_hash": "3e04e0e3acc16bf886ff8ba983b50b6dd65d884f0a9bf6d2c6a5923f6c5d903c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/intrinsic_no_go.md",
+      "file_size_bytes": 3172,
+      "last_modified_utc": "2026-05-06T06:40:39Z",
+      "sha256_hash": "4dfb08cee13701568a6b53badfa4c4ea4492d1329577bd43aca59f25cbf8eec5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/intrinsic_propagation_selector.md",
+      "file_size_bytes": 2463,
+      "last_modified_utc": "2026-05-06T19:34:02Z",
+      "sha256_hash": "209ed8d3f1a25d64fbba0d0ca3b2718c8f85a84fa12cb2bbaa57e54a987cfd96"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/intrinsic_scale_selector.md",
+      "file_size_bytes": 4068,
+      "last_modified_utc": "2026-05-06T23:32:33Z",
+      "sha256_hash": "cebd190824e80ba73636c399fc04834031c24e614a6d15755bd2417bb5518d82"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/intrinsic_selector.md",
+      "file_size_bytes": 2466,
+      "last_modified_utc": "2026-05-06T05:56:15Z",
+      "sha256_hash": "0de93c6780d6fcb1a50eb6f40eeb52269949614cd355b8b18e000c874c0dc28f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/joint_update_action.md",
+      "file_size_bytes": 2346,
+      "last_modified_utc": "2026-05-06T04:01:54Z",
+      "sha256_hash": "bd5143c61288209264776b7f609d2cc113733b53048ce1b1f7a8baaf7206f69c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/nonlocality_action.md",
+      "file_size_bytes": 2460,
+      "last_modified_utc": "2026-05-06T03:33:58Z",
+      "sha256_hash": "d35896b25f5362d58b287a0669f1f382ed3c906b30357a4cc69d578a5cbfdcf8"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/research_program.md",
+      "file_size_bytes": 5431,
+      "last_modified_utc": "2026-05-06T02:12:22Z",
+      "sha256_hash": "f95b913221381f69652723d9188744a39a60de23731c3e6cac5547b2c32bbde5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/rule_origin.md",
+      "file_size_bytes": 1655,
+      "last_modified_utc": "2026-05-06T02:36:08Z",
+      "sha256_hash": "2d1f1b703dff225355dd1bbe16ed46b9c07f701db89a79f33e0653ca3e7cf54f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/trajectory_action.md",
+      "file_size_bytes": 3779,
+      "last_modified_utc": "2026-05-06T03:44:09Z",
+      "sha256_hash": "fc01cd478443baa23ec622dd29ae7f4ad9998dcb86eee453e13ec5f316e249ed"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/docs/unified_mechanism.md",
+      "file_size_bytes": 1938,
+      "last_modified_utc": "2026-05-06T02:29:46Z",
+      "sha256_hash": "c366fcd9e9db5b00e72149d720f87ac1db7472583ed7a30b836a8731ef52e8bc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/action_principle_report.md",
+      "file_size_bytes": 2157,
+      "last_modified_utc": "2026-05-06T02:53:11Z",
+      "sha256_hash": "cf0396043c81c1f73b6a42eb81f7b3b6e48d2b003fd15aca4de651e9ce7b5ccd"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/autonomous_action_report.md",
+      "file_size_bytes": 1913,
+      "last_modified_utc": "2026-05-06T04:32:42Z",
+      "sha256_hash": "0ac6a85a3305ed31cd2ad026324d8edc8f4fdae3fe940a15dbff0270a93158db"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/boundary_data_action_report.md",
+      "file_size_bytes": 2389,
+      "last_modified_utc": "2026-05-06T05:17:13Z",
+      "sha256_hash": "33000d10430fef8c7ddd97ab7058f4fe1e8375ccf24b927993e54bc79b93b5b9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/boundary_generalization_report.md",
+      "file_size_bytes": 2325,
+      "last_modified_utc": "2026-05-06T05:36:22Z",
+      "sha256_hash": "94fcddaa942f80f24641dcc15224fd6469d3747f8f55d8227064636e776fc2cb"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/closed_loop_report.md",
+      "file_size_bytes": 9083,
+      "last_modified_utc": "2026-05-06T22:28:23Z",
+      "sha256_hash": "ddd19383b9c791a42bb749aceee4802c98741c3998a9cee28c18909acd4ada63"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/common_trajectory_selector_report.md",
+      "file_size_bytes": 2754,
+      "last_modified_utc": "2026-05-06T08:06:07Z",
+      "sha256_hash": "e91619b0a994d7b2fa99501b2440dc2db32a79a70d91e6f73484a4e9bed9e7cf"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/constraint_principle_report.md",
+      "file_size_bytes": 1810,
+      "last_modified_utc": "2026-05-06T02:44:13Z",
+      "sha256_hash": "914f037833d302e3dde67f7d42fe2147a6ecba046e59e8dee66cd2f45435eed6"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/continuum_limit_report.md",
+      "file_size_bytes": 1309,
+      "last_modified_utc": "2026-05-06T02:31:59Z",
+      "sha256_hash": "3d9c9f4ec6847a51d77e31b1b94e0f540d1023431924f5aad8b01f20b41ce36e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/derived_assumption_report.md",
+      "file_size_bytes": 2545,
+      "last_modified_utc": "2026-05-06T02:25:33Z",
+      "sha256_hash": "911adc52e25656f0fd1d28be3e21a61063dd1e5656841117755617db5de66028"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_20260507-191358.md",
+      "file_size_bytes": 3843,
+      "last_modified_utc": "2026-05-08T04:09:16Z",
+      "sha256_hash": "100e2fd993aef97b6d87d0a554d39c29250a9ebce061f02dce307d82b3ec0c71"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_balancefix_20260509-050048.md",
+      "file_size_bytes": 1479,
+      "last_modified_utc": "2026-05-09T10:10:59Z",
+      "sha256_hash": "af5d0af863a8c9125cbd6974d462ec77eef3ccf7fb060eeafe39f2147d125809"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_cached_20260508-155832.md",
+      "file_size_bytes": 2604,
+      "last_modified_utc": "2026-05-08T21:05:33Z",
+      "sha256_hash": "6a5991e895bb4d7ad2b99fb39837b5202473fcc790cdb53b0f6ff35327679761"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_cached_tailfix_20260508-163927.md",
+      "file_size_bytes": 1686,
+      "last_modified_utc": "2026-05-08T21:45:46Z",
+      "sha256_hash": "3d679122d4548e0a3335a454d98fcdbbb41ca5f8f8ded0053e2fc0a46941b912"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_redesign_20260508-233813.md",
+      "file_size_bytes": 1562,
+      "last_modified_utc": "2026-05-09T04:47:19Z",
+      "sha256_hash": "729af6f3af8dcfa2609f637a7d516dc687574d97a43f022695c9dba8e1a45888"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_repaired_20260509-014638.md",
+      "file_size_bytes": 1562,
+      "last_modified_utc": "2026-05-09T06:58:29Z",
+      "sha256_hash": "fe4fe836fef52379d3fe74583031268c86ef12846cf68e8a7b84d3b04ff5e005"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_overnight_tieaware_20260508-010333.md",
+      "file_size_bytes": 2608,
+      "last_modified_utc": "2026-05-08T09:52:42Z",
+      "sha256_hash": "a5eca488b0bb92a75919ccf8f43849248e39df468ae37c1adf2c385b7b4027f4"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_smoke_cached.md",
+      "file_size_bytes": 748,
+      "last_modified_utc": "2026-05-08T19:08:25Z",
+      "sha256_hash": "2524b85a6c4ff8631e48bead50e8754360bfa1d64265babb24c1e5775975e131"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_smoke_redesign_20260508-233748.md",
+      "file_size_bytes": 767,
+      "last_modified_utc": "2026-05-09T04:38:00Z",
+      "sha256_hash": "f32d696801b2a84328c68122edf95aafdbb29357bc71dda939ebd1bd121876e7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/excess_mixing_sweep_smoke_test.md",
+      "file_size_bytes": 846,
+      "last_modified_utc": "2026-05-08T00:13:46Z",
+      "sha256_hash": "ecf04ce35adc400bb964755b21e1eb805580e86ade592c36aa05b8342a264f34"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/field_update_action_report.md",
+      "file_size_bytes": 2471,
+      "last_modified_utc": "2026-05-06T04:21:03Z",
+      "sha256_hash": "78843752e6dfb8f692990308d68d2c06b10be8464717a910a08bfc08c7991cfc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_common_data_selector_transfer_report.md",
+      "file_size_bytes": 3960,
+      "last_modified_utc": "2026-05-09T21:17:41Z",
+      "sha256_hash": "56baf51cc10d0dd95357550fb43b73f4c779e8d3fc7de1128c825d5e4c0249c2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_adversarial_report.md",
+      "file_size_bytes": 3442,
+      "last_modified_utc": "2026-05-09T09:48:41Z",
+      "sha256_hash": "b3e654db439d619be64add233f67d15211cd278bc14ca5ff153315ae219026a4"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_claim_summary.md",
+      "file_size_bytes": 11239,
+      "last_modified_utc": "2026-05-10T08:23:13Z",
+      "sha256_hash": "95e427f1b67b0863cf63d7203a742749cdd96d2e29da9271ba983f0a46df3a6d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_frontier_report.md",
+      "file_size_bytes": 4211,
+      "last_modified_utc": "2026-05-09T09:29:43Z",
+      "sha256_hash": "86af979ad5877b86713c811da9cd882278596e6aff92cec2ac53bfa61e91e685"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_holdout_report.md",
+      "file_size_bytes": 2536,
+      "last_modified_utc": "2026-05-09T10:00:36Z",
+      "sha256_hash": "c3f25534b63e9a619969d76946d1543950fd052a5cfa2821aa5ef0e315a2c7d3"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_phase_null_tradeoff_report.md",
+      "file_size_bytes": 1548,
+      "last_modified_utc": "2026-05-09T08:45:32Z",
+      "sha256_hash": "e3db72e5cf1f8adbc09604c643fc8ada2de6abe248c7b1d3fb99bdf95fd4b952"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_redesign_report.md",
+      "file_size_bytes": 2571,
+      "last_modified_utc": "2026-05-09T03:12:14Z",
+      "sha256_hash": "02e0543ef09d9037592da59c23dbdf2e7c866f6c5a0b8f9105bb6de1bb36de74"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_report.md",
+      "file_size_bytes": 3130,
+      "last_modified_utc": "2026-05-07T23:04:24Z",
+      "sha256_hash": "d525c22bd3190f6092973d9ac133a8db2cfe5f03a6ed83a6b68f26dffca17f2b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_robustness_report.md",
+      "file_size_bytes": 3423,
+      "last_modified_utc": "2026-05-09T09:59:38Z",
+      "sha256_hash": "7e2f4284b4454a6cdffde63f99b615c8a6a4feaecd660bac2b856c3a66564150"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_rule_family_transfer_report.md",
+      "file_size_bytes": 3227,
+      "last_modified_utc": "2026-05-09T09:53:30Z",
+      "sha256_hash": "57fee94af68d05d291d34ee8975d7c5271fa9f3610cc3d0c1202e932ea0ca09c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_excess_mixing_warning_followup_report.md",
+      "file_size_bytes": 1643,
+      "last_modified_utc": "2026-05-09T09:39:32Z",
+      "sha256_hash": "ae5991c29f667bf957dfbf77efa6b6a92ce7828f6d8e3eb1e6fc3b85dff27d45"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_selector_bias_audit_report.md",
+      "file_size_bytes": 4313,
+      "last_modified_utc": "2026-05-09T19:56:59Z",
+      "sha256_hash": "6c39e6a3e73d6b1ae5ae3b941be3adced76719a3d1aded95f2682f5f676a58cc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_selector_report.md",
+      "file_size_bytes": 1892,
+      "last_modified_utc": "2026-05-07T19:20:50Z",
+      "sha256_hash": "31c8dd1ba4fd7d60039c9660ed539263ce95a3d91d8974186a83bfdedc9cfa56"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_selector_robustness_report.md",
+      "file_size_bytes": 4484,
+      "last_modified_utc": "2026-05-07T21:43:52Z",
+      "sha256_hash": "4bc7322aedf52dc1e655471d7ed0bafb7bc566f8fdda8afede7d4d21623e77a2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_teacher_guided_recovery_full_report.md",
+      "file_size_bytes": 2349,
+      "last_modified_utc": "2026-05-10T06:15:33Z",
+      "sha256_hash": "76d6c073f61b0cae2a1d91dbcd0a5a010dd4e587254fdb039129230075cd58c0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_cross_spacing_teacher_guided_recovery_report.md",
+      "file_size_bytes": 2330,
+      "last_modified_utc": "2026-05-10T05:54:19Z",
+      "sha256_hash": "c6233eabc4bfa50738fcea5508e65c20af56a6250581a72ba6bd94bb3c4d7bb7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_multihorizon_selector_report.md",
+      "file_size_bytes": 2361,
+      "last_modified_utc": "2026-05-07T00:27:14Z",
+      "sha256_hash": "3b39153641231e88caabdf4ff4649ebd706fe70e802e3e27f38be720d727e67b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_no_go_report.md",
+      "file_size_bytes": 3593,
+      "last_modified_utc": "2026-05-06T07:13:40Z",
+      "sha256_hash": "de8ae9aae766097bff2fbab157587c6bd10154076d2dd5a3ac4a6928f20492ce"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_propagation_selector_report.md",
+      "file_size_bytes": 2779,
+      "last_modified_utc": "2026-05-06T19:32:55Z",
+      "sha256_hash": "ec8cfc4f20dfbd15e2686546fd7b80af2e912c3b0485e4f214eb37eb513cd943"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_scale_selector_report.md",
+      "file_size_bytes": 2605,
+      "last_modified_utc": "2026-05-06T20:45:56Z",
+      "sha256_hash": "b3c8703d45f2171bfb30f47ff08f49e721605d0308c746eb6977ae54012acb3e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_scale_selector_robustness_report.md",
+      "file_size_bytes": 3344,
+      "last_modified_utc": "2026-05-06T23:14:32Z",
+      "sha256_hash": "b6763dca8e39f56488faf86c26197d9ce1cde7a8d7187eb083301d10b26812e5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/intrinsic_selector_report.md",
+      "file_size_bytes": 2444,
+      "last_modified_utc": "2026-05-06T06:09:22Z",
+      "sha256_hash": "28de3331ab10f3eb064428c16411f2d93d1ed93cef83366ad02ed7f003211c8f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/joint_update_action_report.md",
+      "file_size_bytes": 2263,
+      "last_modified_utc": "2026-05-06T03:53:02Z",
+      "sha256_hash": "2f764aa1f1d6d984f92d5980ccb227ea6bc87926dc580bf9f4152c50a6339c95"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/nonlocality_action_report.md",
+      "file_size_bytes": 1786,
+      "last_modified_utc": "2026-05-06T03:33:37Z",
+      "sha256_hash": "56c9246f0892e40b3088e34078b35703eec7548939a123dbf0bf3edea6aa75f0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/official_clutrr_audits_report.md",
+      "file_size_bytes": 3220,
+      "last_modified_utc": "2026-09-03T14:18:13Z",
+      "sha256_hash": "51584852abf42de616887b086d6e0f1c31d4ff0a9eb50f6b4176949dc4b9a87c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/proposal_coverage_diagnostic.md",
+      "file_size_bytes": 3470,
+      "last_modified_utc": "2026-09-03T22:07:54Z",
+      "sha256_hash": "6ae05efc510e51b3a866dc4455db55307cd4a9d67941ab16f2717ddb0e3b11d4"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r1_reduction_report.md",
+      "file_size_bytes": 5062,
+      "last_modified_utc": "2026-09-03T22:48:20Z",
+      "sha256_hash": "bf281e3b23233757c732a06d3ac7e45c0457467f04c43c5794d9c8f484bd7395"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r2_1_reduction_report.md",
+      "file_size_bytes": 4280,
+      "last_modified_utc": "2026-09-04T00:36:46Z",
+      "sha256_hash": "e9c7a3809c45bbb50bc151b8d867242592325dee68fce74a7106a1f7fc1aefb5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r2_2_reduction_report.md",
+      "file_size_bytes": 6968,
+      "last_modified_utc": "2026-09-04T02:42:20Z",
+      "sha256_hash": "e338dd5bef6c786aecedbc46728947bc9648e942347b430a7af5db4f759e90d9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r2_reduction_report.md",
+      "file_size_bytes": 8353,
+      "last_modified_utc": "2026-09-03T23:25:41Z",
+      "sha256_hash": "f9d4e26379bc5efa2abf4d66a5a044ef251ac7b19c3953ed8b2048dc0065fcce"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r3_1_reduction_report.md",
+      "file_size_bytes": 8558,
+      "last_modified_utc": "2026-09-04T15:04:31Z",
+      "sha256_hash": "16132ca5121d81030dc067f71411743714822d58102b6c4343024d8121e3c38f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r3_2_reduction_report.md",
+      "file_size_bytes": 7408,
+      "last_modified_utc": "2026-09-04T21:19:50Z",
+      "sha256_hash": "e3043452d0141bf78c130a6d3cf1367dea0f792148dfde6120b913bc7b2f1cd8"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r3_3_reduction_report.md",
+      "file_size_bytes": 4694,
+      "last_modified_utc": "2026-09-04T21:50:24Z",
+      "sha256_hash": "ca63782ec98a4fa127ece9ded10d93c66bf7b6a687fe7a257d2ae154d6734b42"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/r3_reduction_report.md",
+      "file_size_bytes": 7160,
+      "last_modified_utc": "2026-09-04T14:49:14Z",
+      "sha256_hash": "94a5302b467004a1a1907ee7546f3a0266dbff6d2b351c990ffa01c13df8f277"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/reduction_roadmap.md",
+      "file_size_bytes": 4542,
+      "last_modified_utc": "2026-09-03T22:09:27Z",
+      "sha256_hash": "e7dc661dfe8987e0bb418a4604f3fd952787c6b65a698e944232c3a473c21172"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rigorous_claim_report.md",
+      "file_size_bytes": 3465,
+      "last_modified_utc": "2026-05-06T02:22:30Z",
+      "sha256_hash": "36f91f2bb1bee154f2a4fe2f2968520bb535488260922b2a44208c78f624b6c5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr52_focused_reader_report.md",
+      "file_size_bytes": 2764,
+      "last_modified_utc": "2026-09-03T14:52:42Z",
+      "sha256_hash": "5dde6e93df1a60cb414a5deab9dd6921fafcabafd16f8c9dccb719e345a5ae43"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr52_recurrent_final_report.md",
+      "file_size_bytes": 3509,
+      "last_modified_utc": "2026-09-03T15:34:16Z",
+      "sha256_hash": "91867bae0802a84b6f5bbbd9233f3607bdbf51b87cb17f4fdaf7a321d69ccb9e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr53_bidirectional_recurrent_report.md",
+      "file_size_bytes": 2919,
+      "last_modified_utc": "2026-09-03T16:35:28Z",
+      "sha256_hash": "ee03636ff023978a4c053ecd0fbbbbd3a12d484ddbae4c249efae76069e97326"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr53_definitive_leak_free_report.md",
+      "file_size_bytes": 3785,
+      "last_modified_utc": "2026-09-03T18:23:25Z",
+      "sha256_hash": "bea3059b175d92b87eef5289c8c95c43b6f85ebc2669245cde98feb4bc08e4c7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr53_three_audits_report.md",
+      "file_size_bytes": 4128,
+      "last_modified_utc": "2026-09-03T21:32:53Z",
+      "sha256_hash": "d57b692a59d8e1e9a435c7e30b8ffcec32a33e6d46479d49f7f07bc514968dbd"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rtr_division_audits_report.md",
+      "file_size_bytes": 4965,
+      "last_modified_utc": "2026-09-03T13:52:23Z",
+      "sha256_hash": "56ce056b461c71efea67141a369f42a34117e51543b53d6c3c9bb53c60556e69"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/rule_origin_report.md",
+      "file_size_bytes": 1585,
+      "last_modified_utc": "2026-05-06T02:36:28Z",
+      "sha256_hash": "3ca24810fa6b5c9325508b40e0faa55418f6c90e5670fbbd8fbd9fb44920d22a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/seed_14_tail_diagnostic.md",
+      "file_size_bytes": 9794,
+      "last_modified_utc": "2026-05-08T21:09:52Z",
+      "sha256_hash": "b3c418fd406a7bef4644c8beb79ed54a726069ef4561c7b870b209e066bfa73c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/seed_14_tail_diagnostic_after_local_tie.md",
+      "file_size_bytes": 9809,
+      "last_modified_utc": "2026-05-08T21:34:16Z",
+      "sha256_hash": "6d05d5b97d197206da2d6fa34222465b9d5e074c4f7e191bb8c2379a552202de"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/seed_14_tail_diagnostic_after_local_tie_v2.md",
+      "file_size_bytes": 9813,
+      "last_modified_utc": "2026-05-08T21:35:27Z",
+      "sha256_hash": "aaafbddac960b9b1128d69e6a731fccabe785781dc980b2bb835fbb7e6554249"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/seed_14_tail_diagnostic_after_local_tie_v3.md",
+      "file_size_bytes": 9807,
+      "last_modified_utc": "2026-05-08T21:36:30Z",
+      "sha256_hash": "b572285e718752d2b37959cb15595fc68ceed55aa9cf0aa69e32007b2042e0ec"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/seed_14_tail_diagnostic_after_local_tie_v4.md",
+      "file_size_bytes": 9814,
+      "last_modified_utc": "2026-05-08T21:37:40Z",
+      "sha256_hash": "764d703c45f5c744cd84cbbad52812475e6c96b6887cc53ff5d9b7245563e392"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/selector_sweep_overnight_20260506-035942.md",
+      "file_size_bytes": 665,
+      "last_modified_utc": "2026-05-06T14:35:38Z",
+      "sha256_hash": "13644725f02a037d45b2007f9fc94e6e6f214f0cca73a64913e500c824754760"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/selector_sweep_resume_check.md",
+      "file_size_bytes": 533,
+      "last_modified_utc": "2026-05-06T08:59:26Z",
+      "sha256_hash": "2deb70a6fcd135c63a21692558202520b68bb917f2830ae679d1b0de43879034"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/selector_sweep_smoke.md",
+      "file_size_bytes": 526,
+      "last_modified_utc": "2026-05-06T08:53:06Z",
+      "sha256_hash": "67f0219745460a6d3de00da55d51f3a9d605da9f79494536b52005028cb85907"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/static_vs_adaptive_recheck_report.md",
+      "file_size_bytes": 1976,
+      "last_modified_utc": "2026-09-03T21:52:38Z",
+      "sha256_hash": "eaf7afcf020c01e8dfc00e02767dbcc190418eb3cb47866f6ce25d7032717b45"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/trajectory_action_report.md",
+      "file_size_bytes": 3089,
+      "last_modified_utc": "2026-05-06T03:43:16Z",
+      "sha256_hash": "b5aa7aaa58435800910bd8115e2083b9483a5cb812ab92acbca0a31dba432746"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/outputs/unified_mechanism_report.md",
+      "file_size_bytes": 1597,
+      "last_modified_utc": "2026-05-06T02:28:47Z",
+      "sha256_hash": "922e2e4562d550c26aa5195ee6e6ae44f5205eff76ffc23513d5183d44e523d7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/action_principle_test.py",
+      "file_size_bytes": 6955,
+      "last_modified_utc": "2026-05-06T03:19:36Z",
+      "sha256_hash": "5ab24f6e16b6fc9330fcf56d88eb85d9c573c6b225a56c061bdaa8318e70509a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/autonomous_action_test.py",
+      "file_size_bytes": 12219,
+      "last_modified_utc": "2026-05-06T04:34:25Z",
+      "sha256_hash": "1c77800068b1772938804661df1087de0da994b445d96d3b856fd5e7347dce05"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/bernoulli_fisher.py",
+      "file_size_bytes": 2189,
+      "last_modified_utc": "2026-05-06T01:54:50Z",
+      "sha256_hash": "de4af11b6fa7728c448ea15983e25cf30ced7f5b57006f35f46de85fc7c10daa"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/boundary_data_action_test.py",
+      "file_size_bytes": 25654,
+      "last_modified_utc": "2026-05-09T19:23:44Z",
+      "sha256_hash": "5db539d6b04d976ae2173239a2def4d91c1be2a9368ec5f3aecfdb2acea14f0f"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/boundary_generalization_test.py",
+      "file_size_bytes": 14821,
+      "last_modified_utc": "2026-05-06T05:44:27Z",
+      "sha256_hash": "e0b89623b2163bb7db2731380d2c73e575d1ab66a098d520dffb685276896d52"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/categorical_entropy_flow.py",
+      "file_size_bytes": 3670,
+      "last_modified_utc": "2026-05-06T01:54:50Z",
+      "sha256_hash": "752e481be088baa28093eab3ec19734d16a54d53bf2e1a93f77d55943fb453b8"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/common_trajectory_selector_test.py",
+      "file_size_bytes": 15481,
+      "last_modified_utc": "2026-05-06T08:50:17Z",
+      "sha256_hash": "5d99e930c86fa03fd4c29612d257bbc68382a83710a9d90a41ce836881d15f1d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/constraint_principle_test.py",
+      "file_size_bytes": 5472,
+      "last_modified_utc": "2026-05-06T02:45:14Z",
+      "sha256_hash": "609b9688d2f604765484f11da34c98bbae2fd48d8934a4dcf0a68c220561ef12"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/dirac_continuum_limit_test.py",
+      "file_size_bytes": 4935,
+      "last_modified_utc": "2026-05-06T02:32:56Z",
+      "sha256_hash": "bafae1f270f9ed3e518661ddf25610a7c7aac94f01a2e3549320941c77b27fbc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/dirac_rule_perturbation_test.py",
+      "file_size_bytes": 6663,
+      "last_modified_utc": "2026-05-06T02:36:08Z",
+      "sha256_hash": "98c4f74cf0f8542109e93b8f10173a6c493024709bb03bb0681310e4bdb1d5c9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/directional_prediction_test.py",
+      "file_size_bytes": 5387,
+      "last_modified_utc": "2026-05-06T02:03:11Z",
+      "sha256_hash": "9ee20f8f59c8d90cf9819c9b7a403170d9033cd0c255d71f1abaed7ccc42e005"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/entropic_gravity_toy.py",
+      "file_size_bytes": 3089,
+      "last_modified_utc": "2026-05-06T02:12:22Z",
+      "sha256_hash": "1c12d667994eb796a594759ca2b0d0a806d234d2ec8d2e34306072da316bf03a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/field_update_action_test.py",
+      "file_size_bytes": 11174,
+      "last_modified_utc": "2026-05-06T04:29:02Z",
+      "sha256_hash": "1aa0710808f71aa187c8c4f80a84c2b22086409ef663f0df696f39899e228ca0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/gaussian_fisher_geometry.py",
+      "file_size_bytes": 3025,
+      "last_modified_utc": "2026-05-06T01:54:50Z",
+      "sha256_hash": "8e11760bbfe15eb0803085c4e80a50a43135f74f4d64079208a1fdd4fcd11962"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/integration_proxy_test.py",
+      "file_size_bytes": 4375,
+      "last_modified_utc": "2026-05-06T02:16:00Z",
+      "sha256_hash": "a943935d1505cce6decd2ee5eec51358cd6a08512b28f9a3047794e5f20f151b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/intrinsic_multihorizon_selector_test.py",
+      "file_size_bytes": 72473,
+      "last_modified_utc": "2026-05-10T04:19:14Z",
+      "sha256_hash": "c2d98b4483e2dd1ba67c9c2386f82fe2c6da2d6f4042b082cec91a61aceba3ff"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/intrinsic_no_go_test.py",
+      "file_size_bytes": 13556,
+      "last_modified_utc": "2026-05-06T06:40:39Z",
+      "sha256_hash": "a92fba5e78839a7f54963eb57ee1dcf60cb1134a95e49abb0b3f37fc2667b0c5"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/intrinsic_propagation_selector_test.py",
+      "file_size_bytes": 13644,
+      "last_modified_utc": "2026-05-06T19:34:02Z",
+      "sha256_hash": "c2bacbca2caa6f74f2fab481a2e1cd79124abfa1a04eeded6346728efb3273df"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/intrinsic_scale_selector_test.py",
+      "file_size_bytes": 13495,
+      "last_modified_utc": "2026-05-06T20:49:06Z",
+      "sha256_hash": "3fe1d015febd4fea9c3013b2cb1bf58fe985af285eebc7670a3e539b6e5399f9"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/intrinsic_selector_test.py",
+      "file_size_bytes": 14951,
+      "last_modified_utc": "2026-05-06T05:56:15Z",
+      "sha256_hash": "9bfdcdc5ee3a605a7b7de241187ef88bd37ac34f2898e1e1765e71145ff10876"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/joint_update_action_test.py",
+      "file_size_bytes": 10569,
+      "last_modified_utc": "2026-05-06T04:01:54Z",
+      "sha256_hash": "a3b8e9b47a3e64b30a856e61251056c8cd3f816671c6205c69378a7820b08f66"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/local_light_cone_test.py",
+      "file_size_bytes": 3200,
+      "last_modified_utc": "2026-05-06T02:16:00Z",
+      "sha256_hash": "3afa358a47a9319e1f886e80be9e54d3317e09bd67239a6d4e51cf7456f95e8b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/measurement_update_test.py",
+      "file_size_bytes": 6024,
+      "last_modified_utc": "2026-05-06T02:16:00Z",
+      "sha256_hash": "e2e686d89ff3291b2099a6485aae66c59207fbc264354ab64dac9f1067315426"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/nonlocality_action_test.py",
+      "file_size_bytes": 6156,
+      "last_modified_utc": "2026-05-06T03:33:58Z",
+      "sha256_hash": "432d79e42559cec532d250703b1224909c6e14b998fc77c71b72f8e9edc06b2e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/overnight_excess_mixing_sweep.py",
+      "file_size_bytes": 19621,
+      "last_modified_utc": "2026-05-09T07:12:14Z",
+      "sha256_hash": "652f40aa9d8c29b220bfa30036a27a33b1f44a7b6ecb510e39a28536fc05d5b7"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/overnight_selector_sweep.py",
+      "file_size_bytes": 21778,
+      "last_modified_utc": "2026-05-06T08:58:46Z",
+      "sha256_hash": "dbe74b764ba5e69d1735c64328bad65ceed8f0534a5ad3b2e7345347ac580fb1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/quantum_walk_mechanism_test.py",
+      "file_size_bytes": 6641,
+      "last_modified_utc": "2026-05-06T02:29:46Z",
+      "sha256_hash": "4deff3fb8b597b025eabf3f0f16334df52c9c063b220fc008c4273c637ac04de"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/run_all.py",
+      "file_size_bytes": 2453,
+      "last_modified_utc": "2026-05-06T20:49:06Z",
+      "sha256_hash": "c199680444b11ca953462b0bb28d14db4e8c7405dc851883e8363981a4569bb0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/seed_tail_diagnostic.py",
+      "file_size_bytes": 13469,
+      "last_modified_utc": "2026-05-09T07:12:14Z",
+      "sha256_hash": "faa7a55a69754a03093c0d23e56344ad15ee52478df35f4571ff3d3218ef3e86"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/swap_invariance_test.py",
+      "file_size_bytes": 4068,
+      "last_modified_utc": "2026-05-06T02:07:05Z",
+      "sha256_hash": "c866460dd5ea4052279b8da88f9b684eba93c95ef1e506dbfc63ef80cb29cbc3"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/symmetry_invariant_mass_test.py",
+      "file_size_bytes": 2905,
+      "last_modified_utc": "2026-05-06T02:22:22Z",
+      "sha256_hash": "6be78d0e79730fec07600332dbef016cd2142bae0f7e44fd0cbbed311c8220ca"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/simulations/trajectory_action_test.py",
+      "file_size_bytes": 15995,
+      "last_modified_utc": "2026-05-06T03:44:09Z",
+      "sha256_hash": "adfc3b6d97bc47729abd40cbb22d1e0d8aeaa99f6bf9bc6f352d8898a18041fc"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/action_principle_tests.py",
+      "file_size_bytes": 7615,
+      "last_modified_utc": "2026-05-06T03:19:36Z",
+      "sha256_hash": "1576e3a86936a43246edc245c76b9d412a0d691c9c3e877f787ee8be4fc052bf"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/autonomous_action_tests.py",
+      "file_size_bytes": 6077,
+      "last_modified_utc": "2026-05-06T04:34:25Z",
+      "sha256_hash": "2f61740ac5ccf2de1cc5c754b4059e0d17bf36902206c917312fb76ab3557efe"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/boundary_data_action_tests.py",
+      "file_size_bytes": 8036,
+      "last_modified_utc": "2026-05-06T05:07:33Z",
+      "sha256_hash": "4302f18da9bba49dbcbcf0716f5ed57985e90fb51cb83f86dc32e5bd1e189ad3"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/boundary_generalization_tests.py",
+      "file_size_bytes": 7742,
+      "last_modified_utc": "2026-05-06T05:44:27Z",
+      "sha256_hash": "d620814cdd3a90abbd7d49ef90cd5949399456fbd4c87c3c21e54bbedb6f5dfd"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/closed_loop_tests.py",
+      "file_size_bytes": 26436,
+      "last_modified_utc": "2026-05-06T22:13:40Z",
+      "sha256_hash": "609be3b1b07736509aa88b0c1f68432ba4ac2ef92976e8abc655dab836c94d7b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/common_trajectory_selector_tests.py",
+      "file_size_bytes": 9564,
+      "last_modified_utc": "2026-05-06T08:02:36Z",
+      "sha256_hash": "10cefd959c4f88eb6ec8d48159f6037d0c0bd273cf33d4dd55ad1f75186f78aa"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/constraint_principle_tests.py",
+      "file_size_bytes": 6671,
+      "last_modified_utc": "2026-05-06T02:45:14Z",
+      "sha256_hash": "ef85e576d41b96afa74a62e3e971ae8f3d5807c1aa41ca35a6602eedec863e6e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/continuum_limit_tests.py",
+      "file_size_bytes": 5548,
+      "last_modified_utc": "2026-05-06T02:32:56Z",
+      "sha256_hash": "386869c315b2663659c75177112b18ab6fcc9f1916b3f6dbacd07e750b031346"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/derived_assumption_tests.py",
+      "file_size_bytes": 15974,
+      "last_modified_utc": "2026-05-06T02:25:27Z",
+      "sha256_hash": "8fab71244b72219314bb33a80591b25be378680a6b14852eb1647586ac4bf966"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/field_update_action_tests.py",
+      "file_size_bytes": 7524,
+      "last_modified_utc": "2026-05-06T04:29:02Z",
+      "sha256_hash": "68ee1babf8b26b1fc272a1148c4a82d961da2d77309ab7532b47ae111b58cd18"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_common_data_selector_transfer_tests.py",
+      "file_size_bytes": 11713,
+      "last_modified_utc": "2026-05-10T02:51:25Z",
+      "sha256_hash": "67d67f13bf856c06dbbd83a5c998e1ca22277400767f4885233b9962b77a88f0"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_adversarial_tests.py",
+      "file_size_bytes": 25455,
+      "last_modified_utc": "2026-05-09T07:50:34Z",
+      "sha256_hash": "d0fb86fe44f163685e5dfb62da3dd0639cb2a58f39aef8c48e5d822a7475de1a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_frontier_tests.py",
+      "file_size_bytes": 30608,
+      "last_modified_utc": "2026-05-09T02:28:17Z",
+      "sha256_hash": "ee17f9705376672589129423473820f6b1ae5f0018207fc263ad36199b21c5f8"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_holdout_tests.py",
+      "file_size_bytes": 11498,
+      "last_modified_utc": "2026-05-09T07:12:14Z",
+      "sha256_hash": "65123c9971e9e28173568ca824caa023cc992ad1eb04002839ff69c79cfb599a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_phase_null_tradeoff_tests.py",
+      "file_size_bytes": 14461,
+      "last_modified_utc": "2026-05-09T08:53:44Z",
+      "sha256_hash": "a5e1e73e07e845aaf37584c3f06541c18a105379f86aa6126e110ad69a3ca381"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_redesign_tests.py",
+      "file_size_bytes": 17874,
+      "last_modified_utc": "2026-05-09T03:02:48Z",
+      "sha256_hash": "f25fdb9f85971308d72498ab391b762f8bdc9a2c6fd0f20b22f28f02682a5684"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_robustness_tests.py",
+      "file_size_bytes": 14120,
+      "last_modified_utc": "2026-05-08T04:41:15Z",
+      "sha256_hash": "bd1d83981301b08320696fc7d79d494a8dedc4082df344cd16d36edb23ca5f82"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_rule_family_transfer_tests.py",
+      "file_size_bytes": 13910,
+      "last_modified_utc": "2026-05-09T08:32:51Z",
+      "sha256_hash": "9d5614c820439d79328622b9df36f4b9dd3e41fed98b9764114209678d2056f2"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_tests.py",
+      "file_size_bytes": 11763,
+      "last_modified_utc": "2026-05-07T23:32:36Z",
+      "sha256_hash": "4a729571b29dd8957e19b8b092a9284405ac740173e14f4b4357c38be1f4e126"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_excess_mixing_warning_followup_tests.py",
+      "file_size_bytes": 7315,
+      "last_modified_utc": "2026-05-09T07:50:34Z",
+      "sha256_hash": "3c2f326361adc3be25c3aa37c4728ab9fd0841a7f958882e1d5ffa1e92fb2e69"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_selector_bias_audit_tests.py",
+      "file_size_bytes": 20357,
+      "last_modified_utc": "2026-05-09T19:38:45Z",
+      "sha256_hash": "bf61c546b519440320785b276c9f4e65c78c248d0c35154be9e5b08c29f2e196"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_selector_robustness_tests.py",
+      "file_size_bytes": 15879,
+      "last_modified_utc": "2026-05-07T22:20:27Z",
+      "sha256_hash": "b16efa69f07d30ad6ba397a5e2b3cbca223f4c103d291e69bf35e4e63f8d9248"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_selector_tests.py",
+      "file_size_bytes": 7346,
+      "last_modified_utc": "2026-05-07T19:25:44Z",
+      "sha256_hash": "1b8c89c670beea9007a725786b167d2cd1f38124cb98ce2b427d3b981594eeb1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_cross_spacing_teacher_guided_recovery_tests.py",
+      "file_size_bytes": 14285,
+      "last_modified_utc": "2026-05-10T08:23:13Z",
+      "sha256_hash": "cb0e8beaf7d6c01fd075d694e45c1641f67d468d7f629056279d53db14c5f65b"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_multihorizon_selector_tests.py",
+      "file_size_bytes": 8450,
+      "last_modified_utc": "2026-05-07T02:58:37Z",
+      "sha256_hash": "46094ab3d38370662fb25f6fc3c4791e70d395ff23857ce1343714276952318a"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_no_go_tests.py",
+      "file_size_bytes": 10125,
+      "last_modified_utc": "2026-05-06T06:40:39Z",
+      "sha256_hash": "165ba1dc3dafa56011e3138672ef6f31ac3a03a91fb31a4b73eae5173b7263f1"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_propagation_selector_tests.py",
+      "file_size_bytes": 9362,
+      "last_modified_utc": "2026-05-06T19:34:02Z",
+      "sha256_hash": "2743d1d5d049d743cbdae3ee90a6fbc7b7ee9b5f9cfbfab40f5bbf92687570a3"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_scale_selector_robustness_tests.py",
+      "file_size_bytes": 13569,
+      "last_modified_utc": "2026-05-06T23:32:33Z",
+      "sha256_hash": "ce38924a82c5dfd3c9a7d61b540d21e365b9f7d09572823d147eaeda793c3629"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_scale_selector_tests.py",
+      "file_size_bytes": 9918,
+      "last_modified_utc": "2026-05-06T20:49:06Z",
+      "sha256_hash": "8b3361ba61fc631cfb3a7fd1864bd3d14094d1cd5452ba790f6f4145bd21126d"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/intrinsic_selector_tests.py",
+      "file_size_bytes": 8731,
+      "last_modified_utc": "2026-05-06T05:56:15Z",
+      "sha256_hash": "6b684a21fa91114f79ac1864c39ff7a180ac0346858fca9f0d58331c8186b855"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/joint_update_action_tests.py",
+      "file_size_bytes": 7323,
+      "last_modified_utc": "2026-05-06T04:01:54Z",
+      "sha256_hash": "3741603b246686bda80f4b4f31747c3c27c9ed759f77ba82a55f058e7e209313"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/nonlocality_action_tests.py",
+      "file_size_bytes": 7571,
+      "last_modified_utc": "2026-05-06T03:33:58Z",
+      "sha256_hash": "bbe89256cdda68e272e3d1829d23268208a57254542630aba614a7c2f35f2500"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/rigorous_claim_tests.py",
+      "file_size_bytes": 18997,
+      "last_modified_utc": "2026-05-06T02:22:50Z",
+      "sha256_hash": "fd146b35e094d0b9e763dd23ef607d71d85c10fc3d5cd52e7fd46c7e7b8cca2e"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/rule_origin_tests.py",
+      "file_size_bytes": 5372,
+      "last_modified_utc": "2026-05-06T02:36:27Z",
+      "sha256_hash": "f77c6f97e1080ca57e87a601b2741e0e67a5b2470d07e03ca536ec7bb98d897c"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/trajectory_action_tests.py",
+      "file_size_bytes": 11052,
+      "last_modified_utc": "2026-05-06T03:44:09Z",
+      "sha256_hash": "d0560c26ef4a3bc227bf3c363385b2c1c2d2007c81e0c4a45c7b459ef8c70656"
+    },
+    {
+      "project": "project_2521",
+      "relative_path": "c:/Users/jorge/2521/validation/unified_mechanism_tests.py",
+      "file_size_bytes": 6412,
+      "last_modified_utc": "2026-05-06T02:29:46Z",
+      "sha256_hash": "47617cc99640df38ad0f3c13e086861209fbeba6a55db637339fd134669b974c"
+    }
+  ]
+}

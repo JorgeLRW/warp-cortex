@@ -12,6 +12,8 @@ setup(
         "cortex_benchmarks.*",
         "cortex_resources",
         "cortex_resources.*",
+        "cortex_scorecard",
+        "cortex_scorecard.*",
     ]),
     py_modules=[
         "cortex_engine",
@@ -30,6 +32,8 @@ setup(
         "console_scripts": [
             "warp-cortex-live=cortex_scripts.council_live:main",
             "warp-cortex-gsm8k=cortex_benchmarks.benchmark_cortex_gsm8k:main",
+            "warp-cortex-manifold=cortex_benchmarks.benchmark_shared_manifold:main",
+            "warp-cortex-scorecard=cortex_scorecard.cli:main",
         ]
     },
 )

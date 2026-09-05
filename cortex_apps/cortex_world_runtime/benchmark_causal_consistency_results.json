@@ -1,0 +1,38 @@
+{
+  "causal_consistency_cuts": {
+    "trials": 50,
+    "naive_anomaly_rate": 100.0,
+    "epoch_anomaly_rate": 0.0,
+    "causal_cut_verified": true
+  },
+  "multi_shard_transactions": {
+    "2": {
+      "touched_shards_k": 2,
+      "latency_p50_ms": 0.0031999952625483274,
+      "latency_p95_ms": 0.003599999035941437,
+      "abort_rate_pct": 0.0,
+      "atomicity_violations": 0
+    },
+    "4": {
+      "touched_shards_k": 4,
+      "latency_p50_ms": 0.005099995178170502,
+      "latency_p95_ms": 0.008399991929763928,
+      "abort_rate_pct": 0.0,
+      "atomicity_violations": 0
+    },
+    "8": {
+      "touched_shards_k": 8,
+      "latency_p50_ms": 0.009099996532313526,
+      "latency_p95_ms": 0.0111000110337045,
+      "abort_rate_pct": 0.0,
+      "atomicity_violations": 0
+    },
+    "16": {
+      "touched_shards_k": 16,
+      "latency_p50_ms": 0.01580000389367342,
+      "latency_p95_ms": 0.020599996059900143,
+      "abort_rate_pct": 0.0,
+      "atomicity_violations": 0
+    }
+  }
+}

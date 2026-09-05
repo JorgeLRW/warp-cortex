@@ -7,7 +7,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
-from cortex_core.hf_utils import prepare_hf_cache
+from cortex_core.hf_utils import prepare_hf_cache, resolve_local_model_source
 
 print('=' * 60)
 print('TEST 1: Semantic Router')
@@ -31,13 +31,23 @@ print(f'[PASS] Classifier head: {sum(p.numel() for p in head.parameters())} para
 # Test 1c: Bootstrap with a real model (Qwen 0.5B)
 from transformers import AutoModelForCausalLM, AutoTokenizer
 cache_dir = prepare_hf_cache(ROOT_DIR)
+model_source, local_files_only = resolve_local_model_source('Qwen/Qwen2.5-0.5B-Instruct', cache_dir)
+model_kwargs = {
+    'cache_dir': cache_dir,
+    'dtype': torch.float16,
+    'device_map': 'auto',
+}
+if local_files_only:
+    model_kwargs['local_files_only'] = True
 model = AutoModelForCausalLM.from_pretrained(
-    'Qwen/Qwen2.5-0.5B-Instruct',
-    cache_dir=cache_dir,
-    dtype=torch.float16,
-    device_map='auto',
+    model_source,
+    **model_kwargs,
 )
-tokenizer = AutoTokenizer.from_pretrained('Qwen/Qwen2.5-0.5B-Instruct', cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(
+    model_source,
+    cache_dir=cache_dir,
+    local_files_only=local_files_only,
+)
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 router2 = CortexRouter()

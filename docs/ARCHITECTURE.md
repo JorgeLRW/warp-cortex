@@ -1,13 +1,13 @@
 # WARP CORTEX: Low-Level Architecture Reference
 
-This document details the internal mechanics of the Warp Cortex engine and how it supports main-model-first orchestration with on-demand worker concurrency on a single GPU.
+This document details the internal mechanics of the Warp Cortex engine and how it supports main-model-first orchestration with entropy-triggered, on-demand worker concurrency on a single GPU.
 
 ## Core Components
 
 1.  **The River & Stream Topology** (Main/Side Streams)
 2.  **The Prism** (Singleton Weight Sharing)
 3.  **The Topological Synapse** (Shared Memory)
-4.  **The Cortex Router** (Dynamic Delegation)
+4.  **Entropy-Guided Delegation** (EntropyRouter + Cortex Router)
 5.  **The Validation Gate** (Quality Control)
 6.  **Referential Injection** (Non-Intrusive Memory Update)
 
@@ -29,7 +29,7 @@ We use a **Singleton Model Pattern**. The physical weights (FP16/INT8) are loade
 *   **Worker Threads**: Share the exact same weight pointers. Zero additional weight memory.
 *   **VRAM Usage**: Constant $O(1)$ for weights, regardless of agent count.
 
-**Result**: On a 24GB GPU, you can keep 100+ worker threads available simultaneously.
+**Result**: On an RTX 4090 Laptop GPU, you can keep 100+ worker threads available simultaneously.
 
 ---
 
@@ -50,24 +50,41 @@ Given the Main Agent's query state $Q_t$ at timestep $t$:
 3.  **Storage**: Store these $k$ tokens in a shared ring buffer accessible to all Side Agents.
 4.  **Access**: Side Agents attend *only* to the Synapse, not the full history.
 
+This runtime policy is heuristic, but it is theory-guided rather than arbitrary. The broader attention-geometry work around WarpOS argues that attention is driven by deviations from the key mean and that useful score structure often concentrates in a low-dimensional, query-conditioned subspace. That means the landmark budget should preserve salient, non-redundant deviations and bridge points rather than average background context. The current synapse does not implement the full spectral projector from that research line; it uses top-$k$ salience plus lightweight diversity pressure as a practical approximation.
+
 **Memory Savings**: Reduces per-agent cost from ~1GB (32k context) to ~10MB (64 landmarks).
 
 ---
 
-## 3. The Cortex Router (Explicit Delegation)
+## 3. Entropy-Guided Delegation
 
-Warp Cortex is no longer designed around a fixed council or always-on worker fan-out. The main model remains in control and explicitly emits delegation blocks only when a narrow subtask should be offloaded.
+Warp Cortex is not designed around a fixed council or always-on worker fan-out. The main model stays on the direct path by default, and the runtime escalates only when there is evidence that more reasoning is warranted.
 
-### How It Works
+### Silent Trigger Path
+
+The primary control mechanism is the `EntropyRouter`, which monitors attention disagreement and logit entropy on every decoding step. Let $s_t$ be the head-spread signal and $\ell_t$ the logit-entropy signal at step $t$.
+
+$$z^{spread}_t = \frac{s_t - \mu_s}{\sigma_s}, \qquad z^{logit}_t = \frac{\ell_t - \mu_\ell}{\sigma_\ell}$$
+
+After warmup, the runtime delegates when one of these z-scores rises above its configured threshold. This means the trigger is relative to the model's own recent baseline, not a hardcoded universal entropy cutoff.
+
+An optional learned gate can sit on top of the frozen last-token hidden state:
+
+$$g_t = \sigma(w^\top h_t + b)$$
+
+In the runtime, delegation can require both the entropy trigger and gate approval. Because the gate is trained only on detached hidden states, the main model weights and existing KV caches remain valid.
+
+### Dispatch Flow
 
 1.  **Direct Path First**: The main model attempts to solve the problem itself.
-2.  **Explicit Trigger**: If it wants help, it emits a structured block such as `[DELEGATE:math] ... [/DELEGATE]`.
-3.  **Just-in-Time Worker**: The runtime dispatches only that requested worker task.
-4.  **Result Injection**: The worker result is returned to the next model turn as focused evidence.
+2.  **Entropy Spike**: The router detects internal uncertainty from the current forward pass.
+3.  **Expert Selection**: The runtime maps the local hidden state and partial text to a worker kind such as `math`, `code`, `search`, or `llm`.
+4.  **Just-in-Time Worker**: Only the needed worker task is launched.
+5.  **Result Injection**: The worker result is returned to the next model turn as focused evidence.
 
-**Example**:
-- Main-model output: `"I should check the arithmetic. [DELEGATE:math] 17 * 23 [/DELEGATE]"`
-- Runtime action: Execute the math worker and feed `391` back into the next turn.
+### Explicit Compatibility Path
+
+Warp Cortex can also run in an explicit mode where the model emits a structured block such as `[DELEGATE:math] ... [/DELEGATE]`. That path is useful for controlled prompting, but the distinctive routing idea in Warp Cortex is the silent, uncertainty-triggered path.
 
 ---
 
@@ -117,7 +134,7 @@ We utilize **CUDA Streams** to achieve hardware-level parallelism. Python thread
     *   *Stream: `cuda.Stream(priority=High)`*
 
 2.  **Cycle 1 (Optional Worker Dispatch)**:
-    *   The main model emits an explicit delegation block only if a narrow subtask should be offloaded.
+    *   The runtime detects an entropy spike or receives an explicit delegation request.
     *   **Action**: A focused worker reads the compact context it needs and executes the requested task.
     *   *Stream: `cuda.Stream(priority=Medium)`*
 
@@ -130,7 +147,7 @@ We utilize **CUDA Streams** to achieve hardware-level parallelism. Python thread
 
 ## 7. Scalability Math
 
-Why can we fit 100 worker tasks on a 24GB GPU?
+Why can we fit 100 worker tasks on a laptop RTX 4090?
 
 **Empirical Benchmark Results** (Qwen2.5-0.5B-Instruct):
 
@@ -143,8 +160,8 @@ Why can we fit 100 worker tasks on a 24GB GPU?
 
 **Total Cost per Worker Slot**: ~13 MB
 
-$$\text{Capacity (24 GB)} = \frac{24 - 0.93}{0.013} \approx 1,775 \text{ Agents}$$
+$$\text{Capacity (16 GB)} = \frac{16 - 0.93}{0.013} \approx 1,159 \text{ Agents}$$
 
-**Practical Limit**: ~1,000 agents before compute latency becomes the bottleneck.
+**Practical Limit**: Hundreds of agents before compute latency becomes the bottleneck.
 
 *Note: We are Compute Bound, not Memory Bound.*

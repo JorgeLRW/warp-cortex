@@ -36,6 +36,13 @@ adaptive_engine:
     spread_z_threshold: 2.0
     logit_z_threshold: 2.5
     warmup_steps: 8
+  learned_gate:
+    enabled: false
+    threshold: 0.5
+    lr: 0.001
+    warmup_steps: 64
+    online_learning: true
+    checkpoint: ""
 
 orchestrator:
   max_rounds: 3
@@ -44,6 +51,13 @@ orchestrator:
   llm_workers: false
   stream_inject: false
   async_delegate: false
+
+shared_manifold:
+  store_path: ""
+  cache_key: default
+  hot_capacity: 8
+  background_refresh_seconds: 2.0
+  prefer_hot_cache_for_workers: true
 
 benchmarks:
   gsm8k:

@@ -40,7 +40,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
-from cortex_core.hf_utils import prepare_hf_cache
+from cortex_core.hf_utils import prepare_hf_cache, resolve_local_model_source
 from cortex_core.settings import get_setting, load_settings, resolve_project_path
 
 # ── ANSI ─────────────────────────────────────────────────────────────
@@ -68,7 +68,12 @@ class LocalBackend:
         from transformers import AutoModelForCausalLM, AutoTokenizer
         print(f"{C_DIM}Loading {model_id}...{C_RESET}")
         cache_dir = prepare_hf_cache(ROOT_DIR, preferred_root=cache_root)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=cache_dir)
+        model_source, local_files_only = resolve_local_model_source(model_id, cache_dir)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_source,
+            cache_dir=cache_dir,
+            local_files_only=local_files_only,
+        )
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
         self.tokenizer.padding_side = "left"
@@ -83,7 +88,9 @@ class LocalBackend:
         }
         if runtime_device.startswith("cuda"):
             model_kwargs["device_map"] = "auto"
-        self.model = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
+        if local_files_only:
+            model_kwargs["local_files_only"] = True
+        self.model = AutoModelForCausalLM.from_pretrained(model_source, **model_kwargs)
         if not runtime_device.startswith("cuda"):
             self.model.to(runtime_device)
         self.model.eval()

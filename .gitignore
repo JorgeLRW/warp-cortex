@@ -43,6 +43,20 @@ local_artifacts/
 *.log
 *.csv
 
+# Weights / checkpoints / caches (never commit)
+None/
+.hf_cache/
+.huggingface/
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.onnx
+*.gguf
+*.bin
+*.npy
+.pytest_cache/
+
 # Local Config
 config/settings.local.yaml
 config/*.secrets.yaml

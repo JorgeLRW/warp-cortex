@@ -1,0 +1,205 @@
+{
+  "kill_test_1_semantic_recall": {
+    "exhaustive_p50": 1.5166000011959113,
+    "exhaustive_p95": 1.9770350052567658,
+    "budgets": {
+      "32": {
+        "candidate_budget": 32,
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.4,
+        "recall_at_10": 0.4,
+        "latency_p50": 0.4345500055933371,
+        "latency_p95": 0.47640999982831994
+      },
+      "64": {
+        "candidate_budget": 64,
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.4,
+        "recall_at_10": 0.4,
+        "latency_p50": 0.709500010998454,
+        "latency_p95": 0.7468750038242433
+      },
+      "128": {
+        "candidate_budget": 128,
+        "recall_at_1": 0.0,
+        "recall_at_5": 0.4,
+        "recall_at_10": 0.8,
+        "latency_p50": 1.2461000005714595,
+        "latency_p95": 1.4082249952480197
+      },
+      "256": {
+        "candidate_budget": 256,
+        "recall_at_1": 6.0,
+        "recall_at_5": 3.6000000000000005,
+        "recall_at_10": 3.4000000000000004,
+        "latency_p50": 2.1846500094397925,
+        "latency_p95": 2.4662950083438773
+      },
+      "512": {
+        "candidate_budget": 512,
+        "recall_at_1": 10.0,
+        "recall_at_5": 5.6,
+        "recall_at_10": 5.6,
+        "latency_p50": 4.322000000684056,
+        "latency_p95": 4.6964700006356
+      }
+    }
+  },
+  "kill_test_2_ai_tick_saturation": {
+    "32": {
+      "agent_count": 32,
+      "tick_duration_ms": 16.584500001044944,
+      "service_qps": 1929.5124964867055,
+      "fits_in_50ms_tick": true
+    },
+    "128": {
+      "agent_count": 128,
+      "tick_duration_ms": 57.58500000229105,
+      "service_qps": 2222.8010765808363,
+      "fits_in_50ms_tick": false
+    },
+    "512": {
+      "agent_count": 512,
+      "tick_duration_ms": 226.91009999834932,
+      "service_qps": 2256.40022195453,
+      "fits_in_50ms_tick": false
+    },
+    "1024": {
+      "agent_count": 1024,
+      "tick_duration_ms": 412.478900005226,
+      "service_qps": 2482.5512286495773,
+      "fits_in_50ms_tick": false
+    },
+    "2048": {
+      "agent_count": 2048,
+      "tick_duration_ms": 909.9789000028977,
+      "service_qps": 2250.6016348219487,
+      "fits_in_50ms_tick": false
+    }
+  },
+  "kill_test_3_batched_frame_ingestion": {
+    "results": {
+      "1": {
+        "events_per_frame": 1,
+        "p50_ms": 0.00224999530473724,
+        "p95_ms": 0.0029999937396496534,
+        "p99_ms": 0.007485998212359828,
+        "throughput_events_sec": 444445.37190569047,
+        "fits_in_1ms_budget": true
+      },
+      "10": {
+        "events_per_frame": 10,
+        "p50_ms": 0.009350005711894482,
+        "p95_ms": 0.01291999651584774,
+        "p99_ms": 0.013606001739390193,
+        "throughput_events_sec": 1069518.0632113023,
+        "fits_in_1ms_budget": true
+      },
+      "100": {
+        "events_per_frame": 100,
+        "p50_ms": 0.07294999522855505,
+        "p95_ms": 0.11804499517893417,
+        "p99_ms": 0.12697299898718484,
+        "throughput_events_sec": 1370802.0087828145,
+        "fits_in_1ms_budget": true
+      },
+      "500": {
+        "events_per_frame": 500,
+        "p50_ms": 0.3450500007602386,
+        "p95_ms": 0.5418249944341368,
+        "p99_ms": 0.6315980039653367,
+        "throughput_events_sec": 1449065.34965473,
+        "fits_in_1ms_budget": true
+      },
+      "1000": {
+        "events_per_frame": 1000,
+        "p50_ms": 0.7557499993708916,
+        "p95_ms": 1.2580150061694433,
+        "p99_ms": 2.552904994226992,
+        "throughput_events_sec": 1323188.8863148254,
+        "fits_in_1ms_budget": false
+      },
+      "2500": {
+        "events_per_frame": 2500,
+        "p50_ms": 1.892300002509728,
+        "p95_ms": 2.451375001692213,
+        "p99_ms": 2.6760460028890516,
+        "throughput_events_sec": 1321143.580132267,
+        "fits_in_1ms_budget": false
+      },
+      "5000": {
+        "events_per_frame": 5000,
+        "p50_ms": 4.179800009296741,
+        "p95_ms": 5.171169999084668,
+        "p99_ms": 5.674914992414413,
+        "throughput_events_sec": 1196229.4820036758,
+        "fits_in_1ms_budget": false
+      },
+      "10000": {
+        "events_per_frame": 10000,
+        "p50_ms": 7.685949996812269,
+        "p95_ms": 10.435575003066331,
+        "p99_ms": 11.72705300123198,
+        "throughput_events_sec": 1301075.3393071094,
+        "fits_in_1ms_budget": false
+      }
+    },
+    "e_star": 500
+  },
+  "kill_test_4_sharded_writes": {
+    "R=1_A=128": {
+      "regions": 1,
+      "agents": 128,
+      "commits_attempted": 500,
+      "commits_succeeded": 4,
+      "conflicts": 496,
+      "conflict_rate_pct": 99.2,
+      "commit_throughput_sec": 3281.378184365532
+    },
+    "R=1_A=512": {
+      "regions": 1,
+      "agents": 512,
+      "commits_attempted": 500,
+      "commits_succeeded": 1,
+      "conflicts": 499,
+      "conflict_rate_pct": 99.8,
+      "commit_throughput_sec": 843.0281499449353
+    },
+    "R=16_A=128": {
+      "regions": 16,
+      "agents": 128,
+      "commits_attempted": 500,
+      "commits_succeeded": 64,
+      "conflicts": 436,
+      "conflict_rate_pct": 87.2,
+      "commit_throughput_sec": 50854.19177551185
+    },
+    "R=16_A=512": {
+      "regions": 16,
+      "agents": 512,
+      "commits_attempted": 500,
+      "commits_succeeded": 16,
+      "conflicts": 484,
+      "conflict_rate_pct": 96.8,
+      "commit_throughput_sec": 14463.930414325989
+    },
+    "R=64_A=128": {
+      "regions": 64,
+      "agents": 128,
+      "commits_attempted": 500,
+      "commits_succeeded": 256,
+      "conflicts": 244,
+      "conflict_rate_pct": 48.8,
+      "commit_throughput_sec": 113596.02397209777
+    },
+    "R=64_A=512": {
+      "regions": 64,
+      "agents": 512,
+      "commits_attempted": 500,
+      "commits_succeeded": 64,
+      "conflicts": 436,
+      "conflict_rate_pct": 87.2,
+      "commit_throughput_sec": 40274.36931722571
+    }
+  }
+}

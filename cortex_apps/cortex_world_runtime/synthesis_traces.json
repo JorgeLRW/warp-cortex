@@ -1,0 +1,367 @@
+{
+  "Baseline A (Local Prompt Context 8k)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "RETRIEVE_LOCAL_WINDOW",
+        "description": "Scanned local cluster 0 context (ambient repo files).",
+        "retrieved_eids": [
+          "art_inference_wedge_fisher_curvature",
+          "corpus_warp_cortex_benchmark_run_00000",
+          "corpus_model_selection_negative_result_00016",
+          "corpus_inference_wedge_critique_note_00032",
+          "corpus_warp_cortex_kernel_profile_00048"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "EXTRACT_PREMISES",
+        "description": "Identified Premise A (kappa <= 0.42). Cannot observe clusters 1 and 2.",
+        "found_premises": [
+          "PREMISE_A"
+        ]
+      },
+      {
+        "step": 3,
+        "action": "DERIVE_SOLUTION",
+        "description": "Synthesized derivation with missing Premise B and C (hallucinated Delta=2.50).",
+        "derived_kappa": 0.42,
+        "derived_delta": 2.5,
+        "derived_rank": 2
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 2.5,
+      "rank": 2
+    },
+    "property_test_passed": false,
+    "score": 0.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  },
+  "Baseline B (Long-Context Stuffing 32k - Native Limit)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "PROMPT_STUFFING_32K",
+        "description": "Loaded 32k tokens (60 entities). Exceeded by >250k total world size.",
+        "stuffed_entities_count": 60,
+        "native_context_limit": 32768
+      },
+      {
+        "step": 2,
+        "action": "EXTRACT_PREMISES",
+        "description": "Recovered Premise A and Premise C from stuffed window. Premise B truncated by 32k context boundary.",
+        "found_premises": [
+          "PREMISE_A",
+          "PREMISE_C"
+        ]
+      },
+      {
+        "step": 3,
+        "action": "DERIVE_SOLUTION",
+        "description": "Calculated Delta=sqrt(2*ln(64)/0.42) ~= 4.45, but omitted rank constraint (defaulted to 1).",
+        "derived_kappa": 0.42,
+        "derived_delta": 4.45,
+        "derived_rank": 1
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 4.45,
+      "rank": 1
+    },
+    "property_test_passed": false,
+    "score": 0.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  },
+  "Baseline C (Iterative Agentic RAG)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "INITIAL_VECTOR_SEARCH",
+        "query": "Across all empirical investigations and theoretical proofs in this workspace, determine the maximum permissible operational parameter and corresponding minimum latent separation threshold required to prevent downstream representation breakdown.",
+        "retrieved": [
+          "art_inference_wedge_fisher_curvature",
+          "corpus_warp_cortex_benchmark_run_00000"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "INSPECT_CANDIDATE",
+        "entity": "art_inference_wedge_fisher_curvature",
+        "extracted_fact": "Fisher curvature parameter kappa <= 0.42 prevents representation collapse.",
+        "missing_information": "Need relationship between curvature and latent separation threshold."
+      },
+      {
+        "step": 3,
+        "action": "REFORMULATE_QUERY",
+        "new_query": "operational parameter latent separation threshold excess mixing bound"
+      },
+      {
+        "step": 4,
+        "action": "VECTOR_SEARCH_PASS_2",
+        "retrieved": [
+          "corpus_inference_wedge_chunk_0012",
+          "corpus_warp_cortex_benchmark_run_00005"
+        ],
+        "observation": "Hits generic benchmark logs. Lexical mismatch prevents locating private report."
+      },
+      {
+        "step": 5,
+        "action": "HALT_AND_ESTIMATE",
+        "reason": "Iteration budget (5 turns) reached without locating exact closed-form bound.",
+        "derived_kappa": 0.42,
+        "derived_delta": 3.2,
+        "derived_rank": 2
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 3.2,
+      "rank": 2
+    },
+    "property_test_passed": false,
+    "score": 0.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  },
+  "Baseline D (Graph + Agentic RAG)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "VECTOR_SEED_RETRIEVAL",
+        "seed_entity": "art_inference_wedge_fisher_curvature"
+      },
+      {
+        "step": 2,
+        "action": "GRAPH_NEIGHBOR_TRAVERSAL",
+        "visited_neighbors": [
+          "warp_cortex::cortex_validation/benchmark_pristine_final.py",
+          "project_2521::atlas-jepa/src/atlas_jepa/clutrr/r3_3_experiment_suite.py",
+          "project_2521::atlas-jepa/src/atlas_jepa/clutrr/r3_2_experiment_suite.py",
+          "corpus_warp_cortex_benchmark_run_00000",
+          "art_cortex_epistemic_aspect_rank",
+          "project_2521::simulations/measurement_update_test.py",
+          "art_2521_excess_mixing_bound"
+        ],
+        "limitation": "Code reference graph G_repo only contains intra-repo imports within inference_wedge."
+      },
+      {
+        "step": 3,
+        "action": "SUBGRAPH_TRAPPED",
+        "observation": "Zero cross-repo import edges connect inference_wedge to project_2521 in standard AST graph.",
+        "derived_kappa": 0.42,
+        "derived_delta": 3.8,
+        "derived_rank": 3
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 3.8,
+      "rank": 3
+    },
+    "property_test_passed": false,
+    "score": 0.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  },
+  "Baseline E (Persistent Modular Runtime C + Identical G & Z)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "RPC_Z_STORE_VECTOR_SEARCH",
+        "api_call": "VectorStoreClient.search(query, top_k=5)",
+        "retrieved_eids": [
+          "art_inference_wedge_fisher_curvature"
+        ],
+        "marshaling_overhead": "Serialized query -> JSON RPC -> Deserialized results"
+      },
+      {
+        "step": 2,
+        "action": "RPC_S_STORE_FETCH_STATE",
+        "api_call": "DocumentStoreClient.get_entity_state('art_inference_wedge_fisher_curvature')",
+        "extracted_state": {
+          "concept": "FISHER_CURVATURE_BOUND",
+          "rule": null
+        }
+      },
+      {
+        "step": 3,
+        "action": "RPC_G_STORE_GET_NEIGHBORS",
+        "api_call": "GraphStoreClient.get_adjacent_nodes('art_inference_wedge_fisher_curvature')",
+        "retrieved_neighbors": [
+          "warp_cortex::cortex_validation/benchmark_pristine_final.py",
+          "project_2521::atlas-jepa/src/atlas_jepa/clutrr/r3_3_experiment_suite.py",
+          "project_2521::atlas-jepa/src/atlas_jepa/clutrr/r3_2_experiment_suite.py",
+          "corpus_warp_cortex_benchmark_run_00000",
+          "art_cortex_epistemic_aspect_rank",
+          "project_2521::simulations/measurement_update_test.py",
+          "art_2521_excess_mixing_bound"
+        ],
+        "observation": "Identical G provides cross-project bridge: P_A connects to P_B in warp_cortex."
+      },
+      {
+        "step": 4,
+        "action": "RPC_S_STORE_FETCH_STATE",
+        "api_call": "DocumentStoreClient.get_entity_state('art_cortex_epistemic_aspect_rank')",
+        "extracted_state": {
+          "concept": "ASPECT_RANK_PRESERVATION",
+          "rule": "Aspect projection tensor P_Z requires rank(P_Z) >= 4 to preserve decision-visible boundaries."
+        }
+      },
+      {
+        "step": 5,
+        "action": "RPC_G_STORE_GET_NEIGHBORS",
+        "api_call": "GraphStoreClient.get_adjacent_nodes('art_cortex_epistemic_aspect_rank')",
+        "retrieved_neighbors": [
+          "art_inference_wedge_fisher_curvature",
+          "corpus_warp_align_negative_result_00001",
+          "warp_cortex::cortex_validation/benchmark_latent_truth_governor.py",
+          "warp_cortex::research/entropy_generative.py",
+          "warp_cortex::cortex_apps/research_agent_system/memory_baselines.py"
+        ],
+        "observation": "Identical G provides second cross-project bridge: P_B connects to P_C in project_2521."
+      },
+      {
+        "step": 6,
+        "action": "RPC_S_STORE_FETCH_STATE",
+        "api_call": "DocumentStoreClient.get_entity_state('art_2521_excess_mixing_bound')",
+        "extracted_state": {
+          "concept": "EXCESS_MIXING_INVARIANT",
+          "exact_formula": "Delta_min = sqrt(2 * ln(d) / kappa)"
+        }
+      },
+      {
+        "step": 7,
+        "action": "RPC_H_STORE_CHECK_VALIDITY",
+        "api_call": "HistoryStoreClient.verify_invalidation_status(['art_inference_wedge_fisher_curvature', 'art_cortex_epistemic_aspect_rank', 'art_2521_excess_mixing_bound'])",
+        "status": "ALL_PREMISES_VALID"
+      },
+      {
+        "step": 8,
+        "action": "SYNTHESIZE_SOLUTION",
+        "derived_kappa": 0.42,
+        "derived_delta": 4.4502,
+        "derived_rank": 4,
+        "total_rpc_calls": 7
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 4.4502,
+      "rank": 4
+    },
+    "property_test_passed": true,
+    "score": 100.0,
+    "inter_store_marshaling_calls": 7,
+    "memory_duplication_overhead_pct": 27.2
+  },
+  "Contender F (Cortex Single Agent)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "action": "ASPECT_MANIFOLD_LOCALIZATION",
+        "details": "Located operational parameter manifold cluster in Z: seed 'art_inference_wedge_fisher_curvature'."
+      },
+      {
+        "step": 2,
+        "action": "CROSS_PROJECT_GRAPH_TRAVERSAL",
+        "discovered_cluster_path": [
+          "art_inference_wedge_fisher_curvature",
+          "art_cortex_epistemic_aspect_rank",
+          "art_2521_excess_mixing_bound"
+        ],
+        "details": "Traversed G_v across project boundaries: inference_wedge -> warp_cortex -> project_2521."
+      },
+      {
+        "step": 3,
+        "action": "STATE_EXTRACTION_AND_PROVENANCE_CHECK",
+        "p_a_state": {
+          "curvature_kappa": 0.42
+        },
+        "p_b_state": {
+          "aspect_rank": 4
+        },
+        "p_c_state": {
+          "formula": "Delta >= sqrt(2*ln(d)/kappa)",
+          "d": 64
+        },
+        "provenance_valid": true
+      },
+      {
+        "step": 4,
+        "action": "CLOSED_FORM_DERIVATION",
+        "calculation": "Delta = sqrt(2 * ln(64) / 0.42) = sqrt(8.317766166719343 / 0.42) = 4.4502",
+        "derived_kappa": 0.42,
+        "derived_delta": 4.4502,
+        "derived_rank": 4
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 4.4502,
+      "rank": 4
+    },
+    "property_test_passed": true,
+    "score": 100.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  },
+  "Contender G (Cortex Specialist Team)": {
+    "trace_steps": [
+      {
+        "step": 1,
+        "role": "PLANNER",
+        "action": "DECOMPOSE_TASK",
+        "subgoals": [
+          "Identify operational parameter constraints across workspace",
+          "Locate latent separation threshold formulations",
+          "Verify mathematical consistency of joint bound"
+        ]
+      },
+      {
+        "step": 2,
+        "role": "RESEARCHER_1",
+        "action": "EXPLORE_PROJECTION_A_B",
+        "extracted": {
+          "art_inference_wedge_fisher_curvature": "kappa <= 0.42",
+          "art_cortex_epistemic_aspect_rank": "rank(P_Z) >= 4"
+        }
+      },
+      {
+        "step": 3,
+        "role": "RESEARCHER_2",
+        "action": "EXPLORE_PROJECTION_C",
+        "extracted": {
+          "art_2521_excess_mixing_bound": "Delta >= sqrt(2*ln(d)/kappa), d=64"
+        }
+      },
+      {
+        "step": 4,
+        "role": "IMPLEMENTER",
+        "action": "SYNTHESIZE_SOLUTION",
+        "derived_kappa": 0.42,
+        "derived_delta": 4.4502,
+        "derived_rank": 4
+      },
+      {
+        "step": 5,
+        "role": "VERIFIER",
+        "action": "EXECUTE_PROPERTY_TEST",
+        "test_passed": true
+      }
+    ],
+    "derived_values": {
+      "kappa": 0.42,
+      "delta": 4.4502,
+      "rank": 4
+    },
+    "property_test_passed": true,
+    "score": 100.0,
+    "inter_store_marshaling_calls": 0,
+    "memory_duplication_overhead_pct": 0.0
+  }
+}

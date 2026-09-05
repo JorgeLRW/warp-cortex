@@ -1,0 +1,228 @@
+{
+  "results_full": [
+    {
+      "task_id": "TASK_01_OPTIMAL_LR",
+      "passed": false,
+      "ans": "To solve this problem, we need to use the given optimization theorem which states that the maximum stable learning rate \\(\\eta_{\\text{max}}\\) is given by:\n\n\\[ \\eta_{\\text{max}} = \\frac{\\lambda_{\\text{max}}}{\\kappa} \\]\n\nwhere:\n- \\(\\kappa\\) is the curvature bound,\n- \\(\\lambda_{\\text{max}}\\) is the system parameter for the stability of the learning rate.\n\nGiven:\n- The curvature bound \\(\\kappa =",
+      "lat_ms": 6059.081200000946
+    },
+    {
+      "task_id": "TASK_02_SRAM_TILE",
+      "passed": false,
+      "ans": "To determine the smallest square tile size \\( M \\geq 32 \\) that eliminates shared memory bank conflicts for a bank count of \\( B = 32 \\), we need to use the conflict-free theorem. The theorem states that if the stride \\( M \\) is chosen such that \\( \\gcd(M, B) = 1 \\), then there exists a tile size \\( M \\) that can be used without causing any conflicts.\n\nGiven:\n- Bank count \\( B = 32 \\)\n- Coprime stride \\(",
+      "lat_ms": 5334.990099989227
+    },
+    {
+      "task_id": "TASK_03_KV_DISTORTION",
+      "passed": false,
+      "ans": "To calculate the maximum permissible distortion \\(\\epsilon\\) for key-cache compression with a target key-cache retention ratio \\(r = 0.50\\), we need to use the given rate-distortion invariant (RDI) bound:\n\n\\[ \\text{Max Distortion Bound} = \\sqrt{2 \\ln(1/r)} \\]\n\nGiven that \\(r = 0.50\\):\n\n\\[ \\text{Max Distortion Bound} = \\sqrt{2 \\ln(1/0.50)} \\]\n\nFirst, compute",
+      "lat_ms": 5610.524100004113
+    },
+    {
+      "task_id": "TASK_04_LIPSCHITZ_STEP",
+      "passed": false,
+      "ans": "To determine the maximum stable gradient step \\(\\delta_w\\) for the given conditions, we need to use the stability criterion provided in Document B:\n\n\\[\n\\text{Iterative state convergence requires step size} \\leq \\frac{1}{2L}\n\\]\n\nGiven that the Lipschitz constant \\(L = 4.50\\), we can calculate the required step size as follows:\n\n\\[\n\\delta_w \\leq \\frac{1}{2L}\n\\]\n\nSubstituting the value of \\(L\\):",
+      "lat_ms": 6045.7706000015605
+    },
+    {
+      "task_id": "TASK_05_WARP_OCCUPANCY",
+      "passed": false,
+      "ans": "To calculate the achieved theoretical warp occupancy percentage, we need to follow these steps:\n\n1. **Determine the number of threads**: Since there are 1024 active threads and each thread uses 48 registers, the number of threads is \\( \\frac{1024}{48} = 20 \\) threads.\n\n2. **Calculate the total number of registers used**: Each thread uses 48 registers, so for 20 threads, the total number of registers used is \\( 20 \\times",
+      "lat_ms": 6752.573499994469
+    },
+    {
+      "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+      "passed": true,
+      "ans": "To verify if the epistemic transition matrix satisfies contractive decay given that the spectral radius \\(\\rho\\) is \\(0.82\\), we need to check two conditions:\n\n1. **Strict Epistemic Contraction**: The matrix must satisfy the strict epistemic contraction condition.\n2. **Threshold Condition**: The matrix must satisfy the threshold condition.\n\n### Step-by-Step Verification\n\n#### 1. Strict Epistemic Contraction (Condition 1)\n\nThe strict epistemic contraction condition states that for any initial state vector \\(",
+      "lat_ms": 6859.141699998872
+    },
+    {
+      "task_id": "TASK_07_ATTENTION_SCALE",
+      "passed": false,
+      "ans": "To calculate the attention softmax scale factor \\(\\tau\\) using the given values:\n\n- \\(d_k = 128\\)\n- \\(\\sqrt{d_k} = \\sqrt{128}\\)\n\nFirst, we need to compute \\(\\sqrt{128}\\):\n\n\\[ \\sqrt{128} \\approx 11.3137 \\]\n\nNext, we use this value to find \\(\\tau\\):\n\n\\[ \\tau = \\frac{1}{\\sqrt{128}} \\]",
+      "lat_ms": 5897.237800003495
+    },
+    {
+      "task_id": "TASK_08_LATENT_BOTTLENECK",
+      "passed": false,
+      "ans": "To determine the minimum latent dimension \\(d_{\\text{min}}\\) that preserves channel capacity \\(C = 16.0 \\, \\text{nats}\\) given that each latent dimension supports channel capacity \\(c_0 = 0.25 \\, \\text{nats}\\), we need to follow these steps:\n\n1. **Understand the relationship between \\(d_{\\text{min}}\\) and \\(C\\):**\n   The problem states that the minimum number of dimensions \\(d_{\\text{min}}\\)",
+      "lat_ms": 5203.849400000763
+    },
+    {
+      "task_id": "TASK_09_QUANTIZATION_SQNR",
+      "passed": true,
+      "ans": "To find the minimum bit-width \\( b_{\\text{min}} \\) required to achieve an SQNR of at least 25.84 dB under uniform quantization, we start with the given formula:\n\n\\[ \\text{SQNR} = 6.02 \\times b + 1.76 \\]\n\nWe need this SQNR to be greater than or equal to 25.84 dB. Therefore, we set up the inequality:\n\n\\[ 6.02 \\times b + 1.7",
+      "lat_ms": 6185.09179999819
+    },
+    {
+      "task_id": "TASK_10_MMA_ACCUMULATION",
+      "passed": false,
+      "ans": "To calculate the maximum relative accumulation error \\(\\delta\\) after \\(N = 16\\) MMA (Multiply-Accumulate) operations with machine epsilon \\(\\epsilon = 1.19 \\times 10^{-7}\\), we can use the following steps:\n\n1. **Understand the Accumulation Process**: The problem states that the error is accumulated linearly over \\(N\\) MMA operations. This means that each operation contributes to the total error in a way proportional to \\(N\\).\n\n2. **Calculate the Total Error**:",
+      "lat_ms": 5485.321000000113
+    },
+    {
+      "task_id": "TASK_11_WARP_BARRIER_COST",
+      "passed": false,
+      "ans": "To calculate the total synchronization overhead cycles for a barrier latency of 12 cycles and a warp divergence penalty of 8 cycles, we need to consider both the hardware `__syncthreads()` execution overhead and the scheduling penalty due to warp convergence.\n\n### Given Information:\n- Barrier Latency (BL): 12 cycles\n- Warp Divergence Penalty (WDP): 8 cycles\n\n### Calculation Steps:\n\n1. **Barrier Latency Overhead**:\n   - The barrier latency is given as 12 cycles.\n   -",
+      "lat_ms": 5372.587499994552
+    },
+    {
+      "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+      "passed": false,
+      "ans": "To calculate the scaled gradient norm (L2 norm) when the raw maximum gradient norm \\( G \\) is scaled by the stability factor \\( \\gamma \\), we can follow these steps:\n\n1. **Identify the given values**:\n   - Raw maximum gradient norm \\( G = 1.50 \\)\n   - Stability factor \\( \\gamma = 0.80 \\)\n\n2. **Apply the scaling rule**:\n   The scaled gradient norm \\( L_2 \\) is calculated as follows:\n   \\[\n   L_",
+      "lat_ms": 5688.2387999939965
+    },
+    {
+      "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+      "passed": false,
+      "ans": "To determine the number of evictable cache lines, we need to follow these steps:\n\n1. Calculate the number of non-evictable lines.\n2. Subtract this from the total number of lines to find the number of evictable lines.\n\nGiven:\n- Total cache lines \\( L = 512 \\)\n- Eviction policy: Safety reserve fraction \\( \\theta = 0.125 \\) is protected\n\nFirst, calculate the number of non-evictable lines:\n\\[ \\text{Non-evictable lines}",
+      "lat_ms": 4361.801699997159
+    },
+    {
+      "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+      "passed": true,
+      "ans": "To calculate the total energy required for \\( N = 1,000,000 \\) transactions with each transaction consuming \\( E_0 = 4.20 \\) picojoules (pJ), we can follow these steps:\n\n1. **Calculate the total energy consumed by one transaction:**\n   The energy consumption per transaction is given as \\( E_0 = 4.20 \\) pJ.\n\n2. **Determine the number of transactions:**\n   We need to find out how many",
+      "lat_ms": 4656.61540000292
+    },
+    {
+      "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+      "passed": true,
+      "ans": "To calculate the effective observation window size \\( W \\) for an exponential moving average with a decay factor of \\( \\beta = 0.90 \\), we use the formula:\n\n\\[ W = \\frac{1}{1 - \\beta} \\]\n\nGiven that \\( \\beta = 0.90 \\):\n\n\\[ W = \\frac{1}{1 - 0.90} \\]\n\nFirst, compute \\( 1 - \\beta \\):\n\n\\[ 1 - 0.90 = 0.10 \\",
+      "lat_ms": 5593.451399996411
+    },
+    {
+      "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+      "passed": false,
+      "ans": "To calculate the residual error fraction after 4 contraction steps with a contraction factor of \\(\\alpha = 0.50\\), we need to understand how the error evolves over time under this contraction mapping.\n\n### Step-by-Step Calculation:\n\n1. **Initial Condition**: Assume the initial error \\(E_0\\) is small enough that it can be considered negligible for our purposes (e.g., \\(|E_0| < 10^{-6}\\)).\n\n2. **First Contraction Step**:\n   - The error after the",
+      "lat_ms": 3669.1649999993388
+    },
+    {
+      "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+      "passed": false,
+      "ans": "To calculate the stage time for a 3-cycle critical path stage operating at a clock frequency of \\( f = 1.50 \\) GHz, we need to follow these steps:\n\n1. **Determine the period \\( T \\):**\n   The period \\( T \\) is given by the product of the core GPU sub-system operating frequency \\( f \\) and the number of clock cycles per second.\n   \\[\n   T = f \\times \\text{number of cycles per second}\n   \\]\n\n2. **Calculate the total",
+      "lat_ms": 4401.845999993384
+    },
+    {
+      "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+      "passed": false,
+      "ans": "To determine the null space dimension (nullity) of a projection operator \\( P \\) from dimension \\( D = 32 \\) with rank \\( r = 8 \\), we can use the Rank-Nullity Theorem. The Rank-Nullity Theorem states that for any linear transformation \\( P \\) from an \\( n \\)-dimensional vector space to itself, the sum of the rank and the nullity equals the dimension of the vector space:\n\n\\[\n\\text{rank}(P) + \\text{nullity",
+      "lat_ms": 4413.70079999615
+    },
+    {
+      "task_id": "TASK_19_SPECTRAL_GAP",
+      "passed": false,
+      "ans": "To calculate the spectral gap \\(\\delta_{\\lambda}\\) from the given values of \\(\\lambda_1\\) and \\(\\lambda_2\\), we use the formula:\n\n\\[\n\\delta_{\\lambda} = \\lambda_1 - \\lambda_2\n\\]\n\nGiven:\n- \\(\\lambda_1 = 3.20\\)\n- \\(\\lambda_2 = 2.40\\)\n\nSubstitute these values into the formula:\n\n\\[\n\\delta_{\\lambda} = 3.20",
+      "lat_ms": 4246.942300000228
+    },
+    {
+      "task_id": "TASK_20_NATURAL_FREQUENCY",
+      "passed": false,
+      "ans": "To determine the natural undamped frequency \\(\\omega_n\\) for a dominant pole at real part \\(-0.75\\) with a damping ratio \\(zeta = 0.60\\), we need to use the relationship between the natural undamped frequency \\(\\omega_n\\) and the real part of the dominant pole's characteristic equation.\n\nThe characteristic equation for a second-order system is given by:\n\n\\[ s^2 + \\frac{1}{\\omega_n} \\cdot \\text{(real part of the dominant pole)} =",
+      "lat_ms": 6044.829099992057
+    }
+  ],
+  "results_missing": [
+    {
+      "task_id": "TASK_01_OPTIMAL_LR",
+      "passed": false,
+      "ans": "To solve this problem, we need to use the given context which states that the maximum Fisher curvature \\( \\kappa \\) is bounded by \\( \\kappa_{\\text{max}} \\leq 0.40 \\). Additionally, it provides information about the stability of learning rates in the context of workspace optimization theorems.\n\nGiven:\n- The maximum Fisher curvature \\( \\kappa_{\\text{max}} \\leq 0.40 \\)\n- The value of \\( \\lambda_{\\text{max}} ="
+    },
+    {
+      "task_id": "TASK_02_SRAM_TILE",
+      "passed": false,
+      "ans": "To determine the smallest square tile size \\( M \\) that eliminates shared memory bank conflicts for a hardware system with a shared memory bank count \\( B = 32 \\) and a coprime stride, we need to follow these steps:\n\n1. **Understand the Problem**: We need to find the smallest square tile size \\( M \\) such that no two adjacent banks in the shared memory bank hierarchy have the same tile size. This means that if we place a tile of size \\( M \\) on any bank, all other banks must"
+    },
+    {
+      "task_id": "TASK_03_KV_DISTORTION",
+      "passed": false,
+      "ans": "To calculate the maximum permissible distortion \\(\\epsilon\\) for key-cache compression with a target key-cache retention ratio \\(r = 0.50\\), we need to use the following relationship:\n\n\\[ \\epsilon = \\frac{1}{2} \\left( 1 - e^{-\\gamma r} \\right) \\]\n\nwhere:\n- \\(\\gamma\\) is the entropy bound.\n- \\(r\\) is the compression ratio.\n\nGiven that \\(r = 0.50\\), we can plug this value into the equation:\n\n\\["
+    },
+    {
+      "task_id": "TASK_04_LIPSCHITZ_STEP",
+      "passed": false,
+      "ans": "To determine the maximum stable gradient step \\(\\delta_w\\) for the given epistemic transition operator with a Lipschitz constant \\(L = 4.50\\), we need to understand that this value represents the maximum possible change in the system's state due to the transition process. The maximum stable gradient step is directly related to the Lipschitz constant of the transition function.\n\nGiven:\n- Lipschitz constant \\(L = 4.50\\)\n\nThe maximum stable gradient step \\(\\delta_w\\) can be calculated as follows"
+    },
+    {
+      "task_id": "TASK_05_WARP_OCCUPANCY",
+      "passed": false,
+      "ans": "To calculate the achieved theoretical warp occupancy percentage for running 32 active warps with 48 registers per thread on a 65536-register SM, we need to follow these steps:\n\n1. **Determine the number of threads**: Since there are 1024 active threads and each thread uses 48 registers, the number of threads is \\( \\frac{1024}{48} = 20 \\) threads.\n\n2. **Calculate the total number of registers used**: Each thread uses"
+    },
+    {
+      "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+      "passed": true,
+      "ans": "To verify if the epistemic transition matrix satisfies contractive decay under the given conditions, we need to check two things:\n\n1. The spectral radius (\u03c1) of the transition matrix.\n2. The threshold condition for contractive decay.\n\nGiven:\n- Spectral radius (\\(\\rho\\)) = 0.82\n\nThe threshold for contractive decay is \\(\\rho^2 < 0.70\\).\n\nLet's calculate \\(\\rho^2\\) first:\n\n\\[\n\\rho^2 = (0.82)^"
+    },
+    {
+      "task_id": "TASK_07_ATTENTION_SCALE",
+      "passed": false,
+      "ans": "To calculate the attention softmax scale factor \\(\\tau\\) using the given formula \\(\\tau = \\frac{1}{\\sqrt{d_k}}\\), we need to follow these steps:\n\n1. Identify the value of \\(d_k\\). In this case, it is \\(d_k = 128\\).\n2. Substitute \\(d_k\\) into the formula \\(\\tau = \\frac{1}{\\sqrt{d_k}}\\).\n\nSo, substituting \\(d_k = 128\\) into the formula gives"
+    },
+    {
+      "task_id": "TASK_08_LATENT_BOTTLENECK",
+      "passed": false,
+      "ans": "To determine the minimum latent dimension \\(d_{\\text{min}}\\) that preserves the channel capacity \\(C = 16.0 \\, \\text{nats}\\) while maintaining a per-dimension capacity of \\(c_0 = 0.25 \\, \\text{nats}\\), we can use the relationship between the channel capacity and the latent dimension in the context of the variational information bottleneck (VIB).\n\nThe VIB states that for a given number of dimensions \\(d\\):\n\n\\[ C = \\frac{\\log"
+    },
+    {
+      "task_id": "TASK_09_QUANTIZATION_SQNR",
+      "passed": true,
+      "ans": "To find the minimum bit-width \\( b_{\\text{min}} \\) required to achieve an SQNR of at least 25.84 dB with uniform quantization, we start by using the given formula for SQNR:\n\n\\[ \\text{SQNR} = 6.02 \\times b + 1.76 \\]\n\nWe need to solve for \\( b \\):\n\n\\[ 25.84 = 6.02 \\times b + 1.76 \\]\n\nFirst, isolate the term"
+    },
+    {
+      "task_id": "TASK_10_MMA_ACCUMULATION",
+      "passed": false,
+      "ans": "To calculate the maximum relative accumulation error (RLE) for \\( N = 16 \\) MMA operations using the given machine epsilon \\(\\epsilon = 1.19 \\times 10^{-7}\\), we need to follow these steps:\n\n1. **Understand the Accumulation Error Formula**:\n   The accumulation error \\(\\delta\\) in floating-point arithmetic is given by:\n   \\[\n   \\delta = \\frac{1}{N} \\sum_{i=0}^{N-1} \\left| x"
+    },
+    {
+      "task_id": "TASK_11_WARP_BARRIER_COST",
+      "passed": false,
+      "ans": "To calculate the total synchronization overhead cycles for a barrier latency of 12 cycles and a warp divergence penalty of 8 cycles, we need to consider both the hardware `__syncthreads()` execution overhead and the penalty for warp divergence.\n\nGiven:\n- Barrier latency = 12 cycles\n- Warp divergence penalty = 8 cycles\n\nThe total synchronization overhead cycle is calculated as follows:\n\n\\[ \\text{Total Overhead} = (\\text{Barrier Latency}) + (\\text{Warp Divergence Penalty}) \\]\n\nSubstituting"
+    },
+    {
+      "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+      "passed": false,
+      "ans": "To calculate the scaled gradient norm given the original peak unclipped gradient (G) and the scaling factor for the stability term (gamma), we can use the following formula:\n\n\\[ \\text{Scaled Gradient Norm} = \\frac{\\text{Original Gradient Norm}}{\\sqrt{1 + (\\text{Gamma}^2)}} \\]\n\nWhere:\n- Original Gradient Norm = \\( G \\)\n- Gamma = 0.80\n\nGiven that \\( G = 1.50 \\) and \\( \\gamma = 0.80"
+    },
+    {
+      "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+      "passed": false,
+      "ans": "To determine the number of evictable cache lines, we need to follow these steps:\n\n1. **Calculate the number of evictable cache lines** using the formula:\n   \\[\n   \\text{Number of evictable cache lines} = \\frac{\\text{Total cache lines}}{\\text{Reserved non-evictable fraction}}\n   \\]\n\n2. **Substitute the given values into the formula**:\n   - Total cache lines (\\(L\\)) = 512\n   - Reserved non-evictable fraction"
+    },
+    {
+      "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+      "passed": true,
+      "ans": "To calculate the total energy in microjoules for \\( N = 1,000,000 \\) transactions with each transaction consuming \\( E_0 = 4.20 \\) picojoules (pJ), we can follow these steps:\n\n1. **Calculate the total energy consumption for all transactions:**\n   - Each transaction consumes \\( E_0 = 4.20 \\) pJ.\n   - There are \\( N = 1,000,000 \\)"
+    },
+    {
+      "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+      "passed": true,
+      "ans": "To calculate the effective observation window size \\( W \\) for an exponential moving average with a decay factor of \\( \\beta = 0.90 \\), we use the formula:\n\n\\[ W = \\frac{1}{1 - \\beta} \\]\n\nGiven that \\( \\beta = 0.90 \\):\n\n\\[ W = \\frac{1}{1 - 0.90} \\]\n\nFirst, compute \\( 1 - \\beta \\):\n\n\\[ 1 - 0.90 = 0.10 \\"
+    },
+    {
+      "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+      "passed": false,
+      "ans": "To calculate the residual error fraction after 4 contraction steps with a contraction factor of \\(\\alpha = 0.50\\), we need to understand how the convergence of the epistemic update mapping affects the residual error fraction over time.\n\n### Step-by-Step Calculation:\n\n1. **Initial Condition**: Assume the initial residual error \\(E_0\\) is small enough that it can be considered negligible for this calculation.\n2. **First Contraction Step**:\n   - The new residual error \\(E_1\\) will be approximately \\(\\"
+    },
+    {
+      "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+      "passed": false,
+      "ans": "To calculate the stage time for a k = 3 cycle pipeline stage operating at clock frequency \\( f \\), we need to follow these steps:\n\n1. **Determine the number of stages**: The number of stages is given by \\( n = \\frac{f}{T} \\), where \\( T \\) is the period of one cycle.\n\n2. **Calculate the total number of cycles**: Since there are \\( k \\) cycles per stage, the total number of cycles is \\( N = nk \\).\n\n3. **Calculate the total number"
+    },
+    {
+      "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+      "passed": false,
+      "ans": "To determine the nullity of a projection operator \\( P \\) from a dimension \\( D = 32 \\) to a rank \\( r = 8 \\), we need to understand that the nullity of a projection operator is equal to its rank. This is because a projection operator projects any vector onto a subspace, and the nullity of such an operator is the dimension of the kernel of the projection.\n\nGiven:\n- The dimension \\( D = 32 \\)\n- The rank \\( r = 8 \\)\n\nThe nullity"
+    },
+    {
+      "task_id": "TASK_19_SPECTRAL_GAP",
+      "passed": false,
+      "ans": "To calculate the spectral gap \\(\\delta_{\\lambda}\\) for the given state transition matrix, we need to follow these steps:\n\n1. **Identify the given values**:\n   - \\(\\lambda_1 = 3.20\\)\n   - \\(\\lambda_2 = 2.40\\)\n\n2. **Understand the definition of spectral gap**:\n   The spectral gap \\(\\delta_{\\lambda}\\) is defined as:\n   \\[\n   \\delta_{\\lambda} = \\lambda_1"
+    },
+    {
+      "task_id": "TASK_20_NATURAL_FREQUENCY",
+      "passed": false,
+      "ans": "To determine the natural undamped frequency \\(\\omega_n\\) for a dominant pole at real part \\(-0.75\\) with damping ratio \\(zeta = 0.60\\), we can use the following relationship between the natural undamped frequency \\(\\omega_n\\) and the characteristic equation of the system:\n\n\\[ \\omega_n^2 = \\left(1 + \\frac{z_j}{\\gamma}\\right)^2 \\]\n\nwhere:\n- \\(\\omega_n\\) is the natural undamped frequency,\n- \\(z_j"
+    }
+  ],
+  "full_passes": 4,
+  "miss_passes": 4
+}

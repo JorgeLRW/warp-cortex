@@ -1,0 +1,16 @@
+{
+  "total_agents": 512,
+  "memory_by_archetype_bytes": {
+    "GUARD": 493.0,
+    "MERCHANT": 493.0,
+    "WORKER": 493.0,
+    "PLANNER": 493.0
+  },
+  "total_society_memory_kb": 246.5,
+  "polling_tick_ms": 101.55639999720734,
+  "event_wake_tick_ms": 5.241300008492544,
+  "woken_agent_count": 3,
+  "speedup_parallel": 0.15672079640425224,
+  "fits_polling": false,
+  "fits_event_wake": true
+}

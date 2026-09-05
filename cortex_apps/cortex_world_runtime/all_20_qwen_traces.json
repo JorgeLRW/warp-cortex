@@ -1,0 +1,102 @@
+[
+  {
+    "task_id": "TASK_01_OPTIMAL_LR",
+    "output": "FINAL ANSWER: eta_max = 1 / (0.40 * 10) = 2.5",
+    "expected": "eta_max = 1 / (0.40 * 10.0) = 0.25"
+  },
+  {
+    "task_id": "TASK_02_SRAM_TILE",
+    "output": "FINAL ANSWER: 64",
+    "expected": "M = 33 (smallest M >= 32 with gcd(M, 32) == 1)"
+  },
+  {
+    "task_id": "TASK_03_KV_DISTORTION",
+    "output": "FINAL ANSWER: sqrt(2 * ln(1 / 0.5)) = sqrt(2 * ln(2)) = sqrt(4 * ln(2)) = 2 * sqrt(ln(2)) = 2 * 0.69315 = 1.3863",
+    "expected": "epsilon = sqrt(2 * ln(2)) = 1.1774"
+  },
+  {
+    "task_id": "TASK_04_LIPSCHITZ_STEP",
+    "output": "MAX_STABLE_GRADIENT_STEP_delta_w = 1 / (2 * L)",
+    "expected": "delta_w <= 1 / (2 * 4.5) = 1/9 ~= 0.1111"
+  },
+  {
+    "task_id": "TASK_05_WARP_OCCUPANCY",
+    "output": "FINAL ANSWER: 75%",
+    "expected": "49152 <= 65536 ==> 100% occupancy achieved"
+  },
+  {
+    "task_id": "TASK_06_SPECTRAL_CONTRACTION",
+    "output": "FINAL ANSWER: The epistemic transition matrix satisfies contractive decay for the given conditions.",
+    "expected": "rho^2 = 0.6724 < 0.70 ==> Contraction holds"
+  },
+  {
+    "task_id": "TASK_07_ATTENTION_SCALE",
+    "output": "FINAL ANSWER: 11.3137",
+    "expected": "tau = 1 / sqrt(128) ~= 0.08839"
+  },
+  {
+    "task_id": "TASK_08_LATENT_BOTTLENECK",
+    "output": "FINAL ANSWER: 6.4",
+    "expected": "d_min = 16.0 / 0.25 = 64 dimensions"
+  },
+  {
+    "task_id": "TASK_09_QUANTIZATION_SQNR",
+    "output": "To calculate the minimum bit-width \\( b_{\\text{min}} \\) required for a given SQNR of 25.84 dB under uniform quantization, we can use the provided formula:\n\n\\[ \\text{SQNR} = 6.02 \\times b + 1.76 \\]\n\nWe need to find \\( b_{\\text{min}} \\) such that:\n\n\\[ 6.02 \\times b_{\\text{min}} + 1.76 \\geq 25.84 \\]\n\nFirst, isolate \\( b",
+    "expected": "b >= (25.84 - 1.76) / 6.02 = 24.08 / 6.02 = 4.0 bits"
+  },
+  {
+    "task_id": "TASK_10_MMA_ACCUMULATION",
+    "output": "FINAL ANSWER: 0.0005874",
+    "expected": "delta = 16 * 1.19e-7 = 1.904e-6"
+  },
+  {
+    "task_id": "TASK_11_WARP_BARRIER_COST",
+    "output": "FINAL ANSWER: 20 cycles",
+    "expected": "Total cycles = 12 + 8 = 20 cycles"
+  },
+  {
+    "task_id": "TASK_12_GRADIENT_CLIP_NORM",
+    "output": "FINAL ANSWER: 1.35",
+    "expected": "G_clipped = 1.50 * 0.80 = 1.20"
+  },
+  {
+    "task_id": "TASK_13_EVICTABLE_CACHE_LINES",
+    "output": "FINAL ANSWER: 512 * (1 - 0.125) = 460.8",
+    "expected": "Evictable = 512 * (1 - 0.125) = 512 * 0.875 = 448 lines"
+  },
+  {
+    "task_id": "TASK_14_TOTAL_ENERGY_PJ",
+    "output": "FINAL ANSWER: 4200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "expected": "Total energy = 1e6 * 4.2e-12 J = 4.2e-6 J = 4.2 uJ"
+  },
+  {
+    "task_id": "TASK_15_EFFECTIVE_EMA_WINDOW",
+    "output": "FINAL ANSWER: 1 / (1 - 0.90) = 2.0",
+    "expected": "W = 1 / (1 - 0.90) = 1 / 0.10 = 10 steps"
+  },
+  {
+    "task_id": "TASK_16_RESIDUAL_CONTRACTION_4_STEPS",
+    "output": "FINAL ANSWER: 0.25",
+    "expected": "alpha^4 = (0.50)^4 = 0.0625"
+  },
+  {
+    "task_id": "TASK_17_PIPELINE_STAGE_TIME",
+    "output": "FINAL ANSWER: 24000000000 nanoseconds",
+    "expected": "t_stage = 3 * (1 / 1.50) = 2.00 ns"
+  },
+  {
+    "task_id": "TASK_18_NULL_SPACE_DIMENSION",
+    "output": "FINAL ANSWER: 32 - 8 = 24",
+    "expected": "nullity = 32 - 8 = 24 dimensions"
+  },
+  {
+    "task_id": "TASK_19_SPECTRAL_GAP",
+    "output": "FINAL ANSWER: delta_lambda = 3.20 - 2.40 = 0.80",
+    "expected": "delta_lambda = 3.20 - 2.40 = 0.80"
+  },
+  {
+    "task_id": "TASK_20_NATURAL_FREQUENCY",
+    "output": "FINAL ANSWER: omega_n = sqrt(1 - (zeta^2) / (sigma^2))",
+    "expected": "omega_n = 0.75 / 0.60 = 1.25 rad/s"
+  }
+]

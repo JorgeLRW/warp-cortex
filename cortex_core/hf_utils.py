@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple
 
 
 def _ensure_usable_dir(path_str: str) -> bool:
@@ -68,3 +68,53 @@ def prepare_hf_cache(base_dir: str, preferred_root: Optional[str] = None) -> str
     os.environ["TRANSFORMERS_CACHE"] = transformers_dir
     os.environ["HF_DATASETS_CACHE"] = datasets_dir
     return cache_root
+
+
+def _resolve_cached_snapshot(repo_dir: Path) -> Optional[Path]:
+    snapshots_dir = repo_dir / "snapshots"
+    refs_dir = repo_dir / "refs"
+
+    for ref_name in ("main", "master"):
+        ref_path = refs_dir / ref_name
+        if not ref_path.exists():
+            continue
+        try:
+            snapshot_id = ref_path.read_text(encoding="utf-8").strip()
+        except OSError:
+            continue
+        if not snapshot_id:
+            continue
+        snapshot_path = snapshots_dir / snapshot_id
+        if snapshot_path.is_dir():
+            return snapshot_path
+
+    if not snapshots_dir.exists():
+        return None
+
+    snapshot_paths = [path for path in snapshots_dir.iterdir() if path.is_dir()]
+    if not snapshot_paths:
+        return None
+    snapshot_paths.sort(key=lambda path: path.stat().st_mtime, reverse=True)
+    return snapshot_paths[0]
+
+
+def resolve_local_model_source(model_id: str, cache_root: Optional[str] = None) -> Tuple[str, bool]:
+    model_path = Path(model_id).expanduser()
+    if model_path.exists():
+        return str(model_path), True
+
+    root = cache_root or os.environ.get("HF_HOME")
+    if not root:
+        return model_id, False
+
+    repo_dir = Path(root).expanduser() / "hub" / f"models--{model_id.replace('/', '--')}"
+    snapshot_path = _resolve_cached_snapshot(repo_dir)
+    if snapshot_path is not None:
+        return str(snapshot_path), True
+
+    return model_id, False
+
+
+def prefer_local_files_only(model_id: str, cache_root: Optional[str] = None) -> bool:
+    _, local_files_only = resolve_local_model_source(model_id, cache_root)
+    return local_files_only
