@@ -62,6 +62,10 @@ class SkillInvocationEvent:
     discovered_constraints: Dict[str, Any] = field(default_factory=dict)
     side_effects: List[str] = field(default_factory=list)
     timestamp: float = field(default_factory=time.time)
+    # Portable-project scope: SHARED_CORTEX_LEDGER selection is scoped to one
+    # project world by default. Cross-project learning must be explicitly
+    # allowed by the caller, never default. Defaults preserve legacy behavior.
+    project_id: str = "default"
 
 
 class SkillRegistry:
@@ -139,10 +143,12 @@ class SkillSelector:
         agent_id: str,
         shared_history: Optional[List[SkillInvocationEvent]] = None,
         top_k: int = 3,
+        project_scope: Optional[str] = None,
     ) -> List[Tuple[SkillDefinition, float, str]]:
         """
         Ranks applicable skills for task query `q` under world snapshot U_v.
         Returns list of (SkillDefinition, score, explanation).
+        project_scope filters the history pool to one project world when set.
         """
         all_skills = self.registry.list_skills(include_all_versions=True)
         scored: List[Tuple[SkillDefinition, float, str]] = []
@@ -158,6 +164,10 @@ class SkillSelector:
             history_pool = shared_history if shared_history is not None else []
         else:
             history_pool = []
+
+        if project_scope is not None:
+            history_pool = [ev for ev in history_pool
+                            if getattr(ev, "project_id", "default") == project_scope]
 
         for skill in all_skills:
             # 1. Semantic Score (Z)

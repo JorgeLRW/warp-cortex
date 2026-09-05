@@ -31,7 +31,41 @@ The full architectural blueprint is documented in [docs/CORTEX_OS.md](docs/CORTE
 
 The practical goal is not to beat a frontier API on every single task. The goal is to recover a meaningful share of frontier coding quality while making remote calls infrequent, measurable, and optional.
 
-## Escalation Policy
+## Portable project world v1 (`cortex_apps/cortex_world_runtime/cortex_world/`)
+
+Product path, deliberately boring. One portable dir per project:
+
+```text
+<project>/.cortex/
+├── cortex.sqlite    # CANONICAL machine state (S,G,Z,H,K)
+├── manifest.json    # format cortex-world-v1, encoder id, budgets, history policy
+├── entities/*.md    # human/app mirror (NOT canonical, NOT lossless recovery)
+└── skills/<id>/SKILL.md  # portable skill mirrors (agentskills-v1)
+```
+
+Authority is explicit: sqlite is canonical; Markdown is a mirror. Budgets in
+the manifest are operational, not retrieval guarantees. `recall()` returns
+hits with edge paths + event seqs + candidate-coverage metadata so callers
+see degradation instead of thin context. Typed edges:
+`depends_on, blocks, supports, refutes, mentions, derived_from`;
+`cascade_invalidate` propagates through causal types only. Skills live in the
+project sqlite; shared-ledger selection is project-scoped (cross-project
+learning never default).
+
+```bash
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli open <project_dir>
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli ingest <project_dir> <file>
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli recall <project_dir> <query...>
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli bfs <project_dir> <entity_id>
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli select-skill <project_dir> <query...>
+python -m cortex_apps.cortex_world_runtime.cortex_world.cli record-invocation <project_dir> <skill> <ver> <0|1>
+```
+
+Research machinery (sharded substrate, society sims, scorecard router,
+benchmark-only multi-agent harnesses) stays in the research tree and is NOT
+part of the portable path.
+
+## Escalation Policy (historical — retained for context, not current claims)
 
 Warp Cortex should be understood as a hybrid controller, not as an entropy demo with product language wrapped around it.
 
@@ -41,25 +75,31 @@ Warp Cortex should be understood as a hybrid controller, not as an entropy demo 
 
 The strongest product story is therefore not "entropy replaces testing." It is: entropy predicts trouble, validation confirms it, and remote repair is spent only where the evidence says it matters.
 
-## Current Evidence
+## Current Evidence (frozen research state — supersedes older claims)
 
-Two things are already established.
+What survives is a standardized persistent world model, not an intelligence
+architecture:
 
-1. The Warp Cortex runtime no longer degrades the underlying local model when delegation is disabled.
-2. The decisive missing benchmark is the API-backed comparison between `api_single` and `hybrid_repair`, measured by pass rate, remote call rate, and estimated cost.
+| Property | Result |
+|---|---|
+| Reasoning vs matched baselines | tie (`Q` equal whenever information is matched) |
+| Memory/retrieval vs boring unified store | tie (`D_Cortex ~= D_U0` measured) |
+| 4-store duplication overhead | ~+10% in-process measured lower bound (old +27.2% retired as unsourced) |
+| Small-world retrieval (2k entities, true query-only retrieval) | 10/20 = 10/20 = 10/20, provenance recall 0.70 vs <=0.20 |
+| Bounded-retrieval recall scaling | **fails**: 0.45@10k → 0.00@1M at fixed budget; ranking dead for N>=10k; 16x budget only reaches 0.05 at 1M |
+| Storage / latency scaling | good (linear bytes, bounded ms/tokens) |
+| Determinism | fixed (sorted traversal; cross-seed parity tested) |
+| Dirty-world durability (P2) | done: 1M mutations, 4 policies × 2 seeds (`dirty_world_results.json`). State holds (~0 mismatch); unmaintained SSR→1.0/dangling 13.3/resurr 0.84; rebuild zeroes structure; incremental least memory; checkpoint caps log at 500 but sampled provenance →0.00; recall ≈0 at 1M all policies |
 
-The measurement harness for that table already exists under `research/coding_hybrid_eval/`, and the local parity check between `local_hf` and `single` is already in place. What is still missing is the credentialed API run itself, not the benchmark machinery.
+The old "decisive missing benchmark" framing (API-backed `api_single` vs
+`hybrid_repair` cost comparison) is retired with the claim that Cortex
+amplifies model quality. What matters now is the degradation law
+(`cortex_apps/cortex_world_runtime/retrieval_law_results.json`) and the
+durability battery (`dirty_world.py`). Open directions, in order: P2
+durability, P4 history bounds, P5 skill-at-scale, P7 service composability,
+P6 natural history, P8 multi-agent workloads.
 
-That missing table is the one that turns the architecture into a product claim.
-
-| Mode | Pass Rate | Remote Call Rate | Estimated Cost per 100 Tasks |
-|---|---|---|---|
-| `api_single` | ? | 1.00 | $X |
-| `hybrid_repair` | ? | < 1.00 | $Y |
-
-If `hybrid_repair` preserves most of `api_single`'s quality while making meaningfully fewer remote calls, Warp Cortex has a real commercial story rather than just an interesting local runtime.
-
-## Installation
+## Installation (historical paths — retained for context)
 
 For local development:
 
@@ -220,6 +260,11 @@ Warp Cortex is organized into canonical folders instead of treating every top-le
 - `cortex_benchmarks/` — official evaluation benchmarks
 - `cortex_validation/` — repo-only tests and regression checks
 - `cortex_resources/` — runtime data such as persistent agent skill definitions
+- `cortex_apps/cortex_world_runtime/` — frozen world-model research:
+  `fast_world_substrate.py` (U_v substrate), `dirty_world.py` (P2 durability
+  battery), `unseen_synthesis_suite.py` (controlled retrieval benchmark),
+  `boring_unified_store.py` + `test_boring_store_kill.py` (U_0 kill tests,
+  retrieval law), and `cortex_world/` (portable per-project product path)
 
 The repo root is now intentionally thin. The canonical implementation lives in the folders above, and only `cortex_engine.py` remains at the top level as the public programmatic engine surface.
 
